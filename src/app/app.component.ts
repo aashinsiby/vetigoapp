@@ -7,12 +7,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule, MatIconButton} from '@angular/material/button';
 import { SignupComponent } from './signup/signup.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
-import { LoadingComponent } from './aboutus/loading/loading.component';
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule,RouterOutlet,LoginComponent,RouterLink,RouterLinkActive,NavbarComponent,MatButtonModule,MatIconButton,MatIconModule,
-    SignupComponent,AboutusComponent,LoadingComponent],
+    SignupComponent,AboutusComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
