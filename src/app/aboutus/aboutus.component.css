@@ -1,12 +1,4 @@
-
-body{
- height: 200vh;
- background: linear-gradient(0deg, rgb(255, 96, 54), rgb(253, 210, 38)) no-repeat;
-}
-.loading-image{
- width: 75%;
-
-}
-.slide{
- width:75%;
+*{
+ margin: 0;
+ padding: 0;
 }

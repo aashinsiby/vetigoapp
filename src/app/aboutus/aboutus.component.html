@@ -1,7 +1,7 @@
 
-<body>
+
   
-<div *ngIf="isLoading">
+<!-- <div *ngIf="isLoading">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -9,7 +9,6 @@
 </div></div>
 </div>
 <div *ngIf="!isLoading">
-  <!-- Your About Us content goes here -->
   <div class="container">
   <carousel>
  
@@ -24,4 +23,30 @@
     </slide>
   </carousel>
 </div>
-</div></body>
+</div> -->
+<!-- <div class="container">
+    <img src="assets/About Us/Frame 4.png" alt="Loading" *ngIf="loading">
+
+  <ngx-slick-carousel [config]="slideConfig" *ngIf="!loading">
+    <div *ngFor="let image of images; let i = index" class="carousal-item">
+      <img [src]="image" alt="{{ imageAltText[i] }}">
+    </div>
+  </ngx-slick-carousel>
+</div> -->
+<div *ngIf="isLoading">
+     <div class="row">
+  <img src="assets/About Us/Frame 4.png" alt="Loading Screen" class="loading-image">
+</div>
+</div>
+<div *ngIf="!isLoading">
+<div class="row">
+  <img src="assets/About Us/Frame 5.png" class="img-fluid rounded-start" alt="Login Image" id="dog">
+</div>
+<div class="row">
+  <img src="assets/About Us/Frame 6.png" class="img-fluid rounded-start" alt="Login Image" id="dog">
+</div>
+<div class="row">
+  <img src="assets/About Us/Frame 7png.png" class="img-fluid rounded-start" alt="Login Image" id="dog">
+
+</div>
+</div>

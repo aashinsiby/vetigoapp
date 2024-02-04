@@ -9,11 +9,12 @@ import { SignupComponent } from './signup/signup.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ForgetComponent } from './login/forget/forget.component';
+import { PdfComponent } from './pdf/pdf.component';
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule,RouterOutlet,LoginComponent,RouterLink,RouterLinkActive,NavbarComponent,MatButtonModule,MatIconButton,MatIconModule,
-    SignupComponent,AboutusComponent,MatTabsModule,ForgetComponent],
+    SignupComponent,AboutusComponent,MatTabsModule,ForgetComponent,PdfComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -3,11 +3,14 @@
  padding: 0;
  }
  #main {
-  height:100vh;
+   height: 100vh;
  
-  background-image: url("../../assets/home/bg.png") ;
+  background-image: url("../../assets/login/bg.png") ;
   background-size: cover;
   background-repeat: no-repeat;
+}
+ #card--{
+  height: 100vh;
   
  }
 h1{
@@ -34,7 +37,7 @@ a{
 #dog{
 position: relative;
 left: 40vw;
-top: -30vh;
+top: -40vh;
 transition: transform 0.3s ease-in-out;
 
 }
@@ -76,7 +79,7 @@ transform:translate(2px,0px);
  font-size: 1.4em;
  font-weight: 600;
  padding: 4px;
- 
+ position: relative;
  text-decoration: none;
  width: 7em;
  z-index: 2;
@@ -114,17 +117,26 @@ transform:translate(2px,0px);
 }
 #match{
   position: relative;
-  top: -100vh;
+  top: -60vh;
   left: 60vw;
   transform: scale(2);
 }
-
-
+#cute{
+  position: relative;
+  top: -140vh;
+  left: 2vw;
+}
+#emoji{
+  position: relative;
+  top: -150vh;
+  left: 15vw;
+}
 @media (max-width: 769px) {
  .bn39{
-   top: 5vh;
+   top: 1vh;
+   transform: scale(.5);
    transform: rotate(0);
-   left: 34vw;
+   left: 50vw;
  }
  #dog{
    transform: scale(.8);
@@ -150,7 +162,7 @@ transform:translate(2px,0px);
 }
  #cute{
 opacity: 0%;
-  
+  top: -15vh;
  }
  
  #match

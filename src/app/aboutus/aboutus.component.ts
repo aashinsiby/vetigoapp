@@ -1,11 +1,10 @@
 import { Component,OnInit } from '@angular/core';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-aboutus',
   standalone: true,
-  imports: [CarouselModule,CommonModule],
+  imports: [CommonModule],
   templateUrl: './aboutus.component.html',
   styleUrl: './aboutus.component.css'
 })
