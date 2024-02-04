@@ -2,10 +2,10 @@
   margin-right: 250px; /* Adjust spacing as needed */
  
 }
-
-.navbar-brand {
-  margin-right: 10px; /* Adjust spacing as needed */
+*{
+  margin: 0;
 }
+
 .example-small-box, .example-large-box {
   display: flex;
   align-items: center;
