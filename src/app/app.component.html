@@ -49,14 +49,15 @@
             Home
           </button></a>
           <a class="nav-link" href="">Dating</a>
-          <a class="nav-link" href="">About Us</a>
+          <a class="nav-link"routerLink="/aboutus">About Us</a>
           <a class="nav-link" class="btn btn-dark rounded-pill" routerLink="/login">Get Started</a>
+      
         </div>
       </div>
     </div>
   </nav>
-  <app-aboutus></app-aboutus>
- 
-  <div class="app-container" [ngStyle]="{ backgroundImage: 'url(assets/home/homebg.png)' ,'background-size': 'cover'}">
-    <router-outlet></router-outlet>
+  <!-- <app-forget ></app-forget> -->
+  
+  <div class="app-container">
+    <router-outlet  ></router-outlet>
   </div>

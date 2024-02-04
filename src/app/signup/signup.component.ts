@@ -7,11 +7,13 @@ import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angula
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {ThemePalette} from '@angular/material/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule,MatSelectModule,MatInputModule,MatFormFieldModule, FormsModule, ReactiveFormsModule,MatIconModule,MatButtonModule],
+  imports: [CommonModule,MatSelectModule,MatInputModule,MatFormFieldModule, FormsModule, ReactiveFormsModule,MatIconModule,MatButtonModule,RouterLink, RouterLinkActive, RouterOutlet ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })

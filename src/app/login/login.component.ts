@@ -6,11 +6,11 @@ import { CommonModule } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ThemePalette} from '@angular/material/core';
-
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule,MatButtonModule,MatInputModule,MatFormFieldModule,MatIconModule,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule,MatButtonModule,MatInputModule,MatFormFieldModule,MatIconModule,FormsModule,ReactiveFormsModule,RouterLink,RouterLinkActive, RouterOutlet],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
