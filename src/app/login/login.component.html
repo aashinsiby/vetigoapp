@@ -1,0 +1,62 @@
+
+
+<div class="container" [ngStyle]="{ backgroundImage: 'url(assets/login/bg.png)' ,'background-size': 'cover','background-opacity': 0.5}">
+ <div class="row justify-content-center">
+   <div class="col-md-10" id="card--">
+     <div class="card rounded-4" >
+       <div class="row g-0">
+         <div class="col-md-5">
+          <img src="assets/login/Rectangle 16.png" class="img-fluid rounded-start" alt="Login Image" id="dog">
+         </div>
+         <div class="col-md-2">
+          </div>
+
+         <div class="col-md-3">
+          <div class="container-fluid">
+            <h2 class="mt-3">Sign In</h2>
+            <form>
+                    
+            <div class="mb-1">
+              <mat-form-field>
+                <mat-label>Enter your email</mat-label>
+                <input matInput placeholder="pat@example.com" [formControl]="email">
+                <mat-error *ngIf="email.invalid">{{ getErrorMessage(email) }}</mat-error>
+              </mat-form-field>
+            </div>
+            
+            <div class="mb-5">
+              <mat-form-field>
+                <mat-label>Enter your password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="password.invalid">{{ getErrorMessage(password) }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="mb-5">
+              <button mat-button color="primary" class="img-fluid" >
+                <img src="assets/login/Group 21.png" alt="Login" class="img-fluid">
+       </button>
+            </div>
+            <div class="mb-1">
+              <button mat-button color="primary">Sign in with Google</button>
+            </div>
+            <div class="mb-1">
+              <button mat-button color="primary" class="text-center mt-1">Forgot password?</button>
+                        </div>
+                
+         
+            </form>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="container-fluid">
+           
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+<a href="/signup.html"><img src="assets/login/Group 16.png" alt="" id="sign"></a>
+

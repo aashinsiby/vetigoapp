@@ -1,0 +1,170 @@
+/* #body{
+ background-image: url(".../assets/home/homebg.png");
+ background-size:cover;
+ background-repeat: no-repeat;
+ position:fixed;
+}
+@media (max-width: 768px) {
+  #body {
+    background-image: url("");
+    
+  }
+  
+} */
+h1{
+color: #4FC27E;font-family: 'Manrope', sans-serif;
+text-align: center;
+/* position: relative; */
+
+left: 30vw;
+}
+#hi{
+position: absolute;
+ top: 40vh;
+ left: 30vw;
+ 
+}
+#grp2{
+position:absolute;
+top:50vh;
+left: 16vw;
+transition: transform 0.3s ease-in-out;
+z-index: 1;
+width: 15vw ;
+height:40vh;
+}
+#grp2:hover{
+transform: scale(1.1);
+}
+
+
+#dog{
+ width: 75%;
+ /* position: absolute;
+ top: 40vh;
+ left: 30vw; */
+ object-fit: cover;
+transition: transform 0.3s ease-in-out;
+
+}
+#dog:hover{
+transform:translate(10px,0px);
+
+}
+
+#emoji{ position: absolute;
+ top: 30vh;
+ left: 60vw;
+transition: transform 0.3s ease-in-out;
+ z-index: -1;
+}
+#emoji:hover{
+transform: rotate(5deg);
+
+}
+.vertical-button {
+
+ transform: rotate(-90deg);
+ width: 150px; 
+ height: 50px; 
+ padding: 10px;
+position: absolute;
+top: 55vh;
+left: 0vw;
+ cursor: pointer;
+}
+#cute{
+position:absolute;
+top: 42vh;
+left:1vw;
+
+}
+#grp4{
+ position:absolute;
+top: 70vh;
+left:60vw;
+transition: transform 0.3s ease-in-out;
+width:10vw ;
+height:15vh;
+}
+#grp4:hover{
+transform: scale(1.1);
+}
+.bn39 {
+ background-image: linear-gradient(135deg, #008aff, #86d472);
+ border-radius: 6px;
+ box-sizing: border-box;
+ color: #ffffff;
+ display: block;
+ height: 50px;
+ font-size: 1.4em;
+ font-weight: 600;
+ padding: 4px;
+ position: relative;
+ text-decoration: none;
+ width: 7em;
+ z-index: 2;
+ transform: rotate(-90deg);
+ left: -5vw;
+ top: -55vh;
+}
+
+.bn39:hover {
+ color: #fff;
+}
+
+.bn39 .bn39span {
+ align-items: center;
+ background: #0e0e10;
+ border-radius: 6px;
+ display: flex;
+ justify-content: center;
+ height: 100%;
+ transition: transform 0.5s ease;
+ width: 100%;
+}
+
+.bn39:hover .bn39span {
+ background: transparent;
+}
+@media (max-width: 769px) {
+ .bn39{
+   top: 5vh;
+   transform: rotate(0);
+   left: 34vw;
+ }
+ #dog{
+   top: 50vh;
+ left: -15vw;
+ }
+#grp4{
+width: auto;
+}
+h1{
+ left: 0vw;
+}
+#emoji{
+ opacity: 50%;
+ top: 10%;
+}
+#hi{
+
+  top: 45vh;
+  left: 1vw;
+  
+  
+}
+ #cute{
+opacity: 0%;
+  
+ }
+ #grp2{
+   width: auto;
+   height: 20vh;
+   top: 75vh;
+   left: 1vw;
+ }
+ #doctor{
+   opacity: 0%;
+ }
+}

@@ -1,0 +1,19 @@
+
+<div *ngIf="isLoading">
+  <app-loading></app-loading> <!-- Your loading component -->
+</div>
+
+<div *ngIf="!isLoading">
+  <!-- Display your About Us content here -->
+  <carousel>
+    <slide>
+      <img src="assets/About Us/Frame 5.png" alt="first slide" style="display: block; width: 100%;">
+    </slide>
+    <slide>
+      <img src="assets/About Us/Frame 6.png" alt="second slide" style="display: block; width: 100%;">
+    </slide>
+    <slide>
+      <img src="assets/About Us/Frame 7png.png" alt="third slide" style="display: block; width: 100%;">
+    </slide>
+   </carousel>
+</div>

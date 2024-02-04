@@ -1,0 +1,32 @@
+
+.container{
+  position: realtive;
+     top: 10%;
+     left: 10%;
+ }
+ .img-fluid{
+transition: transform 0.3s ease-in-out;
+
+ }
+ .img-fluid:hover{
+  transform: scale(1.005);
+
+  
+   }
+#img{
+
+transition: transform 0.3s ease-in-out;
+
+}
+#img:hover{
+ transform: scale(1.1);
+
+}
+@media (max-width: 768px) {
+ /* body {
+  background-image: url('assets/category/BG.png');
+   */
+   /* Other styles for smaller screens */
+ /* } */
+ 
+}
