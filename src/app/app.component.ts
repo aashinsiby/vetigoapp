@@ -12,7 +12,7 @@ import { ForgetComponent } from './login/forget/forget.component';
 import { PdfComponent } from './pdf/pdf.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { Observable } from 'rxjs';
-import { Firestore ,collection, getDocs} from 'firebase/firestore';
+import { Firestore ,collection, getDocs} from '@angular/fire/firestore';
 import { collectionData } from '@angular/fire/firestore';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 interface Item {
@@ -32,13 +32,13 @@ interface Item {
 
 export class AppComponent {
   title = 'Vetigo';
-  item$: Observable<Item[]>;
-  firestore: Firestore = inject(Firestore);
+  // item$: Observable<Item[]>;
+  // firestore: Firestore = inject(Firestore);
 
-  constructor() {
-    const itemCollection = collection(this.firestore, 'items');
-    this.item$ = collectionData(itemCollection) as Observable<Item[]>;
-  }
+  // constructor() {
+  //   const itemCollection = collection(this.firestore, 'items');
+  //   this.item$ = collectionData(itemCollection) as Observable<Item[]>;
+  // }
 
 
 

@@ -1,4 +1,5 @@
 export const environment = {
+ production :false,
  firebaseConfig: {
   apiKey: "AIzaSyBpB6zmJKFyr_R_agAXMBmLfKagJMrTmLs",
   authDomain: "fir-cms-cb14a.firebaseapp.com",
