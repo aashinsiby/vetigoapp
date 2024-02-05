@@ -33,15 +33,16 @@
     </div>
   </nav>
    -->
-   <nav class="navbar navbar-expand-sm " [ngStyle]="{ backgroundImage: 'url(assets/home/homebg.png)' ,'background-size': 'cover','background-opacity': 0.5}">
+   <!-- <nav class="navbar navbar-expand-sm " [ngStyle]="{ backgroundImage: 'url(assets/home/homebg.png)' ,'background-size': 'cover','background-opacity': 0.5}">
     <div class="container-fluid">
       <a class="navbar-brand">
         <img src="assets/home/Untitjjled 1.png" alt="Website Logo">
        <span  style="font-family: 'Secular One', sans-serif;"> {{ title }}</span>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link active" aria-current="page"  routerLink="/home"><button mat-fab extended>
@@ -55,9 +56,13 @@
         </div>
       </div>
     </div>
-  </nav>
+  </nav> -->
  
-  
+  <ul>
+    <li *ngFor="let item of item$ | async">
+      {{ item.name }}
+    </li>
+  </ul>
 
-    <router-outlet  ></router-outlet>
+    <!-- <router-outlet  ></router-outlet> -->
   

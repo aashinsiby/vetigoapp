@@ -2,3 +2,14 @@
  margin: 0;
  padding: 0;
 }
+#load{
+ transform: scale(0.5);
+ position: relative;
+ top: -35vh;
+}
+@media (max-width: 769px) {
+#load{
+ top: -5vh;
+}
+
+}
