@@ -7,6 +7,7 @@ import { SignupComponent } from './signup/signup.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { ForgetComponent } from './login/forget/forget.component';
 import { PdfComponent } from './pdf/pdf.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
 
 
 export const routes: Routes = [ { path: 'login', component: LoginComponent},
@@ -17,6 +18,8 @@ export const routes: Routes = [ { path: 'login', component: LoginComponent},
 { path: 'aboutus', component: AboutusComponent},
 { path: 'forget', component: ForgetComponent},
 { path: 'pdf', component: PdfComponent},
+{ path: 'userprofile', component: UserprofileComponent},
+
 
 
 

@@ -10,11 +10,12 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ForgetComponent } from './login/forget/forget.component';
 import { PdfComponent } from './pdf/pdf.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule,RouterOutlet,LoginComponent,RouterLink,RouterLinkActive,NavbarComponent,MatButtonModule,MatIconButton,MatIconModule,
-    SignupComponent,AboutusComponent,MatTabsModule,ForgetComponent,PdfComponent],
+    SignupComponent,AboutusComponent,MatTabsModule,ForgetComponent,PdfComponent,UserprofileComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
