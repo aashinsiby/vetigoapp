@@ -1,6 +1,5 @@
 export const environment = {
-
-  firebaseConfig: {
+ firebaseConfig: {
   apiKey: "AIzaSyAkVjKQNGx19ZJxp-dUNuj7U8gVtTPVzTE",
   authDomain: "vetigo-fc02e.firebaseapp.com",
   databaseURL: "https://vetigo-fc02e-default-rtdb.asia-southeast1.firebasedatabase.app",
