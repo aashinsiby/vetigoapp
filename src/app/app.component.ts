@@ -14,6 +14,8 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
 import { Observable } from 'rxjs';
 import { Firestore ,collection} from 'firebase/firestore';
 import { collectionData } from '@angular/fire/firestore';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+
 interface Item {
   name: string,
   
@@ -22,7 +24,7 @@ interface Item {
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule,RouterOutlet,LoginComponent,RouterLink,RouterLinkActive,NavbarComponent,MatButtonModule,MatIconButton,MatIconModule,
-    SignupComponent,AboutusComponent,MatTabsModule,ForgetComponent,PdfComponent,UserprofileComponent,],
+    SignupComponent,AboutusComponent,MatTabsModule,ForgetComponent,PdfComponent,UserprofileComponent,AngularFirestoreModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
