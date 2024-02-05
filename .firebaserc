@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "vetigo-fc02e": {
+      "hosting": {
+        "vetigo": [
+          "vetigo-fc02e"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "vetigo-fc02e"
+  }
+}

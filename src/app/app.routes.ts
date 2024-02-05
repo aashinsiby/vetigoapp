@@ -20,9 +20,6 @@ export const routes: Routes = [ { path: 'login', component: LoginComponent},
 { path: 'pdf', component: PdfComponent},
 { path: 'userprofile', component: UserprofileComponent},
 
-
-
-
 ];
 
 

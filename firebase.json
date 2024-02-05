@@ -1,0 +1,11 @@
+{
+  "hosting": [
+    {
+      "target": "vetigo",
+      "source": ".",
+      "frameworksBackend": {
+        "region": "asia-east1"
+      }
+    }
+  ]
+}
