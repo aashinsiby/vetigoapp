@@ -1,39 +1,5 @@
 
-<!-- 
-  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#" routerLink="/home">
-        <img src="assets/home/Untitjjled 1.png" class="d-inline-block align-top" alt="">
-        <span style="font-family: 'Secular One', sans-serif;"> <span></span> VETIGO</span> 
-      </a>
-  
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header">
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-        <div class="offcanvas-body ">
-          <ul class="navbar-nav ">
-            <li class="nav-item mb-2">
-              <a class="nav-link" href="/categoryselection.html">Dating</a>
-            </li>
-            <li class="nav-item mb-2">
-              <a class="nav-link" href="/about.html">About Us</a>
-            </li>
-            <li class="mb-2">
-              <button type="button" class="btn btn-dark rounded-pill" routerLink="/login"  >Get Started</button>
-            </li>
-          </ul>
-        </div>
-       
-      </div>
-    </div>
-  </nav>
-   -->
-   <nav class="navbar navbar-expand-sm " [ngStyle]="{ backgroundImage: 'url(assets/home/homebg.png)' ,'background-size': 'cover','background-opacity': 0.5}">
+   <nav class="navbar navbar-expand-sm " >
     <div class="container-fluid">
       <a class="navbar-brand">
         <img src="assets/home/Untitjjled 1.png" alt="Website Logo">
@@ -45,24 +11,21 @@
       
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page"  routerLink="/home"><button mat-fab extended>
-            <mat-icon>home</mat-icon>
-            Home
+          <a class="nav-link active" aria-current="page"  routerLink="/home"><button mat-button>
+            <mat-icon>instagram</mat-icon>
+            
           </button></a>
-          <a class="nav-link" href="">Dating</a>
-          <a class="nav-link"routerLink="/aboutus">About Us</a>
+          <a class="nav-link active" aria-current="page" href=""><button mat-button   >Dating</button></a>
+          <a class="nav-link active" aria-current="page" routerLink="/aboutus">
+            <button mat-button>About Us</button>
+          </a>
           <button class="nav-link"routerLink="/login" class="button-31">Get Started</button>
       
         </div>
       </div>
     </div>
   </nav>
- 
-<!-- <ul>
-    <li *ngFor="let item of item$ | async">
-      {{ item.name }}
-    </li>
-</ul> -->
 
-    <router-outlet  ></router-outlet>
+
+<router-outlet></router-outlet>
   

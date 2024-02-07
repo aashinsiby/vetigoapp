@@ -18,7 +18,7 @@ export const routes: Routes = [ { path: 'login', component: LoginComponent},
 { path: 'aboutus', component: AboutusComponent},
 { path: 'forget', component: ForgetComponent},
 { path: 'pdf', component: PdfComponent},
-{ path: 'userprofile', component: UserprofileComponent},
+{ path: 'userprofile', component: UserprofileComponent },
 
 ];
 

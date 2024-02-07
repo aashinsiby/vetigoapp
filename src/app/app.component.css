@@ -2,6 +2,9 @@
   margin-right: 250px; /* Adjust spacing as needed */
  
 }
+.nav-link.active {
+  white-space: nowrap; /* Prevent line breaks */
+}
 
 .navbar-brand {
   margin-right: 20px; /* Adjust spacing as needed */

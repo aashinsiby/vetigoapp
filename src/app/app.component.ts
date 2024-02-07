@@ -11,19 +11,19 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { ForgetComponent } from './login/forget/forget.component';
 import { PdfComponent } from './pdf/pdf.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
-import { Observable } from 'rxjs';
-import { Firestore ,collection, getDocs} from '@angular/fire/firestore';
-import { collectionData } from '@angular/fire/firestore';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-interface Item {
-  name: string,
-  
-};
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import {MatDividerModule} from '@angular/material/divider';
+import { HomeComponent } from './home/home.component';
+import { VisibleService } from './visible.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Firestore, addDoc, collection } from '@angular/fire/firestore';
+
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule,RouterOutlet,LoginComponent,RouterLink,RouterLinkActive,NavbarComponent,MatButtonModule,MatIconButton,MatIconModule,
-    SignupComponent,AboutusComponent,MatTabsModule,ForgetComponent,PdfComponent,UserprofileComponent,AngularFirestoreModule],
+  imports: [CommonModule,RouterOutlet,LoginComponent,HomeComponent,RouterLink,RouterLinkActive,NavbarComponent,MatButtonModule,MatIconButton,MatIconModule,
+    SignupComponent,AboutusComponent,MatTabsModule,ForgetComponent,PdfComponent,UserprofileComponent,AngularFirestoreModule,MatDividerModule],
   
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -32,14 +32,17 @@ interface Item {
 
 export class AppComponent {
   title = 'Vetigo';
-  // item$: Observable<Item[]>;
-  // firestore: Firestore = inject(Firestore);
+  
+  // constructor(private firestore:Firestore){
 
-  // constructor() {
-  //   const itemCollection = collection(this.firestore, 'items');
-  //   this.item$ = collectionData(itemCollection) as Observable<Item[]>;
   // }
-
+  // public ngOnInit(): void {
+  //   const testCollection = collection(this.firestore, 'new');
+  //   addDoc(testCollection,{text: "Vetigo"});
+  // }
+  constructor(private firestore : AngularFirestore){
+   
+}
 
 
 }

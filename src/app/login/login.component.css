@@ -50,6 +50,7 @@ transition: transform 0.3s ease-in-out;
 #sign{
  transform: scale(.5);
  top: 5vh;
+ left: -26vw;
 }
 
 

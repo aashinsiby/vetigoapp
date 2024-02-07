@@ -7,6 +7,9 @@
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { getAuth , provideAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment.development';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat';
 
 
 
@@ -15,7 +18,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     importProvidersFrom([
-      provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+      // provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
       // provideAnalytics(() => getAnalytics()),
       provideAuth(() => getAuth()),
       provideFirestore(() => getFirestore()),
@@ -23,8 +26,11 @@ export const appConfig: ApplicationConfig = {
       // provideMessaging(() => getMessaging()),
       // providePerformance(() => getPerformance()),
       provideStorage(() => getStorage()),
+      AngularFireModule.initializeApp(environment.firebaseConfig),
+      
+    
      
-    ]),
+    ]), provideAnimationsAsync(),
     
   ],
     
