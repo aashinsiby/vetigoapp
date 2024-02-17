@@ -8,9 +8,16 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import { ForgetComponent } from './login/forget/forget.component';
 import { PdfComponent } from './pdf/pdf.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+import { AuthGuard } from './shared/auth.guard';
+import { SwipeComponent } from './swipe/swipe.component';
 
 
-export const routes: Routes = [ { path: 'login', component: LoginComponent},
+export const routes: Routes = [ 
+ {
+  path:'', redirectTo: 'home', pathMatch:"full"
+ },
+ 
+ { path: 'login', component: LoginComponent},
 { path: 'navbar', component: NavbarComponent},
 { path: 'main', component: AppComponent},
 {path: 'home', component: HomeComponent},
@@ -18,7 +25,9 @@ export const routes: Routes = [ { path: 'login', component: LoginComponent},
 { path: 'aboutus', component: AboutusComponent},
 { path: 'forget', component: ForgetComponent},
 { path: 'pdf', component: PdfComponent},
-{ path: 'userprofile', component: UserprofileComponent },
+// {path: '**', component: HomeComponent},
+{path: 'profile', component: UserprofileComponent,canActivate: [AuthGuard]},
+{ path: 'swipe', component: SwipeComponent,canActivate: [AuthGuard]},
 
 ];
 

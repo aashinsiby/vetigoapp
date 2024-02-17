@@ -1,67 +1,67 @@
-
-
-
- <div class="row justify-content-center">
-   <div class="col-md-10" id="card--">
-     <div class="card rounded-4" >
-       <div class="row ">
-         <div class="col-md-5  text-center ">
+<div class="row justify-content-center" id="main">
+  <div class="col-md-10" id="card--">
+    <div class="card rounded-4 mt-2">
+      <div class="row ">
+        <div class="col-md-5  text-center ">
           <img src="assets/login/Rectangle 16.png" class="img-fluid rounded-start" alt="Login Image" id="dog">
-         </div>
-         <div class="col-md-2">
-          </div>
-
-         <div class="col-md-3">
-          <div class="container-fluid">
-            <h2 class="mt-3 mb-5">Log In</h2>
-            <form [formGroup]="loginForm">
-                    
-            <div class="mb-1">
-              <mat-form-field>
-                <mat-label>Enter your email</mat-label>
-                <input matInput placeholder="pat@example.com" [formControl]="email">
-                <mat-error *ngIf="email.invalid">{{ getErrorMessage(email) }}</mat-error>
-              </mat-form-field>
-            </div>
-            
-            <div class="mb-5">
-              <mat-form-field>
-                <mat-label>Enter your password</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password">
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
-                <mat-error *ngIf="password.invalid">{{ getErrorMessage(password) }}</mat-error>
-              </mat-form-field>
-            </div>
-            <div class="mb-5">
-              <button mat-button color="primary" class="img-fluid" (click)="login()">
-                <img src="assets/login/Group 21.png" alt="Login" class="img-fluid">
-             </button>
-            </div>
-            <div class="mb-1">
-              <button mat-button color="primary">Sign in with Google</button>
-            </div>
-            <div class="mb-1">
-              <button mat-button color="primary" class="text-center mt-1"v routerLink="/forget">Forgot password?</button>
-            </div>
-                
-         
-            </form>
-          </div>
         </div>
         <div class="col-md-2">
-          <div class="container-fluid">
-           
-       </div>
-     </div>
-   </div>
- </div>
-</div>
+        </div>
 
-<a routerLink="/signup"><img src="assets/login/Group 16.png" alt="" id="sign" ></a>
+        <div class="col-md-3">
+          <div class="container-fluid d-flex justify-content-center">
 
-<div class="app-container">
+            <form [formGroup]="loginForm" (ngSubmit)="signIn(loginForm.value)">
+              <h2 class="mt-3 mb-5">Log In</h2>
+              <div class="mb-1 ">
+                <mat-form-field appearance="fill">
+                  <mat-label>Enter your email</mat-label>
+                  <input matInput type="email" placeholder="Enter email" formControlName="email" required>
+                  <mat-error *ngIf="loginForm.get('email')?.invalid">Enter a valid email address</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="mb-5 ">
+                <mat-form-field appearance="fill">
+                  <mat-label>Enter your password</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" type="password" formControlName="password"
+                    required>
+
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="loginForm.get('password')?.invalid">Password must be at least 6 characters
+                    long</mat-error>
+
+                </mat-form-field>
+              </div>
+
+              <div class="mb-5">
+                <button mat-button color="primary" class="img-fluid" type="submit">
+                  <img src="assets/login/Group 21.png" alt="Login" class="img-fluid">
+
+                </button>
+              </div>
+
+              <div class="mb-1">
+                <button mat-button color="primary">Sign in with Google</button>
+              </div>
+
+              <div class="mb-1">
+                <button mat-button color="primary" class="text-center mt-1" routerLink="/login/forgot">Forgot
+                  password?</button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <a routerLink="/signup"><img src="assets/login/Group 16.png" alt="" id="sign"></a>
+
+
   <router-outlet></router-outlet>
-</div>
 </div>

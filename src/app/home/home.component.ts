@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { VisibleService } from '../visible.service';
 
 
 @Component({

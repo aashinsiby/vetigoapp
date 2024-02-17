@@ -1,0 +1,94 @@
+.example-card {
+ max-width: 400px;
+ margin-bottom: 8px;
+ margin-right: 10px;
+}
+#heading{
+ margin-right: 10px;
+}
+.example-header-image {
+ background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+ background-size: cover;
+}
+.example-form {
+ min-width: 150px;
+ max-width: 300px;
+ width: 100%;
+}
+
+.example-full-width {
+ width: 100%;
+}
+.uploaded-images {
+ display: flex;
+ flex-wrap: wrap;
+}
+
+.picture {
+ position: relative; /* Make the container for uploaded images and placeholders relative */
+}
+
+.image-upload-container {
+ position: relative;
+ height: 100%; /* Ensure the container fills the card's height */
+
+}
+
+.uploaded-images {
+ display: flex;
+ flex-wrap: wrap; /* Allow images to wrap to the next line if they overflow */
+}
+
+.image-preview {
+ width: 200px;
+ height: 200px;
+ margin-right: 10px;
+ margin-bottom: 10px;
+ overflow: hidden;
+ position: relative;
+}
+
+.image-preview img {
+ width: 100%;
+ height: 100%;
+ object-fit: cover; /* Ensure the image covers the entire box */
+}
+
+.placeholder-boxes {
+ display: grid;
+ grid-template-columns: repeat(2, 1fr); /* 2 columns for the boxes */
+ gap: 10px;
+ position: absolute;
+ bottom: 10px;
+ right: 10px;
+}
+
+.placeholder-box {
+ width: 200px;
+ height: 200px;
+ background-color: lightgray;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ position: relative;
+}
+
+.placeholder-box .add-icon {
+ position: absolute;
+ bottom: 5px;
+ right: 5px;
+ color: white;
+}
+.placeholder-box button {
+ position: relative;
+ overflow: hidden;
+}
+
+.placeholder-box input[type="file"] {
+ opacity: 0;
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+}

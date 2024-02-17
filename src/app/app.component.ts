@@ -1,4 +1,4 @@
-import { Component, NgModule, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { CommonModule } from '@angular/common';
@@ -14,9 +14,6 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import {MatDividerModule} from '@angular/material/divider';
 import { HomeComponent } from './home/home.component';
-import { VisibleService } from './visible.service';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Firestore, addDoc, collection } from '@angular/fire/firestore';
 
 
 @Component({
