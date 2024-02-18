@@ -10,7 +10,7 @@ import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/rou
 import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
 import { Database, onValue, ref, set, update } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { User } from '../model/user';
+
 
 @Component({
   selector: 'app-signup',

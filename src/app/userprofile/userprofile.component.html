@@ -1,4 +1,4 @@
-<div class="container-fluid profile-container">
+<form class="container-fluid profile-container" [formGroup]="userForm"  >
   <div class="row profile-sections">
     <div class="col-md-6 user-info">
       <div class="profile-pic-container">
@@ -18,15 +18,15 @@
         <div class="editable-details">
           <div class="form-group">
             <label for="contactNumber">Contact Number:</label>
-            <input type="tel" id="contactNumber" [(ngModel)]="userProfile.contactNumber" name="contactNumber">
+            <input type="tel" id="contactNumber" formControlName="userProfile.contactNumber" name="contactNumber">
           </div>
           <div class="form-group">
             <label for="email">Email ID:</label>
-            <input type="email" id="email" [(ngModel)]="userProfile.email" name="email">
+            <input type="email" id="email" formControlName="userProfile.email" name="email">
           </div>
           <div class="form-group">
             <label for="bio">Bio:</label>
-            <textarea id="bio" [(ngModel)]="userProfile.bio" name="bio"></textarea>
+            <textarea id="bio" formControlName="userProfile.bio" name="bio"></textarea>
           </div>
           <button (click)="updateProfile()">Save Changes</button>
         </div>
@@ -46,4 +46,4 @@
       </div>
     </div>
   </div>
-</div>
+</form>
