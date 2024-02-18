@@ -1,46 +1,12 @@
 
 
-  
-<!-- <div *ngIf="isLoading">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-  <img src="assets/About Us/Frame 4.png" alt="Loading Screen" class="loading-image"></div>
-</div></div>
-</div>
-<div *ngIf="!isLoading">
-  <div class="container">
-  <carousel>
- 
-    <slide>
-      <img src="assets/About Us/Frame 5.png" alt="first slide" class="slide"style="display: block; width: 100%;">
-    </slide>
-    <slide>
-      <img src="assets/About Us/Frame 6.png" alt="second slide"class="slide"style="display: block; width: 100%;">
-    </slide>
-    <slide>
-      <img src="assets/About Us/Frame 7png.png" alt="third slide"class="slide"style="display: block; width: 100%;">
-    </slide>
-  </carousel>
-</div>
-</div> -->
-<!-- <div class="container">
-    <img src="assets/About Us/Frame 4.png" alt="Loading" *ngIf="loading">
-
-  <ngx-slick-carousel [config]="slideConfig" *ngIf="!loading">
-    <div *ngFor="let image of images; let i = index" class="carousal-item">
-      <img [src]="image" alt="{{ imageAltText[i] }}">
-    </div>
-  </ngx-slick-carousel>
-</div> -->
-
-
 <div *ngIf="isLoading">
      <div class="row">
   <img src="assets/About Us/Frame 4.png" alt="Loading Screen" class="" id="load">
     </div>
 </div>
-<div *ngIf="!isLoading">
+
+ <div *ngIf="!isLoading" style=" background: linear-gradient(0deg, rgb(255, 96, 54), rgb(253, 210, 38)) no-repeat;">
     <div class="row">
   <img src="assets/About Us/Frame 5.png" class="img-fluid rounded-start" alt="Login Image" id="dog">
     </div>

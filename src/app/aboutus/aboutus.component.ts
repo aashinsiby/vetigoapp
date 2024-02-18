@@ -18,6 +18,6 @@ export class AboutusComponent implements OnInit {
     // Simulate loading delay (you can replace this with your actual loading logic)
     setTimeout(() => {
       this.isLoading = false; // Set isLoading to false after the delay
-    }, 2000); // Change the delay time as needed
+    }, 1500); // Change the delay time as needed
   } 
 }
