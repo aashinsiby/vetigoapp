@@ -1,83 +1,65 @@
-import { Component,OnInit    } from '@angular/core';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatCardModule} from '@angular/material/card';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {FormControl, FormGroup, FormsModule} from '@angular/forms';
-import {MatIconModule} from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
-import { AngularFireAuth  } from '@angular/fire/compat/auth';
-import { catchError, finalize, tap } from 'rxjs/operators';
-import { throwError } from 'rxjs/internal/observable/throwError';
-import { Database, child, get, getDatabase, onValue, set, update } from '@angular/fire/database';
-import { FileMetaData } from '../model/file-meta-data';
-import { getStorage, ref, uploadBytesResumable,getDownloadURL } from '@angular/fire/storage';
-import { getAuth, onAuthStateChanged, user } from '@angular/fire/auth';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'; // Import FormBuilder for building forms
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { onAuthStateChanged } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-userprofile',
-  standalone: true,
-  imports: [MatButtonModule,MatCardModule,MatDividerModule,MatInputModule,MatFormFieldModule,FormsModule,MatIconModule,CommonModule],
   templateUrl: './userprofile.component.html',
-  styleUrl: './userprofile.component.css'
+  styleUrls: ['./userprofile.component.css']
 })
 export class UserprofileComponent implements OnInit {
   userProfile: any = {}; // Initialize user profile object
-  pictures: string[] = []; // Initialize array for pet pictures
+  userName: string = ''; // Define userName property and its type
+
+  userForm = new FormGroup({
+    userName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+  });
 
   constructor(
-    private afAuth: AngularFireAuth, // Adjust if using Cloud Firestore
-    private afs: AngularFirestore, // Or AngularFirestore for Cloud Firestore
-    private afStorage: AngularFireStorage
+    private afAuth: AngularFireAuth,
+    private afs: AngularFirestore,
+    private afStorage: AngularFireStorage,
+    private formBuilder: FormBuilder // Add formBuilder for form initialization
   ) {}
 
-  async ngOnInit() {
-    // Retrieve user data and pictures based on your database and authentication method
-    const auth = getAuth();
+  ngOnInit(): void {
+    const auth = this.afAuth.auth;
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const userRef = this.afAuth.firestore?.collection('users').doc(user.uid); // Adjust firestore path
-        userRef?.valueChanges().subscribe(userData => {
+        const userRef = this.afs.collection('users').doc(user.uid);
+        userRef.valueChanges().subscribe((userData: any) => { // Specify the type of userData
           this.userName = userData?.name;
-          this.userForm.setValue({ userName: this.userName }); // Pre-populate form with initial username
+          this.userForm.patchValue({ userName: this.userName }); // Use patchValue to set form control value
         });
       }
     });
   }
-userForm = new FormGroup({
-    userName: new FormControl('', [Validators.required, Validators.minLength(3)]),
-  });
-}
 
-  updateProfile() {// Replace with your Cloud Firestore document path
-    this.afs.collection('users').doc(this.afAuth.currentUser.uid).update(this.userProfile)
+  updateProfile() {
+    this.afs.collection('users').doc(this.afAuth.currentUser?.uid).update(this.userProfile)
       .then(() => console.log('Profile updated successfully!'))
       .catch(error => console.error('Error updating profile:', error));
   }
 
-
-  // Image uploading functionality using Firebase Storage (adapt based on your needs):
-  openImagePicker(type?: string) { // Handle separate upload types if needed
+  openImagePicker(type?: string) {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
 
     input.onchange = (event) => {
-      const file = event.target.files[0];
+      const file = (event.target as HTMLInputElement).files?.[0]; // Correct type casting
       if (file) {
-        // Replace with your desired storage path and naming convention
-        const filePath = type ? `profiles/${user.uid}/${type}/${file.name}` : `pets/${user.uid}/${file.name}`;
+        const filePath = type ? `profiles/${this.afAuth.currentUser?.uid}/${type}/${file.name}` : `pets/${this.afAuth.currentUser?.uid}/${file.name}`;
         const storageRef = this.afStorage.ref(filePath);
         const uploadTask = storageRef.put(file);
 
         uploadTask.snapshotChanges().subscribe(snapshot => {
           if (snapshot.bytesTransferred === snapshot.totalBytes) {
             storageRef.getDownloadURL().subscribe(url => {
-              this.pictures.push(url); // Add downloaded URL to pictures array
+              this.pictures.push(url);
             });
           }
         }, error => {
@@ -97,22 +79,3 @@ userForm = new FormGroup({
     // Implement picture removal logic (handle storage deletion and array update)
   }
 }
-//  uploadImage() {
-//     if (!this.selectedFile) {
-//       console.error('No file selected for upload!');
-//       return;
-//     }
-//     else{
-//       this.storage.upload("/files"+ Math.random()+this.selectedFile, this.selectedFile);
-    
-      
-//      alert('Image uploaded successfully');
-//      this.router.navigate(['/profile']);
-
-//   }
- 
-
-// }
-
-
-
