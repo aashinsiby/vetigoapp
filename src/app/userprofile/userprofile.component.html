@@ -1,50 +1,49 @@
-<div class="p-5 mb-4 bg-light rounded-3">
-  <div class="container-fluid py-5 text-center">
-    <h1 class="display-5 fw-bold">Profile</h1>
-    <div class="row">
-    <div class="col-md-4 fs-4 d-flex  justify-content-center ">
-      <mat-card class="example-card">
-        <mat-card-header class="mb-4  ">
-           <div class="div text-start" id="heading">
-          <mat-card-title >Shiba Inu</mat-card-title>
-          <mat-card-subtitle >Dog Breed</mat-card-subtitle>
-        </div>
-          <img mat-card-md-image [src]="proimage"   alt="Image of a Shiba Inu">
-        </mat-card-header>
-        <mat-divider class="mb-4"></mat-divider>
-        <mat-card-content class="mb-4 mr-4">
-          <form class="example-form">
-            <mat-form-field class="example-full-width">
-              <mat-label>Bio</mat-label>
-              <input matInput #message maxlength="256" placeholder="Bio">
-            </mat-form-field>
-          </form>
-        </mat-card-content>
-        <mat-card-actions >
-        <button mat-button>  <mat-icon>create</mat-icon></button>
-
-          
-          <button mat-button >save</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-    <div class="col-md-8  fs-4">
-
-   
-<div>
-  <h2>Profile</h2>
-  <input type="file" (change)="onFileSelected($event)">
-  <button (click)="uploadImage()">Upload Image</button>
-  <img *ngIf="imageURL" [src]="imageURL" alt="Profile Picture">
-</div>
-
-
-
-
+<form class="container-fluid profile-container" [formGroup]="userForm">
+  <div class="row profile-sections">
+    <div class="col-md-6 user-info">
+      <div class="profile-pic-container">
+        <img [src]="userProfile.photoURL" alt="Profile Picture" (click)="openImagePicker()">
       </div>
-</div>
-
-
-  
+      <div class="user-details">
+        <h2>{{ userProfile.name }}</h2>
+        <p class="pet-details">
+          <span>Pet Name:</span> {{ userProfile.petName }}
+        </p>
+        <p class="pet-details">
+          <span>Parent Name:</span> {{ userProfile.parentName }}
+        </p>
+        <p class="pet-details">
+          <span>Pet Age:</span> {{ userProfile.petAge }}
+        </p>
+        <div class="editable-details">
+          <div class="form-group">
+            <label for="contactNumber">Contact Number:</label>
+            <input type="tel" id="contactNumber" [(ngModel)]="userProfile.contactNumber" name="contactNumber">
+          </div>
+          <div class="form-group">
+            <label for="email">Email ID:</label>
+            <input type="email" id="email" [(ngModel)]="userProfile.email" name="email">
+          </div>
+          <div class="form-group">
+            <label for="bio">Bio:</label>
+            <textarea id="bio" [(ngModel)]="userProfile.bio" name="bio"></textarea>
+          </div>
+          <button (click)="updateProfile()">Save Changes</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 pet-pics">
+      <h2>Pet Pictures</h2>
+      <div class="row pictures-container">
+        <div class="col-md-3 picture-item" *ngFor="let picture of userProfile.pictures; let i = index">
+          <img [src]="picture" alt="Pet Picture {{ i + 1 }}" (click)="openImagePreview(picture)">
+          <button class="remove-button" (click)="removePicture(i)">Remove</button>
+        </div>
+        <div class="col-md-3 picture-item add-picture" (click)="openImagePicker('pet')">
+          <i class="bi bi-plus-circle-fill"></i>
+          <p>Add Picture</p>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</form>
