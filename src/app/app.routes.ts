@@ -10,7 +10,7 @@ import { PdfComponent } from './pdf/pdf.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { AuthGuard } from './shared/auth.guard';
 import { SwipeComponent } from './swipe/swipe.component';
-
+import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 
 export const routes: Routes = [ 
  {
@@ -26,8 +26,8 @@ export const routes: Routes = [
 { path: 'forget', component: ForgetComponent},
 { path: 'pdf', component: PdfComponent},
 // {path: '**', component: HomeComponent},
-{path: 'profile', component: UserprofileComponent,canActivate: [AuthGuard]},
-{ path: 'swipe', component: SwipeComponent,canActivate: [AuthGuard]},
+{path: 'profile', component: UserprofileComponent,canActivate: [AngularFireAuthGuard] },
+{ path: 'swipe', component: SwipeComponent,canActivate: [AngularFireAuthGuard] },
 
 ];
 

@@ -1,49 +1,63 @@
-<form class="container-fluid profile-container" [formGroup]="userForm"  >
-  <div class="row profile-sections">
-    <div class="col-md-6 user-info">
-      <div class="profile-pic-container">
-        <img [src]="userProfile.photoURL" alt="Profile Picture" (click)="openImagePicker()">
-      </div>
-      <div class="user-details">
-        <h2>{{ userProfile.name }}</h2>
-        <p class="pet-details">
-          <span>Pet Name:</span> {{ userProfile.petName }}
-        </p>
-        <p class="pet-details">
-          <span>Parent Name:</span> {{ userProfile.parentName }}
-        </p>
-        <p class="pet-details">
-          <span>Pet Age:</span> {{ userProfile.petAge }}
-        </p>
-        <div class="editable-details">
-          <div class="form-group">
-            <label for="contactNumber">Contact Number:</label>
-            <input type="tel" id="contactNumber" formControlName="userProfile.contactNumber" name="contactNumber">
-          </div>
-          <div class="form-group">
-            <label for="email">Email ID:</label>
-            <input type="email" id="email" formControlName="userProfile.email" name="email">
-          </div>
-          <div class="form-group">
-            <label for="bio">Bio:</label>
-            <textarea id="bio" formControlName="userProfile.bio" name="bio"></textarea>
-          </div>
-          <button (click)="updateProfile()">Save Changes</button>
-        </div>
-      </div>
+
+<div class="p-5 mb-4 bg-light rounded-3">
+  <div class=" row container-fluid py-5">
+    <h1 class="display-5 fw-bold">Profile</h1>
+    <div class="col-md-4 fs-4 ">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <img *ngIf="profilePictureUrl" [src]="profilePictureUrl" alt="Profile Picture" style="width: 100px; height: 100px;" class="d-flex justify-content-end">
+
+          <mat-card-title>{{name}} </mat-card-title>
+          <mat-card-subtitle>{{pet}}</mat-card-subtitle>
+        </mat-card-header>
+        
+        <mat-card-content class="mt-5">
+          <p>{{bio}}</p>
+           
+          
+        </mat-card-content>
+       
+      </mat-card>
     </div>
-    <div class="col-md-6 pet-pics">
-      <h2>Pet Pictures</h2>
-      <div class="row pictures-container">
-        <div class="col-md-3 picture-item" *ngFor="let picture of userProfile.pictures; let i = index">
-          <img [src]="picture" alt="Pet Picture {{ i + 1 }}" (click)="openImagePreview(picture)">
-          <button class="remove-button" (click)="removePicture(i)">Remove</button>
-        </div>
-        <div class="col-md-3 picture-item add-picture" (click)="openImagePicker('pet')">
-          <i class="bi bi-plus-circle-fill"></i>
-          <p>Add Picture</p>
-        </div>
-      </div>
-    </div>
+    <div class="col-md-6 ">
+      <form [formGroup]="form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Edit Bio</mat-label>
+          <textarea matInput formControlName="bio" placeholder="Update your bio.."></textarea>
+        </mat-form-field>
+        <!-- <textarea formControlName="bio" placeholder="Update your bio..."></textarea><br> -->
+        <button (click)="updateBio(form.value.bio)" mat-raised-button color="primary" >Save Changes</button>
+      </form>
+      <mat-card-actions>
+      
+      
+      </mat-card-actions>
+      <label for="file">Choose Profile Picture&nbsp;</label>
+      <input type="file" (change)="profilePic($event)" accept=".png, .jpg, .jpeg">
+      
+      <hr class="my-2">
+      <label for="file">Choose the Display Image  &nbsp;</label>
+      <input type="file" (change)="uploadImage($event)" accept=".png, .jpg, .jpeg">
+      <hr class="my-2">
+      <label for="file">Choose the Display Image  &nbsp;</label>
+      <input type="file" (change)="uploadImage1($event)" accept=".png, .jpg, .jpeg"><hr class="my-2">
+      <label for="file">Choose the Display Image  &nbsp;</label>
+      <input type="file" (change)="uploadImage2($event)" accept=".png, .jpg, .jpeg"><hr class="my-2">
+      <label for="file">Choose the Display Image  &nbsp;</label>
+      <input type="file" (change)="uploadImage3($event)" accept=".png, .jpg, .jpeg">
+  
   </div>
-</form>
+  </div>
+  <div class="jumbotron">
+  
+    <hr class="my-2">
+    <h1 class="display-3">Pictures</h1>
+    <img *ngIf="pictureUrl" [src]="pictureUrl" alt="uploaded" style="width: 400px; height: 400px;" >
+    <img *ngIf="pictureUrl1" [src]="pictureUrl1" alt="uploaded" style="width: 400px; height: 400px;" >
+    <img *ngIf="pictureUrl2" [src]="pictureUrl2" alt="uploaded" style="width: 400px; height: 400px;" >
+    <img *ngIf="pictureUrl3" [src]="pictureUrl3" alt="uploaded" style="width: 400px; height: 400px;">
+
+  </div>
+  <hr class="my-2">
+
+  <button mat-raised-button color="warn" (click)="logout()" routerLink="/login">Logout</button>

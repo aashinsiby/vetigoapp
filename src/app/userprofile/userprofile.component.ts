@@ -1,82 +1,209 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'; // Import FormBuilder for building forms
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Component, Inject, OnInit, inject } from '@angular/core';
+import {  Auth, User, user,authState  } from '@angular/fire/auth';
+import { Database, onValue, ref, update } from '@angular/fire/database';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/compat/storage';
+import { finalize, tap } from 'rxjs/operators';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
- 
+import {  AngularFireAuthModule,  } from '@angular/fire/compat/auth';
+import { Subscription } from 'rxjs';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+
 @Component({
   selector: 'app-userprofile',
+  standalone: true,
+  imports: [FormsModule,MatSelectModule,MatInputModule,MatFormFieldModule, ReactiveFormsModule,CommonModule,AngularFireAuthModule, ReactiveFormsModule,MatIconModule,MatButtonModule,RouterLink, RouterLinkActive, RouterOutlet,MatCardModule , MatDividerModule ],
   templateUrl: './userprofile.component.html',
   styleUrls: ['./userprofile.component.css']
 })
 export class UserprofileComponent implements OnInit {
-  userProfile: any = {}; // Initialize user profile object
-  userName: string = ''; // Define userName property and its type
  
-  userForm = new FormGroup({
-    userName: new FormControl('', [Validators.required, Validators.minLength(3)]),
-  });
- 
+  userId: string | null = null;
+  profilePictureUrl: string | null = null;
+  pictureUrl: string | null = null;
+  pictureUrl1: string | null = null;
+  pictureUrl2: string | null = null;
+  pictureUrl3: string | null = null;
+
+
+  bio: string | null = null;
+  form: FormGroup;
+   user: User | null = null;
+  // user = user(this.auth);
+  userSubscription = Subscription;
+  authState = authState(this.auth);
+  email: string | null = null;
+  name: string | null = null;
+  pet: string | null = null;
+  downloadURL: any;
+  imageUrls: string[] = [];
   constructor(
-    private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
-    private afStorage: AngularFireStorage,
-    private formBuilder: FormBuilder // Add formBuilder for form initialization
-  ) {}
- 
+    private auth: Auth = inject(Auth),
+    private database: Database,
+    private storage: AngularFireStorage,
+   
+  ) {this.form = new FormGroup({
+    bio: new FormControl('')
+  });}
+
   ngOnInit(): void {
-    const auth = this.afAuth.auth;
     
-    this.afAuth.authState.subscribe((user: any | null) => { // Use authState for current user
+     this.authState.subscribe((user: User | null) => {
+      //handle auth state changes here. Note, that user will be null if there is no currently logged in user.
       if (user) {
-        const userRef = this.afs.collection('users').doc(user.uid);
-        userRef.valueChanges().subscribe((userData: any) => {
-          this.userName = userData?.name;
-          this.userForm.patchValue({ userName: this.userName });
-        });
+        this.userId = user.uid;
+        this.fetchUserProfile();
       }
+   console.log(user);
+  })
+    
+  }
+
+  fetchUserProfile() {
+    const userRef = ref(this.database, 'users/' + this.userId);
+    onValue(userRef,(snapshot) => {
+      this.bio = snapshot.val()?.bio;
+      this.email =snapshot.val()?.email;
+      this.name = snapshot.val()?.name;
+      this.pet = snapshot.val()?.pet;
+      this.profilePictureUrl = snapshot.val()?.profilePictureUrl;
+      this.pictureUrl = snapshot.val()?.pictureUrl;
+      this.pictureUrl1 = snapshot.val()?.pictureUrl1;
+      this.pictureUrl2 = snapshot.val()?.pictureUrl2;
+      this.pictureUrl3 = snapshot.val()?.pictureUrl3;
+
     });
+
+  
   }
- 
-  updateProfile() {
-    this.afs.collection('users').doc(this.afAuth.currentUser?.uid).update(this.userProfile)
-      .then(() => console.log('Profile updated successfully!'))
-      .catch(error => console.error('Error updating profile:', error));
+
+  updateBio(newBio: string) {
+    const userRef = ref(this.database, 'users/' + this.userId);
+    update(userRef, { bio: newBio });
   }
- 
-  openImagePicker(type?: string) {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
- 
-    input.onchange = (event) => {
-      const file = (event.target as HTMLInputElement).files?.[0]; // Correct type casting
-      if (file) {
-        const filePath = type ? `profiles/${this.afAuth.currentUser?.uid}/${type}/${file.name}` : `pets/${this.afAuth.currentUser?.uid}/${file.name}`;
-        const storageRef = this.afStorage.ref(filePath);
-        const uploadTask = storageRef.put(file);
- 
-        uploadTask.snapshotChanges().subscribe(snapshot => {
-          if (snapshot.bytesTransferred === snapshot.totalBytes) {
-            storageRef.getDownloadURL().subscribe(url => {
-              this.pictures.push(url);
-            });
-          }
-        }, error => {
-          console.error('Error uploading image:', error);
+  uploadImage(event: any): void {
+    if (this.imageUrls.length < 4) { // Check if maximum reached
+      const file = event.target.files[0];
+      const filePath = 'images/' + file.name + this.userId;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, file);
+  
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(url => {
+            console.log('File available at: ', url);
+            this.imageUrls.push(url);
+            const userRef = ref(this.database, 'users/' + this.userId);
+            update(userRef, { pictureUrl: url });
+          });
+        })
+      ).subscribe();
+    } else {
+      // Display a message or alert to inform the user about the limit
+      console.log('Maximum of 4 images reached.');
+    }
+  }
+  uploadImage1(event: any): void {
+    if (this.imageUrls.length < 4) { // Check if maximum reached
+      const file = event.target.files[0];
+      const filePath = 'images/' + file.name + this.userId;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, file);
+  
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(url => {
+            console.log('File available at: ', url);
+            this.imageUrls.push(url);
+            const userRef = ref(this.database, 'users/' + this.userId);
+            update(userRef, { pictureUrl1: url });
+          });
+        })
+      ).subscribe();
+    } else {
+      // Display a message or alert to inform the user about the limit
+      console.log('Maximum of 4 images reached.');
+    }
+  }  
+  uploadImage2(event: any): void {
+    if (this.imageUrls.length < 4) { // Check if maximum reached
+      const file = event.target.files[0];
+      const filePath = 'images/' + file.name + this.userId;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, file);
+  
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(url => {
+            console.log('File available at: ', url);
+            this.imageUrls.push(url);
+            const userRef = ref(this.database, 'users/' + this.userId);
+            update(userRef, { pictureUrl2: url });
+          });
+        })
+      ).subscribe();
+    } else {
+      // Display a message or alert to inform the user about the limit
+      console.log('Maximum of 4 images reached.');
+    }
+  }  
+  uploadImage3(event: any): void {
+    if (this.imageUrls.length < 4) { // Check if maximum reached
+      const file = event.target.files[0];
+      const filePath = 'images/' + file.name + this.userId;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, file);
+  
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(url => {
+            console.log('File available at: ', url);
+            this.imageUrls.push(url);
+            const userRef = ref(this.database, 'users/' + this.userId);
+            update(userRef, { pictureUrl3: url });
+          });
+        })
+      ).subscribe();
+    } else {
+      // Display a message or alert to inform the user about the limit
+      console.log('Maximum of 4 images reached.');
+    }
+  }
+
+
+
+
+
+
+
+
+  profilePic(event: any): void {
+    const file = event.target.files[0];
+    const filePath = 'profile-picture/' + file.name+ this.userId;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+  
+    // You can also get the download URL to display or save it in your database
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe(url => {
+          
+          const userRef = ref(this.database, 'users/' + this.userId);
+          update(userRef, { profilePictureUrl: url });
         });
-      }
-    };
+      })
+    ).subscribe();
  
-    input.click();
   }
- 
-  openImagePreview(picture: string) {
-    // Implement a modal or lightbox component to display the image in a larger view
-  }
- 
-  removePicture(index: number) {
-    // Implement picture removal logic (handle storage deletion and array update)
+  logout() {
+    this.auth.signOut();
   }
 }
