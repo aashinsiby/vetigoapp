@@ -49,7 +49,7 @@ transition: transform 0.3s ease-in-out;
 
 #sign{
  transform: scale(.5);
- top: -148vh;
+ top: -131vh;
  left: -26vw;
 }
 

@@ -60,7 +60,7 @@ isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable
       if (idToken) {
         // Store the token securely, e.g., in local storage or browser session
         localStorage.setItem('firebaseToken', await idToken);
-        console.log(idToken);
+       
         // Navigate to the protected route or profile page
         this.router.navigate(['/profile']);
       }

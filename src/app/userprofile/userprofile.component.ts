@@ -62,7 +62,7 @@ export class UserprofileComponent implements OnInit {
         this.userId = user.uid;
         this.fetchUserProfile();
       }
-   console.log(user);
+ 
   })
     
   }
@@ -99,7 +99,7 @@ export class UserprofileComponent implements OnInit {
       task.snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe(url => {
-            console.log('File available at: ', url);
+          
             this.imageUrls.push(url);
             const userRef = ref(this.database, 'users/' + this.userId);
             update(userRef, { pictureUrl: url });
@@ -121,7 +121,7 @@ export class UserprofileComponent implements OnInit {
       task.snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe(url => {
-            console.log('File available at: ', url);
+           
             this.imageUrls.push(url);
             const userRef = ref(this.database, 'users/' + this.userId);
             update(userRef, { pictureUrl1: url });
@@ -143,7 +143,7 @@ export class UserprofileComponent implements OnInit {
       task.snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe(url => {
-            console.log('File available at: ', url);
+           
             this.imageUrls.push(url);
             const userRef = ref(this.database, 'users/' + this.userId);
             update(userRef, { pictureUrl2: url });
@@ -165,7 +165,7 @@ export class UserprofileComponent implements OnInit {
       task.snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe(url => {
-            console.log('File available at: ', url);
+           
             this.imageUrls.push(url);
             const userRef = ref(this.database, 'users/' + this.userId);
             update(userRef, { pictureUrl3: url });

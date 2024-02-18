@@ -73,7 +73,7 @@ export class SignupComponent implements OnInit{
           
         return onValue(starCountRef, (snapshot) => {
           const username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-          console.log(username);
+        
         }, {
           onlyOnce: true
         });
