@@ -1,63 +1,74 @@
-
 <div class="p-5 mb-4 bg-light rounded-3">
-  <div class=" row container-fluid py-5">
-    <h1 class="display-5 fw-bold">Profile</h1>
-    <div class="col-md-4 fs-4 ">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <img *ngIf="profilePictureUrl" [src]="profilePictureUrl" alt="Profile Picture" style="width: 100px; height: 100px;" class="d-flex justify-content-end">
-
-          <mat-card-title>{{name}} </mat-card-title>
-          <mat-card-subtitle>{{pet}}</mat-card-subtitle>
-        </mat-card-header>
-        
-        <mat-card-content class="mt-5">
-          <p>{{bio}}</p>
-           
-          
-        </mat-card-content>
-       
-      </mat-card>
-    </div>
-    <div class="col-md-6 ">
-      <form [formGroup]="form">
-        <mat-form-field class="example-full-width">
-          <mat-label>Edit Bio</mat-label>
-          <textarea matInput formControlName="bio" placeholder="Update your bio.."></textarea>
-        </mat-form-field>
-        <!-- <textarea formControlName="bio" placeholder="Update your bio..."></textarea><br> -->
-        <button (click)="updateBio(form.value.bio)" mat-raised-button color="primary" >Save Changes</button>
-      </form>
+  <div class="row container-fluid py-5">
+    <!-- Profile Section -->
+    <div class="col-md-6">
+      <h1 class="display-5 fw-bold">Profile</h1>
+      <div class="col-md-12 fs-4">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <img *ngIf="profilePictureUrl" [src]="profilePictureUrl" alt="Profile Picture" style="width: 100px; height: 100px;" class="d-flex justify-content-end">
+            <mat-card-title>{{name}} </mat-card-title>
+            <mat-card-subtitle>{{pet}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="mt-5">
+            <p>{{bio}}</p>
+          </mat-card-content>
+          <button mat-icon-button (click)="toggleEdit()">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-card>
+      </div>
+      <div class="col-md-12 " *ngIf="showForm">
+        <form [formGroup]="form">
+          <mat-form-field class="example-full-width">
+            <mat-label>Edit Bio</mat-label>
+            <textarea matInput formControlName="bio" placeholder="Update your bio.."></textarea>
+          </mat-form-field>
+          <button (click)="updateBio(form.value.bio)" mat-raised-button color="primary">Save Changes</button>
+        </form>
+      </div>
       <mat-card-actions>
-      
-      
+        <!-- Your card actions -->
       </mat-card-actions>
+      <div class="div" *ngIf="showForm">
       <label for="file">Choose Profile Picture&nbsp;</label>
       <input type="file" (change)="profilePic($event)" accept=".png, .jpg, .jpeg">
-      
       <hr class="my-2">
       <label for="file">Choose the Display Image  &nbsp;</label>
       <input type="file" (change)="uploadImage($event)" accept=".png, .jpg, .jpeg">
       <hr class="my-2">
       <label for="file">Choose the Display Image  &nbsp;</label>
-      <input type="file" (change)="uploadImage1($event)" accept=".png, .jpg, .jpeg"><hr class="my-2">
+      <input type="file" (change)="uploadImage1($event)" accept=".png, .jpg, .jpeg">
+      <hr class="my-2">
       <label for="file">Choose the Display Image  &nbsp;</label>
-      <input type="file" (change)="uploadImage2($event)" accept=".png, .jpg, .jpeg"><hr class="my-2">
+      <input type="file" (change)="uploadImage2($event)" accept=".png, .jpg, .jpeg">
+      <hr class="my-2">
       <label for="file">Choose the Display Image  &nbsp;</label>
       <input type="file" (change)="uploadImage3($event)" accept=".png, .jpg, .jpeg">
-  
+    </div>
+    </div>
+    
+    <!-- Pictures Section -->
+    <div class="col-md-6">
+      <div class="jumbotron">
+                <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <img *ngIf="pictureUrl" [src]="pictureUrl" alt="Uploaded" class="img-fluid mb-3" style="max-width: 100%; height: 200px;">
+            </div>
+            <div class="col-md-6">
+              <img *ngIf="pictureUrl1" [src]="pictureUrl1" alt="Uploaded" class="img-fluid mb-3" style="max-width: 100%; height: 200px;">
+            </div>
+            <div class="col-md-6">
+              <img *ngIf="pictureUrl2" [src]="pictureUrl2" alt="Uploaded" class="img-fluid mb-3" style="max-width: 100%; height: 200px;">
+            </div>
+            <div class="col-md-6">
+              <img *ngIf="pictureUrl3" [src]="pictureUrl3" alt="Uploaded" class="img-fluid mb-3" style="max-width: 100%; height: 200px;">
+            </div>
+            <!-- Add more columns for additional images -->
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  </div>
-  <div class="jumbotron">
-  
-    <hr class="my-2">
-    <h1 class="display-3">Pictures</h1>
-    <img *ngIf="pictureUrl" [src]="pictureUrl" alt="uploaded" style="width: 400px; height: 400px;" >
-    <img *ngIf="pictureUrl1" [src]="pictureUrl1" alt="uploaded" style="width: 400px; height: 400px;" >
-    <img *ngIf="pictureUrl2" [src]="pictureUrl2" alt="uploaded" style="width: 400px; height: 400px;" >
-    <img *ngIf="pictureUrl3" [src]="pictureUrl3" alt="uploaded" style="width: 400px; height: 400px;">
-
-  </div>
-  <hr class="my-2">
-
-  <button mat-raised-button color="warn" (click)="logout()" routerLink="/login">Logout</button>
+</div>

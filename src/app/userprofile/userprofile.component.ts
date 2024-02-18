@@ -32,7 +32,7 @@ export class UserprofileComponent implements OnInit {
   pictureUrl1: string | null = null;
   pictureUrl2: string | null = null;
   pictureUrl3: string | null = null;
-
+  showForm: boolean = false;
 
   bio: string | null = null;
   form: FormGroup;
@@ -66,7 +66,9 @@ export class UserprofileComponent implements OnInit {
   })
     
   }
-
+  toggleEdit() {
+    this.showForm = !this.showForm;
+  }
   fetchUserProfile() {
     const userRef = ref(this.database, 'users/' + this.userId);
     onValue(userRef,(snapshot) => {
