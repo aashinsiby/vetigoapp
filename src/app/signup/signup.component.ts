@@ -10,6 +10,7 @@ import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/rou
 import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
 import { Database, onValue, ref, set, update } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-signup',
@@ -27,6 +28,8 @@ export class SignupComponent implements OnInit{
     username: new FormControl('', [Validators.required]),
     pet: new FormControl('', [Validators.required])
   });
+
+  
   constructor( private router: Router, public auth : Auth,public database: Database, private storage : AngularFireStorage) {}
 
   ngOnInit(): void {}

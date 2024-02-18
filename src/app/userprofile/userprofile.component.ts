@@ -4,14 +4,14 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {FormControl, FormGroup, FormsModule} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, Validators} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { AngularFireAuth  } from '@angular/fire/compat/auth';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
-import { Database, child, get, getDatabase, onValue, set, update } from '@angular/fire/database';
+import {  Database, DatabaseReference, onValue } from '@angular/fire/database';
 import { FileMetaData } from '../model/file-meta-data';
 import { getStorage, ref, uploadBytesResumable,getDownloadURL } from '@angular/fire/storage';
 import { getAuth, onAuthStateChanged, user } from '@angular/fire/auth';
@@ -28,30 +28,29 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class UserprofileComponent implements OnInit {
   userProfile: any = {}; // Initialize user profile object
   pictures: string[] = []; // Initialize array for pet pictures
-
+  user?: firebase.User = null;
+  userId?: string;
+  userDetails: any = {};
   constructor(
     private afAuth: AngularFireAuth, // Adjust if using Cloud Firestore
     private afs: AngularFirestore, // Or AngularFirestore for Cloud Firestore
     private afStorage: AngularFireStorage
   ) {}
 
-  async ngOnInit() {
-    // Retrieve user data and pictures based on your database and authentication method
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
+     ngOnInit() {
+    this.afAuth.currentUser.subscribe(user => {
       if (user) {
-        const userRef = this.afAuth.firestore?.collection('users').doc(user.uid); // Adjust firestore path
-        userRef?.valueChanges().subscribe(userData => {
-          this.userName = userData?.name;
-          this.userForm.setValue({ userName: this.userName }); // Pre-populate form with initial username
-        });
+        this.user = user;
+        this.userId = user.uid;
+        this.userDetails();
+      } else {
+        // Handle the case where no user is logged in
+        console.log('No user is currently logged in.');
       }
     });
   }
-userForm = new FormGroup({
-    userName: new FormControl('', [Validators.required, Validators.minLength(3)]),
-  });
-}
+
+
 
   updateProfile() {// Replace with your Cloud Firestore document path
     this.afs.collection('users').doc(this.afAuth.currentUser.uid).update(this.userProfile)
