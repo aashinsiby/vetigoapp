@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatCardModule, MatCardTitleGroup } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 
@@ -62,14 +62,16 @@ export class UserprofileComponent implements OnInit {
   pet: string | null = null;
   downloadURL: any;
   imageUrls: string[] = [];
-  username: any;
+  username: string | null = null;
   constructor(
     private auth: Auth = inject(Auth),
     private database: Database,
     private storage: AngularFireStorage,
+    private router: Router
    
   ) {this.form = new FormGroup({
-    bio: new FormControl('')
+    bio: new FormControl(''),
+    username: new FormControl('')
   });}
 
   ngOnInit(): void {
@@ -104,10 +106,14 @@ export class UserprofileComponent implements OnInit {
 
   
   }
-
-  updateBio(newBio: string) {
+updateUsername(usrname: string){
+  const userRef = ref(this.database,'users/'+this.userId);
+}
+  updateBio(usrname: string, newBio: string) {
     const userRef = ref(this.database, 'users/' + this.userId);
     update(userRef, { bio: newBio });
+  update(userRef,{username:usrname});
+
   }
   uploadImage(event: any): void {
     if (this.imageUrls.length < 4) { // Check if maximum reached
@@ -225,5 +231,6 @@ export class UserprofileComponent implements OnInit {
   }
   logout() {
     this.auth.signOut();
+    this.router.navigate(['/login']);
   }
 }
