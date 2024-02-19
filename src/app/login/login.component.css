@@ -17,14 +17,12 @@
 }
 
 
-#sign{
-position: relative;
-top:-75vh;
-left: 5vw;
+#dog{
+
 transition: transform 0.3s ease-in-out;
 
 }
-#sign:hover{
+#dog:hover{
  transform: scale(1.1);
 
 }
