@@ -11,16 +11,33 @@ import { Subscription } from 'rxjs';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
+import { MatCardModule, MatCardTitleGroup } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-userprofile',
   standalone: true,
-  imports: [FormsModule,MatSelectModule,MatInputModule,MatFormFieldModule, ReactiveFormsModule,CommonModule,AngularFireAuthModule, ReactiveFormsModule,MatIconModule,MatButtonModule,RouterLink, RouterLinkActive, RouterOutlet,MatCardModule , MatDividerModule ],
+  imports: [ FormsModule,
+    MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    CommonModule,
+    AngularFireAuthModule,
+    MatIconModule,
+    MatButtonModule,
+    RouterLink,
+    RouterLinkActive,
+    RouterOutlet,
+    MatCardModule,
+    MatDividerModule,
+  MatIconButton,
+  MatCardTitleGroup,
+  
+ ],
   templateUrl: './userprofile.component.html',
   styleUrls: ['./userprofile.component.css']
 })
@@ -45,6 +62,7 @@ export class UserprofileComponent implements OnInit {
   pet: string | null = null;
   downloadURL: any;
   imageUrls: string[] = [];
+  username: any;
   constructor(
     private auth: Auth = inject(Auth),
     private database: Database,
@@ -81,7 +99,7 @@ export class UserprofileComponent implements OnInit {
       this.pictureUrl1 = snapshot.val()?.pictureUrl1;
       this.pictureUrl2 = snapshot.val()?.pictureUrl2;
       this.pictureUrl3 = snapshot.val()?.pictureUrl3;
-
+      this.username = snapshot.val()?.username;
     });
 
   
