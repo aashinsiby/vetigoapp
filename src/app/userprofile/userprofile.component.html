@@ -99,8 +99,12 @@ background-repeat: no-repeat,">
                   <img mat-card-image *ngIf="pictureUrl" [src]="pictureUrl" alt="Uploaded" class=""
                     style="height: 400px ;width:300px ;">
                   <br>
-
-                  <input type="file" (change)="uploadImage($event)" accept=".png, .jpg, .jpeg">
+                 
+        <button mat-fab (click)="fileSelectRef.click()" class="grab" matTooltip="click to select files">
+                  <mat-icon>add</mat-icon>
+        </button>
+        <input type="file" #fileSelectRef id="filesSelectRef"  (change)="uploadImage($event)" accept=".png, .jpg, .jpeg" hidden>
+        <!--  -->
                 </mat-card>
               </div>
             </div>
@@ -109,7 +113,11 @@ background-repeat: no-repeat,">
                 <mat-card class="img-card ">
                   <img mat-card-image *ngIf="pictureUrl1" [src]="pictureUrl1" alt="Uploaded" class="card-img-top"
                     style="height: 400px ;width:300px ;"><br>
-                  <input type="file" (change)="uploadImage1($event)" accept=".png, .jpg, .jpeg">
+
+                    <button mat-fab (click)="fileSelectRef2.click()" class="grab" matTooltip="click to select files">
+                      <mat-icon>add</mat-icon>
+            </button>
+                  <input type="file" #fileSelectRef2 id="filesSelectRef2" (change)="uploadImage1($event)" accept=".png, .jpg, .jpeg" hidden>
 
                 </mat-card>
               </div>
@@ -118,7 +126,10 @@ background-repeat: no-repeat,">
               <div class="card bg-warning mb-3" style="max-width: 18rem;">  <mat-card class="img-card ">
                   <img mat-card-image *ngIf="pictureUrl2" [src]="pictureUrl2" alt="Uploaded" class="card-img-top"
                     style="height: 400px ;width:300px ;"><br>
-                  <input type="file" (change)="uploadImage2($event)" accept=".png, .jpg, .jpeg">
+                    <button mat-fab (click)="fileSelectRef3.click()" class="grab" matTooltip="click to select files">
+                      <mat-icon>add</mat-icon>
+            </button>
+                  <input type="file" #fileSelectRef3 id="filesSelectRef3" (change)="uploadImage2($event)" accept=".png, .jpg, .jpeg" hidden>
 
                 </mat-card>
               </div>
@@ -127,7 +138,10 @@ background-repeat: no-repeat,">
               <div class="card bg-warning mb-3" style="max-width: 18rem;">  <mat-card class="img-card ">
                   <img mat-card-image *ngIf="pictureUrl3" [src]="pictureUrl3" alt="Uploaded" class="card-img-top"
                     style="height: 400px ;width:300px ;"><br>
-                  <input type="file" (change)="uploadImage3($event)" accept=".png, .jpg, .jpeg">
+                    <button mat-fab (click)="fileSelectRef4.click()" class="grab" matTooltip="click to select files">
+                      <mat-icon>add</mat-icon>
+            </button>
+                  <input type="file" #fileSelectRef4 id="filesSelectRef4" (change)="uploadImage3($event)" accept=".png, .jpg, .jpeg" hidden>
 
                 </mat-card>
               </div>

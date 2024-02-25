@@ -5,7 +5,7 @@ import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask 
 import { finalize, tap } from 'rxjs/operators';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { FileUploadModule } from 'primeng/fileupload';
 import {  AngularFireAuthModule,  } from '@angular/fire/compat/auth';
 import { Subscription } from 'rxjs';
 import { MatSelectModule } from '@angular/material/select';
@@ -16,7 +16,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatCardModule, MatCardTitleGroup } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-
 @Component({
   selector: 'app-userprofile',
   standalone: true,
@@ -64,12 +63,11 @@ export class UserprofileComponent implements OnInit {
   imageUrls: string[] = [];
   username: string | null = null;
   constructor(
-    private auth: Auth = inject(Auth),
+  private auth: Auth = inject(Auth),
     private database: Database,
     private storage: AngularFireStorage,
-    private router: Router
-   
-  ) {this.form = new FormGroup({
+    private router: Router)
+    {this.form = new FormGroup({
     bio: new FormControl(''),
     username: new FormControl('')
   });}
@@ -86,6 +84,7 @@ export class UserprofileComponent implements OnInit {
   })
     
   }
+
   toggleEdit() {
     this.showForm = !this.showForm;
   }
@@ -116,17 +115,19 @@ updateUsername(usrname: string){
 
   }
   uploadImage(event: any): void {
+  
     if (this.imageUrls.length < 4) { // Check if maximum reached
       const file = event.target.files[0];
       const filePath = 'images/' + file.name + this.userId;
       const fileRef = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, file);
-  
+
       task.snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe(url => {
-          
             this.imageUrls.push(url);
+
+            // Update the database with the uploaded image URL
             const userRef = ref(this.database, 'users/' + this.userId);
             update(userRef, { pictureUrl: url });
           });
