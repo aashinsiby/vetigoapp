@@ -19,11 +19,12 @@ background-repeat: no-repeat,">
           <mat-divider></mat-divider>
            
             <!--  -->
-           Pet Name : {{username}} <br>
+            <div class="div">
+            Pet Name : {{username}} <br>
            Sex : {{sex}} <br>
            Age : {{age}} <br>
            Breed : {{breed}} <br>
-
+          </div>
             <mat-card-content *ngIf="!showForm" class="mt-2">
              
                   <mat-form-field appearance="outline">
