@@ -31,3 +31,7 @@ mat-form-field{
 .grab{
  font-size: 14px;
 }
+.custom-input {
+ font-size: 14px;
+ height: 200px; /* Adjust the height as per your requirement */
+}

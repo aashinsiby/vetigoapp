@@ -26,7 +26,10 @@ export class SignupComponent implements OnInit{
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
      name: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required]),
-    pet: new FormControl('', [Validators.required])
+    pet: new FormControl('', [Validators.required]),
+    age: new FormControl('', [Validators.required]),
+    sex: new FormControl('', [Validators.required]),
+    breed: new FormControl('', [Validators.required]),
   });
 
   
@@ -63,7 +66,10 @@ export class SignupComponent implements OnInit{
           email : formValues.email,
           name : formValues.name,
           username: formValues.username,
-          pet : formValues.pet
+          pet : formValues.pet,
+          age: formValues.age,
+          sex: formValues.sex,
+          breed: formValues.breed
 
         })
         alert('signup successful');

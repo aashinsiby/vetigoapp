@@ -19,28 +19,23 @@ background-repeat: no-repeat,">
           <mat-divider></mat-divider>
            
             <!--  -->
+           Pet Name : {{username}} <br>
+           Sex : {{sex}} <br>
+           Age : {{age}} <br>
+           Breed : {{breed}} <br>
+
             <mat-card-content *ngIf="!showForm" class="mt-2">
-              <mat-form-field appearance="outline">
-                <mat-label>Pet Name</mat-label>
-                <input matInput value="{{username}}" #message disabled>
-                </mat-form-field>
-            
+             
                   <mat-form-field appearance="outline">
                     <mat-label>Bio</mat-label>
-                    <input matInput value="{{bio}}" #message disabled>
+                    <input matInput value="{{bio}}" #message disabled class="custom-input">
                     </mat-form-field>
                 </mat-card-content>
 <!--  -->
             <mat-card-content *ngIf="showForm">
               
               <form [formGroup]="form">
-              <mat-form-field appearance="outline">
-                <mat-label>Pet Name</mat-label>
-               
-                        
-                  <textarea matInput formControlName="username" ></textarea>
-                
-                </mat-form-field>
+              
                
                   <mat-form-field appearance="outline">
                     <mat-label>Bio</mat-label>
@@ -55,7 +50,7 @@ background-repeat: no-repeat,">
                       <input type="file" (change)="profilePic($event)" accept=".png, .jpg, .jpeg">
                       </mat-card-subtitle>
                    <br>
-                    <button (click)="updateBio(form.value.username,form.value.bio)" mat-raised-button  style="font-size: 14px;"><mat-icon>save</mat-icon>Save </button>
+                    <button (click)="updateBio(form.value.bio)" mat-raised-button  style="font-size: 14px;"><mat-icon>save</mat-icon>Save </button>
                     <br>
                     
                       <button mat-raised-button (click)="toggleEdit()" id="lg">

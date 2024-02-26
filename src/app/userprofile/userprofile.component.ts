@@ -62,6 +62,9 @@ export class UserprofileComponent implements OnInit {
   downloadURL: any;
   imageUrls: string[] = [];
   username: string | null = null;
+  sex: any;
+  age: any;
+  breed: any;
   constructor(
   private auth: Auth = inject(Auth),
     private database: Database,
@@ -95,6 +98,9 @@ export class UserprofileComponent implements OnInit {
       this.email =snapshot.val()?.email;
       this.name = snapshot.val()?.name;
       this.pet = snapshot.val()?.pet;
+      this.sex = snapshot.val()?.sex;
+      this.age=snapshot.val()?.age;
+      this.breed=snapshot.val()?.breed;
       this.profilePictureUrl = snapshot.val()?.profilePictureUrl;
       this.pictureUrl = snapshot.val()?.pictureUrl;
       this.pictureUrl1 = snapshot.val()?.pictureUrl1;
@@ -108,10 +114,10 @@ export class UserprofileComponent implements OnInit {
 updateUsername(usrname: string){
   const userRef = ref(this.database,'users/'+this.userId);
 }
-  updateBio(usrname: string, newBio: string) {
+  updateBio( newBio: string) {
     const userRef = ref(this.database, 'users/' + this.userId);
     update(userRef, { bio: newBio });
-  update(userRef,{username:usrname});
+  
 
   }
   uploadImage(event: any): void {
