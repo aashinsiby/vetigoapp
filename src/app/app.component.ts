@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { CommonModule } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
@@ -13,6 +13,7 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import {MatDividerModule} from '@angular/material/divider';
 import { HomeComponent } from './home/home.component';
+import {  Auth, User, user,authState  } from '@angular/fire/auth';
 
 
 @Component({
@@ -28,17 +29,35 @@ import { HomeComponent } from './home/home.component';
 
 export class AppComponent {
   title = 'Vetigo';
-  
-  // constructor(private firestore:Firestore){
+  authState = authState(this.auth);
+  userId: string | null = null;
+  showprof: boolean = false;
 
-  // }
-  // public ngOnInit(): void {
-  //   const testCollection = collection(this.firestore, 'new');
-  //   addDoc(testCollection,{text: "Vetigo"});
-  // }
-  constructor(private firestore : AngularFirestore){
+  constructor(private firestore : AngularFirestore,private auth: Auth = inject(Auth),private router: Router){
    
+  }
+  
+  ngOnInit(): void {
+    
+    this.authState.subscribe((user: User | null) => {
+     //handle auth state changes here. Note, that user will be null if there is no currently logged in user.
+     if (user) {
+       this.userId = user.uid;
+   this.showprof = !this.showprof;
+     
+     }
+
+ })
+   
+ }
+ logout() {
+  this.auth.signOut();
+  this.router.navigate(['/login']);
+  this.showprof = !this.showprof;
 }
 
 
+
 }
+
+

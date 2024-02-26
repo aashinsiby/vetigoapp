@@ -21,7 +21,7 @@ background-repeat: no-repeat,">
             <!--  -->
             <mat-card-content *ngIf="!showForm" class="mt-2">
               <mat-form-field appearance="outline">
-                <mat-label>Username</mat-label>
+                <mat-label>Pet Name</mat-label>
                 <input matInput value="{{username}}" #message disabled>
                 </mat-form-field>
             
@@ -35,7 +35,7 @@ background-repeat: no-repeat,">
               
               <form [formGroup]="form">
               <mat-form-field appearance="outline">
-                <mat-label>Username</mat-label>
+                <mat-label>Pet Name</mat-label>
                
                         
                   <textarea matInput formControlName="username" ></textarea>
@@ -51,7 +51,7 @@ background-repeat: no-repeat,">
                      
                     </mat-form-field>
                     </form>
-                    <mat-card-subtitle style="font-size: 12px;"> <label for="file"><i class="fas fa-search"></i> New Profile Picture &nbsp;</label>
+                    <mat-card-subtitle style="font-size: 12px;"> <label for="file"> New Profile Picture &nbsp;</label>
                       <input type="file" (change)="profilePic($event)" accept=".png, .jpg, .jpeg">
                       </mat-card-subtitle>
                    <br>
@@ -62,14 +62,7 @@ background-repeat: no-repeat,">
                         <mat-icon>keyboard_backspace</mat-icon>Back
                       </button>
                 </mat-card-content>
-                <mat-divider></mat-divider>
-          <mat-card-content class="mt-1">
-            
-            <button  mat-button color="warn" (click)="logout()" id="lg">
-              <mat-icon>logout</mat-icon>Logout
-            </button>
-          </mat-card-content>
-          
+               
         </mat-card>
       </div>
    
@@ -88,7 +81,7 @@ background-repeat: no-repeat,">
                   style="height: 100px ;width:100px ;">
                   <br>
                  
-        <button mat-fab (click)="fileSelectRef.click()" class="grab" matTooltip="click to select files">
+        <button mat-fab (click)="fileSelectRef.click()" class="grab" matTooltip="click to select files" *ngIf="showForm">
                   <mat-icon>add</mat-icon>
         </button>
         <input type="file" #fileSelectRef id="filesSelectRef"  (change)="uploadImage($event)" accept=".png, .jpg, .jpeg" hidden>
@@ -103,7 +96,7 @@ background-repeat: no-repeat,">
                   style="height: 100px ;width:100px ;">
                   <br>
 
-                    <button mat-fab (click)="fileSelectRef2.click()" class="grab" matTooltip="click to select files">
+                    <button mat-fab (click)="fileSelectRef2.click()" class="grab" matTooltip="click to select files" *ngIf="showForm">
                       <mat-icon>add</mat-icon>
             </button>
                   <input type="file" #fileSelectRef2 id="filesSelectRef2" (change)="uploadImage1($event)" accept=".png, .jpg, .jpeg" hidden>
@@ -116,7 +109,7 @@ background-repeat: no-repeat,">
                   <img mat-card-image *ngIf="pictureUrl2" [src]="pictureUrl2" alt="Uploaded" class="card-img-top"
                   style="height: 100px ;width:100px ;">
                   <br>
-                    <button mat-fab (click)="fileSelectRef3.click()" class="grab" matTooltip="click to select files">
+                    <button mat-fab (click)="fileSelectRef3.click()" class="grab" matTooltip="click to select files" *ngIf="showForm">
                       <mat-icon>add</mat-icon>
             </button>
                   <input type="file" #fileSelectRef3 id="filesSelectRef3" (change)="uploadImage2($event)" accept=".png, .jpg, .jpeg" hidden>
@@ -129,7 +122,7 @@ background-repeat: no-repeat,">
                   <img mat-card-image *ngIf="pictureUrl3" [src]="pictureUrl3" alt="Uploaded" class="card-img-top"
                   style="height: 100px ;width:100px ;">
                   <br>
-                    <button mat-fab (click)="fileSelectRef4.click()" class="grab" matTooltip="click to select files">
+                    <button mat-fab (click)="fileSelectRef4.click()" class="grab" matTooltip="click to select files" *ngIf="showForm">
                       <mat-icon>add</mat-icon>
             </button>
                   <input type="file" #fileSelectRef4 id="filesSelectRef4" (change)="uploadImage3($event)" accept=".png, .jpg, .jpeg" hidden>

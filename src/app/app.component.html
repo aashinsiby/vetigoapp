@@ -19,14 +19,16 @@
           <a class="nav-link active" aria-current="page" routerLink="/aboutus">
             <button mat-button>About Us</button>
           </a>
-          <button class="nav-link"routerLink="/login" class="button-31">Get Started</button>
+          <button class="nav-link"routerLink="/login" class="button-31" *ngIf="!showprof">Get Started</button>
+          <button  mat-button color="warn" (click)="logout()" id="lg" *ngIf="showprof">
+            <mat-icon>logout</mat-icon>Logout
+          </button>
       
         </div>
       </div>
     </div>
   </nav>
-<!-- <app-login></app-login> -->
-<!-- <app-userprofile></app-userprofile> -->
+
 
 
 <router-outlet></router-outlet>
