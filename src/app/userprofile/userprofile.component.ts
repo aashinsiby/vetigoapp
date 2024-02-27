@@ -5,7 +5,7 @@ import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask 
 import { finalize, tap } from 'rxjs/operators';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FileUploadModule } from 'primeng/fileupload';
+import {MatListModule} from '@angular/material/list';
 import {  AngularFireAuthModule,  } from '@angular/fire/compat/auth';
 import { Subscription } from 'rxjs';
 import { MatSelectModule } from '@angular/material/select';
@@ -15,7 +15,9 @@ import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatCardModule, MatCardTitleGroup } from '@angular/material/card';
+import {MatBadgeModule} from '@angular/material/badge';
 import { MatDividerModule } from '@angular/material/divider';
+import {MatChipsModule} from '@angular/material/chips';
 @Component({
   selector: 'app-userprofile',
   standalone: true,
@@ -34,7 +36,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatCardModule,
     MatDividerModule,
   MatIconButton,
-  MatCardTitleGroup,
+  MatCardTitleGroup,MatBadgeModule,MatChipsModule,MatListModule
   
  ],
   templateUrl: './userprofile.component.html',
