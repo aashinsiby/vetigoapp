@@ -7,13 +7,13 @@
       <mat-card class="example-card ">
         
         <mat-card-header >
-
-          <div class="d-flex flex-column align-items-center justify-content-center" *ngIf="!showForm">
+          
+            
+          <div class=" d-flex flex-column align-items-center justify-content-center" *ngIf="!showForm">
           <img mat-card-image *ngIf="profilePictureUrl"
-          [src]="profilePictureUrl" alt="Profile Picture" style="width: 150px; height: 150px;" class="" > 
+          [src]="profilePictureUrl" alt="Profile Picture" style="width: 100vw; height: 100vh;" class="" > 
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" (click)="toggleEdit()" id="lg" *ngIf="!showForm">
               <mat-icon>edit</mat-icon>
-              
             </span>
           </div>
 
@@ -31,6 +31,7 @@
             
             <mat-icon>keyboard_backspace</mat-icon>
           </button>
+          
         </mat-card-header>
         
         <mat-divider></mat-divider>
@@ -64,7 +65,7 @@
 
         <mat-card-content  class="mt-2 mb-2">
           <h6>Interests:</h6>
-          <button mat-raised-button >Setup interests</button> 
+          <button mat-raised-button >Comming Soon</button> 
         </mat-card-content>
         <mat-divider></mat-divider>
 
