@@ -64,7 +64,7 @@ mat-form-field{
  left: 0;
  width: 100%;
  background-color: rgba(0, 0, 0, 0.096); /* Add transparency for better readability */
- color: white; /* Username text color */
+ color: rgb(0, 0, 0); /* Username text color */
  padding: 10px; /* Adjust padding as needed */
  box-sizing: border-box;
  border-bottom-left-radius: 10px; /* Match card's border radius for bottom left */
