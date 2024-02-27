@@ -1,43 +1,33 @@
-<mat-card class="image-card">
-  <img mat-card-image *ngIf="profilePictureUrl" [src]="profilePictureUrl" alt="Profile Picture" class="profile-image">
-  <div class="username-overlay">
-    <h1 class="display-5 " style=" font-family: 'Roboto', sans-serif;
-    font-weight: 600;
-    font-style: normal;"> {{username}}, {{age}} &nbsp; </h1>
-    <div class="row justify-content-center">
-      <div class="col d-flex justify-content-center ">
-        <button mat-fab color="warn" aria-label="No Love">
-          <mat-icon>clear</mat-icon>
-        </button>
-      </div>
-      <div class="col d-flex justify-content-center">
-        <button mat-fab color="primary" aria-label="Love">
-          <mat-icon>star</mat-icon>
-        </button>
-      </div>
-      <div class="col d-flex justify-content-center"> <button mat-fab color="accent" aria-label="Love">
-          <mat-icon>favorite</mat-icon>
-        </button></div>
-    </div>
-  </div>
-</mat-card>
-<div class="p-5  bg-dark rounded-3">
 
-  <div class="row  text-center ">
+<div class="p-5 bg-light rounded-3">
 
-    <div class="col-md-8 d-flex flex-column align-items-center justify-content-center ">
+  <div class="row  text-center justify-content-center">
+
+    <div class="col-md-6 d-flex flex-column align-items-center justify-content-center ">
 
 
       <mat-card class="example-card ">
 
         <mat-card-header>
-
-
+          <div class="div" *ngIf="!showForm">
+          <img mat-card-image *ngIf="profilePictureUrl" [src]="profilePictureUrl" alt="Profile Picture" class="profile-image" >
+        </div>
+        <div class="div" *ngIf="showForm"><div matBadge="+" matBadgePosition="before" matBadgeSize="large"  class="demo-section" *ngIf="showForm"
+          (click)="profSelectRef.click()" class="grab" matTooltip="click to select files">
+          <img mat-card-image *ngIf="profilePictureUrl" [src]="profilePictureUrl" alt="Profile Picture" class="profile-image" ></div>
+        </div>
           <div class=" d-flex flex-column align-items-center justify-content-center" *ngIf="!showForm">
 
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
               (click)="toggleEdit()" id="lg" *ngIf="!showForm">
               <mat-icon>edit</mat-icon>
+            </span>
+          </div>
+          <div class=" d-flex flex-column align-items-center justify-content-center" *ngIf="showForm">
+
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              (click)="toggleEdit()" id="lg" *ngIf="showForm">
+              <mat-icon>keyboard_backspace</mat-icon>
             </span>
           </div>
 
@@ -47,17 +37,10 @@
           </mat-card-subtitle>
 
 
-          <div matBadge="+" matBadgeSize="large" matBadgePosition="before" class="demo-section" *ngIf="showForm"
-            (click)="profSelectRef.click()" class="grab" matTooltip="click to select files"><img mat-card-image
-              *ngIf="profilePictureUrl" [src]="profilePictureUrl" alt="Profile Picture"
-              style="width: 150px; height: 150px;" class=""></div>
 
 
 
-          <button mat-icon-button (click)="toggleEdit()" id="lg" *ngIf="showForm">
-
-            <mat-icon>keyboard_backspace</mat-icon>
-          </button>
+          
 
         </mat-card-header>
 
@@ -131,78 +114,62 @@
       </mat-card>
     </div>
 
-
-
-    <!-- Pictures Section -->
-    <div class="col-md-4 d-flex flex-column align-items-center justify-content-center ">
-      <div class="row ">
-        <div class="col-6 d-flex flex-column align-items-center justify-content-center">
-          <div class="card bg-warning " style="max-width: 5rem;">
-            <mat-card class="img-card d-flex flex-column align-items-center justify-content-center">
-              <img mat-card-image *ngIf="pictureUrl" [src]="pictureUrl" alt="Uploaded" class=""
-                style="height: 100px ;width:100px ;">
-              <br>
-              <button mat-fab (click)="fileSelectRef.click()" class="grab" matTooltip="click to select files"
-                *ngIf="showForm">
-                <mat-icon>add</mat-icon>
-              </button>
-              <input type="file" #fileSelectRef id="filesSelectRef" (change)="uploadImage($event)"
-                accept=".png, .jpg, .jpeg" hidden>
-              <!--  -->
-            </mat-card>
-          </div>
+    <!--  -->
+    <div class="col-md-6 d-flex flex-column align-items-center justify-content-center ">
+      <mat-card class="example-card ">
+        <!-- images -->
+        <img mat-card-image *ngIf="pictureUrl" [src]="pictureUrl" alt="Uploaded" class="" style="height: 400px; width: auto;">
+        <br>
+        <div class="center-button">
+          <button mat-fab (click)="fileSelectRef.click()" class="grab" matTooltip="click to select files" *ngIf="showForm">
+            <mat-icon>add</mat-icon>
+          </button>
         </div>
-        <div class="col-6">
-          <div class="card bg-warning mb-2" style="max-width: 5rem;">
-            <mat-card class="img-card d-flex flex-column align-items-center justify-content-center">
-              <img mat-card-image *ngIf="pictureUrl1" [src]="pictureUrl1" alt="Uploaded" class="card-img-top"
-                style="height: 100px ;width:100px ;">
-              <br>
-
-              <button mat-fab (click)="fileSelectRef2.click()" class="grab" matTooltip="click to select files"
-                *ngIf="showForm">
-                <mat-icon>add</mat-icon>
-              </button>
-              <input type="file" #fileSelectRef2 id="filesSelectRef2" (change)="uploadImage1($event)"
-                accept=".png, .jpg, .jpeg" hidden>
-
-            </mat-card>
-          </div>
+        <input type="file" #fileSelectRef id="filesSelectRef" (change)="uploadImage($event)" accept=".png, .jpg, .jpeg"
+          hidden>
+    
+        <!-- end here -->
+        <mat-divider></mat-divider>
+        <!--  -->
+        <img mat-card-image *ngIf="pictureUrl1" [src]="pictureUrl1" alt="Uploaded" class="card-img-top" style="height: 400px; width: auto;">
+        <br>
+        <div class="center-button">
+    
+          <button mat-fab (click)="fileSelectRef2.click()" class="grab" matTooltip="click to select files" *ngIf="showForm">
+            <mat-icon>add</mat-icon>
+          </button>
         </div>
-        <div class="col-6 d-flex flex-column align-items-center justify-content-center">
-          <div class="card bg-warning mb-2" style="max-width: 5rem;"> <mat-card
-              class="img-card d-flex flex-column align-items-center justify-content-center ">
-              <img mat-card-image *ngIf="pictureUrl2" [src]="pictureUrl2" alt="Uploaded" class="card-img-top"
-                style="height: 100px ;width:100px ;">
-              <br>
-              <button mat-fab (click)="fileSelectRef3.click()" class="grab" matTooltip="click to select files"
-                *ngIf="showForm">
-                <mat-icon>add</mat-icon>
-              </button>
-              <input type="file" #fileSelectRef3 id="filesSelectRef3" (change)="uploadImage2($event)"
-                accept=".png, .jpg, .jpeg" hidden>
-
-            </mat-card>
-          </div>
+        <input type="file" #fileSelectRef2 id="filesSelectRef2" (change)="uploadImage1($event)" accept=".png, .jpg, .jpeg"
+          hidden>
+        <mat-divider></mat-divider>
+    
+        <!--  -->
+        <img mat-card-image *ngIf="pictureUrl2" [src]="pictureUrl2" alt="Uploaded" class="card-img-top" style="height: 400px; width: auto;">
+        <br>
+        <div class="center-button">
+    
+          <button mat-fab (click)="fileSelectRef3.click()" class="grab" matTooltip="click to select files" *ngIf="showForm">
+            <mat-icon>add</mat-icon>
+          </button>
         </div>
-        <div class="col-6">
-          <div class="card bg-warning mb-2" style="max-width: 5rem;"> <mat-card
-              class="img-card d-flex flex-column align-items-center justify-content-center">
-              <img mat-card-image *ngIf="pictureUrl3" [src]="pictureUrl3" alt="Uploaded" class="card-img-top"
-                style="height: 100px ;width:100px ;">
-              <br>
-              <button mat-fab (click)="fileSelectRef4.click()" class="grab" matTooltip="click to select files"
-                *ngIf="showForm">
-                <mat-icon>add</mat-icon>
-              </button>
-              <input type="file" #fileSelectRef4 id="filesSelectRef4" (change)="uploadImage3($event)"
-                accept=".png, .jpg, .jpeg" hidden>
-
-            </mat-card>
-          </div>
+        <input type="file" #fileSelectRef3 id="filesSelectRef3" (change)="uploadImage2($event)" accept=".png, .jpg, .jpeg"
+          hidden>
+    
+    
+        <mat-divider></mat-divider>
+        <!--  -->
+        <img mat-card-image *ngIf="pictureUrl3" [src]="pictureUrl3" alt="Uploaded" class="card-img-top" style="height: 400px; width: auto;">
+        <br>
+        <div class="center-button">
+    
+          <button mat-fab (click)="fileSelectRef4.click()" class="grab" matTooltip="click to select files" *ngIf="showForm">
+            <mat-icon>add</mat-icon>
+          </button>
         </div>
-        <!-- Add more columns for additional images -->
-      </div>
+        <input type="file" #fileSelectRef4 id="filesSelectRef4" (change)="uploadImage3($event)" accept=".png, .jpg, .jpeg"
+          hidden>
+    
+      </mat-card>
     </div>
-  </div>
-</div>
+    </div>
+    </div>

@@ -1,0 +1,109 @@
+<mat-card class="image-card">
+ <img mat-card-image *ngIf="profilePictureUrl" [src]="profilePictureUrl" alt="Profile Picture" class="profile-image">
+ <div class="username-overlay">
+   <h1 class="display-5 " style=" font-family: 'Roboto', sans-serif;
+   font-weight: 600;
+   font-style: normal;"> {{username}}, {{age}} &nbsp; </h1>
+   <div class="row justify-content-center">
+     <div class="col d-flex justify-content-center ">
+       <button mat-fab color="warn" aria-label="No Love">
+         <mat-icon>clear</mat-icon>
+       </button>
+     </div>
+     <div class="col d-flex justify-content-center">
+       <button mat-fab color="primary" aria-label="Love">
+         <mat-icon>star</mat-icon>
+       </button>
+     </div>
+     <div class="col d-flex justify-content-center"> <button mat-fab color="accent" aria-label="Love">
+         <mat-icon>favorite</mat-icon>
+       </button></div>
+   </div>
+ </div>
+</mat-card>
+<div class="p-5  bg-dark rounded-3">
+
+ <div class="row  text-center ">
+
+   <div class="col-md-6 d-flex flex-column align-items-center justify-content-center ">
+
+
+     <mat-card class="example-card ">
+
+
+       <mat-divider></mat-divider>
+       <mat-card-title style="font-size:22px;">{{ username }}</mat-card-title>
+       <mat-list *ngIf="!showForm">
+         <div class="row d-flex flex-column align-items-center justify-content-center">
+           <div class="col-md-4">
+             <span matListItemTitle>Gender</span>
+             <span matListItemLine><mat-icon>{{sex}}</mat-icon></span>
+           </div>
+           <div class="col-md-4 ">
+             <span matListItemTitle>Age</span>
+             <span matListItemLine>{{age}}</span>
+           </div>
+           <div class="col-md-4">
+             <span matListItemTitle>Breed</span>
+             <span matListItemLine>{{pet}} : {{breed}}</span>
+           </div>
+         </div>
+
+       </mat-list>
+
+       <mat-divider></mat-divider>
+       <mat-card-content *ngIf="!showForm" class="mt-2 mb-2">
+
+         <h6>About {{username}}:</h6>
+         <p>{{ bio }}</p>
+       </mat-card-content>
+       <!--  -->
+       <mat-divider></mat-divider>
+
+       <mat-card-content class="mt-2 mb-2">
+         <h6>Interests:</h6>
+         <button mat-raised-button>Comming Soon</button>
+       </mat-card-content>
+       <mat-divider></mat-divider>
+
+       <mat-card-content *ngIf="!showForm" class="mt-2 mb-2">
+         <h6>Contact Information:</h6>
+         <mat-list>
+           <mat-list-item>
+             <span matListItemTitle>Owner Name</span>
+             <span matListItemLine>{{name}}</span>
+           </mat-list-item>
+           <mat-list-item>
+             <span matListItemTitle>Email</span>
+             <span>{{email}}</span>
+           </mat-list-item>
+         </mat-list>
+       </mat-card-content>
+     
+     </mat-card>
+   </div>
+
+   <div class="col-md-6 d-flex flex-column align-items-center justify-content-center ">
+    <mat-card class="example-card ">
+     <!-- images -->
+     <img mat-card-image *ngIf="pictureUrl" [src]="pictureUrl" alt="Uploaded" class="" style="height: 300px; width: auto;">
+     <br>
+     <mat-divider></mat-divider>
+     <!--  -->
+     <img mat-card-image *ngIf="pictureUrl1" [src]="pictureUrl1" alt="Uploaded" class="card-img-top"
+      style="height: 300px; width: auto;">
+     <br>
+     <mat-divider></mat-divider>
+     <!--  -->
+     <img mat-card-image *ngIf="pictureUrl2" [src]="pictureUrl2" alt="Uploaded" class="card-img-top"
+      style="height: 300px; width: auto;">
+     <br>
+     <mat-divider></mat-divider>
+     <!--  -->
+     <img mat-card-image *ngIf="pictureUrl3" [src]="pictureUrl3" alt="Uploaded" class="card-img-top"
+      style="height: 300px; width: auto;">
+     <br>
+    </mat-card>
+   </div>
+   </div>
+   </div>

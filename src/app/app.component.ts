@@ -14,13 +14,14 @@ import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/f
 import {MatDividerModule} from '@angular/material/divider';
 import { HomeComponent } from './home/home.component';
 import {  Auth, User, user,authState  } from '@angular/fire/auth';
+import { SwipeComponent } from './swipe/swipe.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule,RouterOutlet,LoginComponent,HomeComponent,RouterLink,RouterLinkActive,MatButtonModule,MatIconButton,MatIconModule,
-    SignupComponent,AboutusComponent,MatTabsModule,ForgetComponent,PdfComponent,UserprofileComponent,AngularFirestoreModule,MatDividerModule],
+    SignupComponent,AboutusComponent,MatTabsModule,ForgetComponent,PdfComponent,UserprofileComponent,AngularFirestoreModule,MatDividerModule,SwipeComponent],
   
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -28,11 +29,12 @@ import {  Auth, User, user,authState  } from '@angular/fire/auth';
 
 
 export class AppComponent {
+
   title = 'Vetigo';
   authState = authState(this.auth);
   userId: string | null = null;
   showprof: boolean = false;
-
+  showdat: boolean = false;
   constructor(private firestore : AngularFirestore,private auth: Auth = inject(Auth),private router: Router){
    
   }
@@ -44,6 +46,7 @@ export class AppComponent {
      if (user) {
        this.userId = user.uid;
    this.showprof = !this.showprof;
+   this.showdat = !this.showdat;
      
      }
 
@@ -54,8 +57,14 @@ export class AppComponent {
   this.auth.signOut();
   this.router.navigate(['/login']);
   this.showprof = !this.showprof;
-}
+  this.showdat = !this.showdat;
 
+}
+swipe() {
+ 
+  this.router.navigate(['/swipe']);
+  
+}
 
 
 }
