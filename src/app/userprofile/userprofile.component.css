@@ -89,6 +89,7 @@
 .image-card {
  
  position: relative;
+ top: 2vh;
  left: 10vw;
  width: 80vw; /* Adjust as needed */
  height: 60vh; /* Adjust as needed */
@@ -111,8 +112,8 @@
  bottom: 0;
  left: 0;
  width: 100%;
- background-color: rgba(0, 0, 0, 0.096); /* Add transparency for better readability */
- color: rgb(0, 0, 0); /* Username text color */
+ background-color: rgba(0, 0, 0, 0.3); /* Add transparency for better readability */
+ color: rgb(255, 255, 255); /* Username text color */
  padding: 10px; /* Adjust padding as needed */
  box-sizing: border-box;
  /* Match card's border radius for bottom right */

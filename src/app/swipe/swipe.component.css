@@ -44,8 +44,7 @@
  width: 80vw; /* Adjust as needed */
  height: 60vh; /* Adjust as needed */
  overflow: hidden; /* Ensure username overlay stays within the card */
- border: 2px solid black; /* Add black border */
- border-radius: 10px; /* Add rounded edges */
+ border-radius: 55px; /* Add rounded edges */
 }
 
 .profile-image {
@@ -63,8 +62,8 @@
  bottom: 0;
  left: 0;
  width: 100%;
- background-color: rgba(0, 0, 0, 0.096); /* Add transparency for better readability */
- color: rgb(0, 0, 0); /* Username text color */
+ background-color: rgba(0, 0, 0, 0.452); /* Add transparency for better readability */
+ color: rgb(255, 255, 255); /* Username text color */
  padding: 10px; /* Adjust padding as needed */
  box-sizing: border-box;
  border-bottom-left-radius: 10px; /* Match card's border radius for bottom left */
@@ -129,5 +128,23 @@
  background-position: center; /* Adjust as needed */
  width: 28px; /* Adjust the width of the button */
  height: 28px; /* Adjust the height of the button */
+ border: none; /* Remove border if necessary */
+}
+.custom-icon-x {
+ /* background-image: url('../../assets/icons/x.png'); */
+ background-size: cover;
+ background-repeat: no-repeat; /* Adjust as needed */
+ background-position: center; /* Adjust as needed */
+ width: 125px; /* Adjust the width of the button */
+ height: 125px; /* Adjust the height of the button */
+ border: none; /* Remove border if necessary */
+}
+.custom-icon-love {
+ /* background-image: url('../../assets/icons/love.png'); */
+ background-size:cover;
+ background-repeat: no-repeat; /* Adjust as needed */
+ background-position: center; /* Adjust as needed */
+ width: 125px; /* Adjust the width of the button */
+ height: 125px; /* Adjust the height of the button */
  border: none; /* Remove border if necessary */
 }

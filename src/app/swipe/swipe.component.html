@@ -1,27 +1,29 @@
+<div class="div" style="background-color: #D3CC21;">
 <mat-card class="image-card">
  <img mat-card-image *ngIf="profilePictureUrl" [src]="profilePictureUrl" alt="Profile Picture" class="profile-image">
  <div class="username-overlay">
    <h1 class="display-5 " style=" font-family: 'Roboto', sans-serif;
    font-weight: 600;
-   font-style: normal;"> {{username}}, {{age}} &nbsp; </h1>
+   font-style: normal;"> &nbsp; &nbsp; {{username}}, {{age}} &nbsp; </h1>
+
    <div class="row justify-content-center">
      <div class="col d-flex justify-content-center ">
-       <button mat-fab color="warn" aria-label="No Love">
-         <mat-icon>clear</mat-icon>
-       </button>
+     
+      <button mat-icon-button class="custom-icon-x">
+        <img src="../../assets/icons/x.png" alt="Image Alt Text" style="width: 125px; height: 125px ;">
+      </button>
      </div>
-     <div class="col d-flex justify-content-center">
-       <button mat-fab color="primary" aria-label="Love">
-         <mat-icon>star</mat-icon>
-       </button>
-     </div>
-     <div class="col d-flex justify-content-center"> <button mat-fab color="accent" aria-label="Love">
-         <mat-icon>favorite</mat-icon>
-       </button></div>
+    
+     <div class="col d-flex justify-content-center"> 
+      <button mat-icon-button class="custom-icon-love">
+        <img src="../../assets/icons/love.png" alt="Image Alt Text" class="large-icon" style="width: 60px; height: 60px ;">
+      </button>
+  </div>
    </div>
  </div>
 </mat-card>
-<div class="p-5  bg-dark rounded-3">
+</div>
+<div class="p-5 rounded-3" style="background-color: #D3CC21;">
 
  <div class="row  text-center ">
 
