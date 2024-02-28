@@ -1,5 +1,17 @@
 
-<div class="p-5 bg-light rounded-3">
+<div class="div " style="background-color: #D3CC21;">
+<mat-card class="image-card " >
+  <img mat-card-image *ngIf="profilePictureUrl" [src]="profilePictureUrl" alt="Profile Picture" class="profile-image ">
+  <div class="username-overlay">
+    <h1 class="display-5 " style=" font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-style: normal;"> {{username}}, {{age}} &nbsp; </h1>
+  
+  </div>
+ </mat-card>
+</div>
+
+<div class="p-5 " style="background-color: #D3CC21;">
 
   <div class="row  text-center justify-content-center">
 
@@ -9,9 +21,7 @@
       <mat-card class="example-card ">
 
         <mat-card-header>
-          <div class="div" *ngIf="!showForm">
-          <img mat-card-image *ngIf="profilePictureUrl" [src]="profilePictureUrl" alt="Profile Picture" class="profile-image" >
-        </div>
+          
         <div class="div" *ngIf="showForm"><div matBadge="+" matBadgePosition="before" matBadgeSize="large"  class="demo-section" *ngIf="showForm"
           (click)="profSelectRef.click()" class="grab" matTooltip="click to select files">
           <img mat-card-image *ngIf="profilePictureUrl" [src]="profilePictureUrl" alt="Profile Picture" class="profile-image" ></div>
@@ -173,3 +183,38 @@
     </div>
     </div>
     </div>
+
+
+    <footer class="footer">
+      <div class="container">
+        <div class="row justify-content-center"> <!-- Center the columns -->
+          <div class="col text-center"> <!-- Center the content horizontally -->
+            <a class="nav-link active" aria-current="page" routerLink="/swipe">
+              <button mat-icon-button class="custom-icon-card">
+                <!-- Your icon or image goes here -->
+              </button>
+            </a>
+          </div>
+          <div class="col text-center"> <!-- Center the content horizontally -->
+            <button mat-icon-button class="custom-icon-heart">
+              <!-- Your icon or image goes here -->
+            </button>
+          </div>
+          <div class="col text-center"> <!-- Center the content horizontally -->
+            <button mat-icon-button class="custom-icon-msg">
+              <!-- Your icon or image goes here -->
+            </button>
+          </div>
+          <div class="col text-center"> <!-- Center the content horizontally -->
+            <a class="nav-link active" aria-current="page" routerLink="/profile">
+
+            <button mat-icon-button class="custom-icon-people" >
+              <!-- Your icon or image goes here -->
+            </button>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+    </footer>
+    

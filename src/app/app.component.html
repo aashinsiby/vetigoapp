@@ -17,11 +17,11 @@
             <button mat-button>About Us</button>
           </a>
           <button class="nav-link" routerLink="/login" class="button-31" *ngIf="!showprof">Get Started</button>
-          <a class="nav-link active" aria-current="page" routerLink="/aboutus"  routerLink="/profile"  *ngIf="showprof">
+          <a class="nav-link active" aria-current="page"  routerLink="/profile"  *ngIf="showprof">
           <button  mat-button color="primary" id="lg"> 
             <mat-icon>pets</mat-icon>
           </button></a>
-          <a class="nav-link active" aria-current="page" routerLink="/aboutus"  routerLink="/login"  *ngIf="showprof">
+          <a class="nav-link active" aria-current="page"   routerLink="/login"  *ngIf="showprof">
 
           <button  mat-button color="warn" (click)="logout()" id="lg" >
             <mat-icon>logout</mat-icon>Logout
