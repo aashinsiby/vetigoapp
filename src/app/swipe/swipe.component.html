@@ -27,7 +27,7 @@
 
  <div class="row  text-center ">
 
-   <div class="col-md-6  ">
+   <div class="col-md-6 d-flex flex-column align-items-center justify-content-center ">
 
 
      <mat-card class="example-card ">
@@ -47,10 +47,12 @@
           <div class="col">
              <span matListItemLine><button mat-raised-button style="background-color: #DCFC14;">Age : {{age}}</button></span>
             </div>
-            <div class="col d-flex flex-column align-items-center justify-content-center">
-             <span matListItemLine><button mat-raised-button style="background-color: #DCFC14;">{{pet}} : {{breed}}</button></span>
+          </div>
+          <div class="row">
+            <div class="col ">
+             <span matListItemLine><button mat-raised-button style="background-color: #DCFC14; z-index: 0;">{{pet}} : {{breed}}</button></span>
            </div>
-         </div>
+          </div>
 
        </mat-list>
 
