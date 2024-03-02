@@ -40,6 +40,7 @@
 .image-card {
  
  position: relative;
+ top: 2vh;
  left: 10vw;
  width: 80vw; /* Adjust as needed */
  height: 60vh; /* Adjust as needed */

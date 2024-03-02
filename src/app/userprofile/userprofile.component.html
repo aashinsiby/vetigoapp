@@ -54,7 +54,7 @@
 
         </mat-card-header>
 
-        <mat-divider></mat-divider>
+        <mat-divider  *ngIf="showForm"></mat-divider>
         <mat-card-title style="font-size:22px;">{{ username }}</mat-card-title>
         <mat-list *ngIf="!showForm">
           <div class="row d-flex flex-column align-items-center justify-content-center">

@@ -23,11 +23,11 @@
  </div>
 </mat-card>
 </div>
-<div class="p-5 rounded-3" style="background-color: #D3CC21;">
+<div class="p-5 " style="background-color: #D3CC21;">
 
  <div class="row  text-center ">
 
-   <div class="col-md-6 d-flex flex-column align-items-center justify-content-center ">
+   <div class="col-md-6  ">
 
 
      <mat-card class="example-card ">
@@ -36,18 +36,19 @@
        <mat-divider></mat-divider>
        <mat-card-title style="font-size:22px;">{{ username }}</mat-card-title>
        <mat-list *ngIf="!showForm">
-         <div class="row d-flex flex-column align-items-center justify-content-center">
-           <div class="col-md-4">
-             <span matListItemTitle>Gender</span>
-             <span matListItemLine><mat-icon>{{sex}}</mat-icon></span>
-           </div>
-           <div class="col-md-4 ">
-             <span matListItemTitle>Age</span>
-             <span matListItemLine>{{age}}</span>
-           </div>
-           <div class="col-md-4">
-             <span matListItemTitle>Breed</span>
-             <span matListItemLine>{{pet}} : {{breed}}</span>
+         <div class="row ">
+           <div class="col">
+             
+             <span matListItemLine><button mat-raised-button style="background-color: #DCFC14;">
+              <mat-icon >{{sex}}</mat-icon>
+            </button>
+            </span>
+          </div>
+          <div class="col">
+             <span matListItemLine><button mat-raised-button style="background-color: #DCFC14;">Age : {{age}}</button></span>
+            </div>
+            <div class="col d-flex flex-column align-items-center justify-content-center">
+             <span matListItemLine><button mat-raised-button style="background-color: #DCFC14;">{{pet}} : {{breed}}</button></span>
            </div>
          </div>
 
@@ -60,27 +61,10 @@
          <p>{{ bio }}</p>
        </mat-card-content>
        <!--  -->
+      
        <mat-divider></mat-divider>
 
-       <mat-card-content class="mt-2 mb-2">
-         <h6>Interests:</h6>
-         <button mat-raised-button>Comming Soon</button>
-       </mat-card-content>
-       <mat-divider></mat-divider>
-
-       <mat-card-content *ngIf="!showForm" class="mt-2 mb-2">
-         <h6>Contact Information:</h6>
-         <mat-list>
-           <mat-list-item>
-             <span matListItemTitle>Owner Name</span>
-             <span matListItemLine>{{name}}</span>
-           </mat-list-item>
-           <mat-list-item>
-             <span matListItemTitle>Email</span>
-             <span>{{email}}</span>
-           </mat-list-item>
-         </mat-list>
-       </mat-card-content>
+   
      
      </mat-card>
    </div>
@@ -88,22 +72,22 @@
    <div class="col-md-6 d-flex flex-column align-items-center justify-content-center ">
     <mat-card class="example-card ">
      <!-- images -->
-     <img mat-card-image *ngIf="pictureUrl" [src]="pictureUrl" alt="Uploaded" class="" style="height: 300px; width: auto;">
+     <img mat-card-image *ngIf="pictureUrl" [src]="pictureUrl" alt="Uploaded" class="" style="height: 400px; width: auto;">
      <br>
      <mat-divider></mat-divider>
      <!--  -->
      <img mat-card-image *ngIf="pictureUrl1" [src]="pictureUrl1" alt="Uploaded" class="card-img-top"
-      style="height: 300px; width: auto;">
+      style="height: 400px; width: auto;">
      <br>
      <mat-divider></mat-divider>
      <!--  -->
      <img mat-card-image *ngIf="pictureUrl2" [src]="pictureUrl2" alt="Uploaded" class="card-img-top"
-      style="height: 300px; width: auto;">
+      style="height: 400px; width: auto;">
      <br>
      <mat-divider></mat-divider>
      <!--  -->
      <img mat-card-image *ngIf="pictureUrl3" [src]="pictureUrl3" alt="Uploaded" class="card-img-top"
-      style="height: 300px; width: auto;">
+      style="height: 400px; width: auto;">
      <br>
     </mat-card>
    </div>
