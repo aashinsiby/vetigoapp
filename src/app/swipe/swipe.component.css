@@ -136,8 +136,8 @@
  background-size: cover;
  background-repeat: no-repeat; /* Adjust as needed */
  background-position: center; /* Adjust as needed */
- width: 125px; /* Adjust the width of the button */
- height: 125px; /* Adjust the height of the button */
+ width: 100px; /* Adjust the width of the button */
+ height: 100px; /* Adjust the height of the button */
  border: none; /* Remove border if necessary */
 }
 .custom-icon-love {
@@ -145,8 +145,8 @@
  background-size:cover;
  background-repeat: no-repeat; /* Adjust as needed */
  background-position: center; /* Adjust as needed */
- width: 125px; /* Adjust the width of the button */
- height: 125px; /* Adjust the height of the button */
+ width: 100px; /* Adjust the width of the button */
+ height: 100px; /* Adjust the height of the button */
  border: none; /* Remove border if necessary */
 }
 
