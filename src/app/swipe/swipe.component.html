@@ -1,151 +1,145 @@
 <swiper-container class="swiper-container mySwiper">
-  <!-- <swiper-slide *ngFor="let user of allUserProfiles">
-    <img mat-card-image
-       *ngIf="user.profilePictureUrl"
-       [src]="user.profilePictureUrl"
-       alt="Profile Picture"
-       class="profile-image" style="width: 125px; height: 125px ;">
-  </swiper-slide> -->
+  <swiper-slide class="div" *ngFor="let user of allUserProfiles">
 
-
-
-<swiper-slide class="div" *ngFor="let user of allUserProfiles">
-
-<div class="div" style="background-color: #E49500;"  >
-<mat-card  class="image-card"  >
- <img mat-card-image *ngIf="profilePictureUrl" [src]="user.profilePictureUrl" alt="Profile Picture" class="profile-image">
- <div class="username-overlay">
-   <h1 class="display-5 " style=" font-family: 'Roboto', sans-serif;
+    <div class="div" style="background-color: #E49500;">
+      <mat-card class="image-card">
+        <img mat-card-image *ngIf="user.profilePictureUrl" [src]="user.profilePictureUrl" alt="Profile Picture"
+          class="profile-image">
+        <div class="username-overlay">
+          <h1 class="display-5 " style=" font-family: 'Roboto', sans-serif;
    font-weight: 600;
    font-style: normal;"> &nbsp; &nbsp; {{user.username}}, {{user.age}} &nbsp; </h1>
+          <div class="row justify-content-center">
+            <div class="col d-flex justify-content-center ">
 
-   <div class="row justify-content-center">
-     <div class="col d-flex justify-content-center ">
-     
-      <button mat-icon-button class="custom-icon-x" >
-        <img src="../../assets/icons/x.png" alt="Image Alt Text" style="width: 50px; height: 50px ;">
-      </button>
-     </div>
-    
-     <div class="col d-flex justify-content-center"> 
-      <button mat-icon-button class="custom-icon-love" >
-        <img src="../../assets/icons/love.png" alt="Image Alt Text" class="large-icon" style="width: 50px; height: 50px ;">
-      </button>
-  </div>
-   </div>
- </div>
-</mat-card>
-</div>
+              <button mat-icon-button class="custom-icon-x">
+                <img src="../../assets/icons/x.png" alt="Image Alt Text" style="width: 50px; height: 50px ;">
+              </button>
+            </div>
 
-<div class="p-5 " style="background-color: #E49500;">
-
- <div class="row  text-center ">
-
-   <div class="col-md-6 d-flex flex-column align-items-center justify-content-center ">
-
-
-     <mat-card class="example-card ">
-
-
-       <mat-divider></mat-divider>
-       <mat-card-title style="font-size:22px;">{{ user.username }}</mat-card-title>
-       <mat-list *ngIf="!showForm">
-         <div class="row ">
-           <div class="col">
-             
-             <span matListItemLine><button mat-raised-button style="background-color: #DCFC14;border-radius: 20px;">
-              <mat-icon >{{user.sex}}</mat-icon>
-            </button>
-            </span>
-          </div>
-          <div class="col">
-             <span matListItemLine><button mat-raised-button style="background-color: #DCFC14;border-radius: 20px;">Age : {{user.age}}</button></span>
+            <div class="col d-flex justify-content-center">
+              <button mat-icon-button class="custom-icon-love">
+                <img src="../../assets/icons/love.png" alt="Image Alt Text" class="large-icon"
+                  style="width: 50px; height: 50px ;">
+              </button>
             </div>
           </div>
-          <div class="row mb-2">
-            <div class="col ">
-             <span matListItemLine><button mat-raised-button style="background-color: #DCFC14; z-index: 0; border-radius: 20px;">{{user.pet}} : {{user.breed}}</button></span>
-           </div>
-          </div>
+        </div>
+      </mat-card>
+    </div>
 
-       </mat-list>
+    <div class="p-5 " style="background-color: #E49500;">
 
-       <mat-divider></mat-divider>
-       <mat-card-content *ngIf="!showForm" class="mt-2 mb-2">
+      <div class="row  text-center ">
 
-         <h6>About {{user.username}}:</h6>
-         <p>{{ user.bio }}</p>
-       </mat-card-content>
-       <!--  -->
-      
-       <mat-divider></mat-divider>
+        <div class="col-md-6 d-flex flex-column align-items-center justify-content-center ">
 
-   
-     
-     </mat-card>
-   </div>
 
-   <div class="col-md-6 d-flex flex-column align-items-center justify-content-center ">
-    <mat-card class="example-card ">
-     <!-- images -->
-     <img mat-card-image *ngIf="user.pictureUrl" [src]="user.pictureUrl" alt="Uploaded" class="" style="height: 400px; width: auto;">
-     <br>
-     <mat-divider></mat-divider>
-     <!--  -->
-     <img mat-card-image *ngIf="user.pictureUrl1" [src]="user.pictureUrl1" alt="Uploaded" class="card-img-top"
-      style="height: 400px; width: auto;">
-     <br>
-     <mat-divider></mat-divider>
-     <!--  -->
-     <img mat-card-image *ngIf="user.pictureUrl2" [src]="user.pictureUrl2" alt="Uploaded" class="card-img-top"
-      style="height: 400px; width: auto;">
-     <br>
-     <mat-divider></mat-divider>
-     <!--  -->
-     <img mat-card-image *ngIf="user.pictureUrl3" [src]="user.pictureUrl3" alt="Uploaded" class="card-img-top"
-      style="height: 400px; width: auto;">
-     <br>
-    </mat-card>
-   </div>
-   </div>
-   </div>
+          <mat-card class="example-card ">
+
+
+            <mat-divider></mat-divider>
+            <mat-card-title style="font-size:22px;">{{ user.username }}</mat-card-title>
+            <mat-list *ngIf="!showForm">
+              <div class="row ">
+                <div class="col">
+
+                  <span matListItemLine><button mat-raised-button
+                      style="background-color: #DCFC14;border-radius: 20px;">
+                      <mat-icon>{{user.sex}}</mat-icon>
+                    </button>
+                  </span>
+                </div>
+                <div class="col">
+                  <span matListItemLine><button mat-raised-button
+                      style="background-color: #DCFC14;border-radius: 20px;">Age : {{user.age}}</button></span>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col ">
+                  <span matListItemLine><button mat-raised-button
+                      style="background-color: #DCFC14; z-index: 0; border-radius: 20px;">{{user.pet}} :
+                      {{user.breed}}</button></span>
+                </div>
+              </div>
+
+            </mat-list>
+
+            <mat-divider></mat-divider>
+            <mat-card-content *ngIf="!showForm" class="mt-2 mb-2">
+
+              <h6>About {{user.username}}:</h6>
+              <p>{{ user.bio }}</p>
+            </mat-card-content>
+            <!--  -->
+
+            <mat-divider></mat-divider>
+
+
+
+          </mat-card>
+        </div>
+
+        <div class="col-md-6 d-flex flex-column align-items-center justify-content-center ">
+          <mat-card class="example-card ">
+            <!-- images -->
+            <img mat-card-image *ngIf="user.pictureUrl" [src]="user.pictureUrl" alt="Uploaded" class=""
+              style="height: 400px; width: auto;">
+            <br>
+            <mat-divider></mat-divider>
+            <!--  -->
+            <img mat-card-image *ngIf="user.pictureUrl1" [src]="user.pictureUrl1" alt="Uploaded" class="card-img-top"
+              style="height: 400px; width: auto;">
+            <br>
+            <mat-divider></mat-divider>
+            <!--  -->
+            <img mat-card-image *ngIf="user.pictureUrl2" [src]="user.pictureUrl2" alt="Uploaded" class="card-img-top"
+              style="height: 400px; width: auto;">
+            <br>
+            <mat-divider></mat-divider>
+            <!--  -->
+            <img mat-card-image *ngIf="user.pictureUrl3" [src]="user.pictureUrl3" alt="Uploaded" class="card-img-top"
+              style="height: 400px; width: auto;">
+            <br>
+          </mat-card>
+        </div>
+      </div>
+    </div>
   </swiper-slide>
 </swiper-container>
 
 
 
 
-   <footer class="footer" style="z-index: 3;">
-    <div class="container">
-      <div class="row justify-content-center"> <!-- Center the columns -->
-        <div class="col text-center"> <!-- Center the content horizontally -->
-          <a class="nav-link active" aria-current="page" routerLink="/swipe">
-            <button mat-icon-button class="custom-icon-card">
-              <!-- Your icon or image goes here -->
-            </button>
-          </a>
-        </div>
-        <div class="col text-center"> <!-- Center the content horizontally -->
-          <button mat-icon-button class="custom-icon-heart">
+<footer class="footer" style="z-index: 3;">
+  <div class="container">
+    <div class="row justify-content-center"> <!-- Center the columns -->
+      <div class="col text-center"> <!-- Center the content horizontally -->
+        <a class="nav-link active" aria-current="page" routerLink="/swipe">
+          <button mat-icon-button class="custom-icon-card">
             <!-- Your icon or image goes here -->
           </button>
-        </div>
-        <div class="col text-center"> <!-- Center the content horizontally -->
-          <button mat-icon-button class="custom-icon-msg">
-            <!-- Your icon or image goes here -->
-          </button>
-        </div>
-        <div class="col text-center"> <!-- Center the content horizontally -->
-          <a class="nav-link active" aria-current="page" routerLink="/profile">
+        </a>
+      </div>
+      <div class="col text-center"> <!-- Center the content horizontally -->
+        <button mat-icon-button class="custom-icon-heart">
+          <!-- Your icon or image goes here -->
+        </button>
+      </div>
+      <div class="col text-center"> <!-- Center the content horizontally -->
+        <button mat-icon-button class="custom-icon-msg">
+          <!-- Your icon or image goes here -->
+        </button>
+      </div>
+      <div class="col text-center"> <!-- Center the content horizontally -->
+        <a class="nav-link active" aria-current="page" routerLink="/profile">
 
-          <button mat-icon-button class="custom-icon-people" >
+          <button mat-icon-button class="custom-icon-people">
             <!-- Your icon or image goes here -->
           </button>
-          </a>
-        </div>
+        </a>
       </div>
     </div>
-    
-  </footer>
-  
-  
+  </div>
+
+</footer>

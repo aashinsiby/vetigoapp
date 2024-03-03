@@ -113,12 +113,12 @@ export class UserprofileComponent implements OnInit {
 
   
   }
-updateUsername(usrname: string){
-  const userRef = ref(this.database,'users/'+this.userId);
-}
+
   updateBio( newBio: string) {
     const userRef = ref(this.database, 'users/' + this.userId);
+    
     update(userRef, { bio: newBio });
+    this.showForm = !this.showForm;
   
 
   }
