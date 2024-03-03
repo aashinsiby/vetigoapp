@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { CommonModule } from '@angular/common';
@@ -24,7 +24,8 @@ import { SwipeComponent } from './swipe/swipe.component';
     SignupComponent,AboutusComponent,MatTabsModule,ForgetComponent,PdfComponent,UserprofileComponent,AngularFirestoreModule,MatDividerModule,SwipeComponent],
   
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 
 

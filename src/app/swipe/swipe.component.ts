@@ -1,9 +1,8 @@
-import { Component, Inject, OnInit, inject } from '@angular/core';
-import {  Auth, User, user,authState  } from '@angular/fire/auth';
-import { Database, onValue, ref, update } from '@angular/fire/database';
-import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/compat/storage';
-import { finalize, tap } from 'rxjs/operators';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {  Auth, User, authState  } from '@angular/fire/auth';
+import { Database, onValue, ref } from '@angular/fire/database';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {MatListModule} from '@angular/material/list';
 import {  AngularFireAuthModule,  } from '@angular/fire/compat/auth';
@@ -39,7 +38,8 @@ import {MatChipsModule} from '@angular/material/chips';
   MatIconButton,
   MatCardTitleGroup,MatBadgeModule,MatChipsModule,MatListModule],
   templateUrl: './swipe.component.html',
-  styleUrl: './swipe.component.css'
+  styleUrl: './swipe.component.css',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SwipeComponent {
   showForm: boolean = false;
@@ -50,9 +50,9 @@ export class SwipeComponent {
   pictureUrl2: string | null = null;
   pictureUrl3: string | null = null;
 
-
+  allUserProfiles: any[] = [];
   bio: string | null = null;
-
+  currentIndex: number = 0; 
    user: User | null = null;
   // user = user(this.auth);
   userSubscription = Subscription;
@@ -74,24 +74,58 @@ export class SwipeComponent {
   private router: Router){}
 
   ngOnInit(): void {
-    
+  
     this.authState.subscribe((user: User | null) => {
      //handle auth state changes here. Note, that user will be null if there is no currently logged in user.
      if (user) {
        this.userId = user.uid;
        this.fetchUserProfile();
+       this.fetchAllUserProfiles();
      }
 
  })
    
  }
 
+ 
+ fetchAllUserProfiles() {
+  const usersRef = ref(this.database, 'users');
+
+  // Use `once` to fetch data once for security:
+  onValue(usersRef, (snapshot) => {
+    const usersData: { bio: any; name: any; pet: any; sex: any; age: any; breed: any; profilePictureUrl: any; pictureUrl: any; pictureUrl1: any; pictureUrl2: any; pictureUrl3: any; username: any; }[] = [];
+    snapshot.forEach((userSnapshot) => {
+      const user = userSnapshot.val();
+      if (user) {
+        // Exercise caution when handling sensitive data:
+        const publicUserData = {
+          bio: user.bio,
+          name: user.name,
+          pet: user.pet,
+          sex: user.sex,
+          age: user.age,
+          breed: user.breed,
+          profilePictureUrl: user.profilePictureUrl,
+          pictureUrl: user.pictureUrl,
+          pictureUrl1: user.pictureUrl1,
+          pictureUrl2: user.pictureUrl2,
+          pictureUrl3: user.pictureUrl3,
+          username: user.username,
+        };
+        usersData.push(publicUserData);
+      }
+    });
+
+    this.allUserProfiles = usersData;
+    
+  });
+}
 
   fetchUserProfile() {
+    
     const userRef = ref(this.database, 'users/' + this.userId);
     onValue(userRef,(snapshot) => {
       this.bio = snapshot.val()?.bio;
-      this.email =snapshot.val()?.email;
       this.name = snapshot.val()?.name;
       this.pet = snapshot.val()?.pet;
       this.sex = snapshot.val()?.sex;
@@ -105,4 +139,10 @@ export class SwipeComponent {
       this.username = snapshot.val()?.username;
     });
 }
+  // Handle swipe left action
+ 
+
+  // Handle swipe right action
+ 
+  
 }
