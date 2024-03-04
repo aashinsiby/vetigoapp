@@ -1,5 +1,9 @@
-<swiper-container class="swiper-container mySwiper">
-  <swiper-slide class="div" *ngFor="let user of allUserProfiles">
+
+<div class="swiper"  grab-cursor="true" *ngIf="allUserProfiles.length>0; else emptyTemplate" >
+
+  <div class="div" *ngFor="let user of allUserProfiles;let i= index;" [style.zIndex]="allUserProfiles.length-i" (touchstart)="touchStar($event)"
+  (touchmove)="touchMove($event,i)" (touchend)="touchEnd(i)" id="{{'card-'+i}}"
+  >
 
     <div class="div" style="background-color: #E49500;">
       <mat-card class="image-card">
@@ -12,13 +16,13 @@
           <div class="row justify-content-center">
             <div class="col d-flex justify-content-center ">
 
-              <button mat-icon-button class="custom-icon-x">
+              <button mat-icon-button class="custom-icon-x" (click)="onSwipeLeft()" id="x-button">
                 <img src="../../assets/icons/x.png" alt="Image Alt Text" style="width: 50px; height: 50px ;">
               </button>
             </div>
 
             <div class="col d-flex justify-content-center">
-              <button mat-icon-button class="custom-icon-love">
+              <button mat-icon-button class="custom-icon-love" id="love-button">
                 <img src="../../assets/icons/love.png" alt="Image Alt Text" class="large-icon"
                   style="width: 50px; height: 50px ;">
               </button>
@@ -105,8 +109,9 @@
         </div>
       </div>
     </div>
-  </swiper-slide>
-</swiper-container>
+  </div>
+ 
+</div>
 
 
 
@@ -143,3 +148,11 @@
   </div>
 
 </footer>
+ <ng-template #emptyTemplate>
+  <div class="centre">
+    <ion-icon name="check-circle"></ion-icon>
+    <br>
+    <ion-note>All Swiped!</ion-note>
+
+  </div>
+</ng-template>

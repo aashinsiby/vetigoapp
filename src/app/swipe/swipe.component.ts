@@ -1,4 +1,4 @@
-import { Component, inject, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, inject, CUSTOM_ELEMENTS_SCHEMA ,HostListener } from '@angular/core';
 import { Auth, User, authState } from '@angular/fire/auth';
 import { Database, onValue, ref } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
@@ -22,6 +22,11 @@ import { MatCardModule, MatCardTitleGroup } from '@angular/material/card';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
+import * as Hammer from 'hammerjs';
+import { IonicSlides } from '@ionic/angular/standalone';
+import Swiper from 'swiper';
+import { IonIcon, IonicModule } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-swipe',
@@ -45,13 +50,17 @@ import { MatChipsModule } from '@angular/material/chips';
     MatCardTitleGroup,
     MatBadgeModule,
     MatChipsModule,
-    MatListModule,
+    MatListModule, IonicModule
   ],
   templateUrl: './swipe.component.html',
   styleUrl: './swipe.component.css',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class SwipeComponent {
+  swiperModules = [IonicSlides];
+
+
   showForm: boolean = false;
   userId: string | null = null;
   profilePictureUrl: string | null = null;
@@ -76,13 +85,28 @@ export class SwipeComponent {
   sex: any;
   age: any;
   breed: any;
+  
+startX :number =0;
+endX :number =0;
+
+
+
 
   constructor(
     private auth: Auth = inject(Auth),
     private database: Database,
     private storage: AngularFireStorage,
     private router: Router
-  ) {}
+  ) { 
+    const swiper = new Swiper('.swiper', {
+    on: {
+      activeIndexChange: function(swiper) {
+        // Handle active index change here
+      }
+    },
+  });
+   
+  }
 
   ngOnInit(): void {
     this.authState.subscribe((user: User | null) => {
@@ -90,9 +114,91 @@ export class SwipeComponent {
       if (user) {
         this.userId = user.uid;
         const currentUserEmail = user.email ?? ''; // Use empty string if user.email is null
+        this. fetchUserProfile() ;
         this.fetchAllUserProfiles(currentUserEmail);
       }
     });
+  }
+  touchStar(event: any){
+    this.startX =event.touches[0].pageX;
+  }
+  touchMove(event: any,index: number){
+    let deltX = this.startX -event.touches[0].pageX;
+    let deg =deltX / 10;
+    this.endX = event.touches[0].pageX;
+    (<HTMLStyleElement>document.getElementById("card-"+index)).style.transform = "translateX("+ -deltX+ "px)rotate("+-deg+"deg)";
+    if((this.endX -this.startX)<0){
+      
+      (<HTMLStyleElement>document.getElementById("x-button")).style.opacity = String(deltX/100);
+         
+    }
+    else{
+      (<HTMLStyleElement>document.getElementById("love-button")).style.opacity = String(deltX/100);
+
+    }
+  }
+  touchEnd(index: number){
+    if (this.endX > 0){ //to avoid removing card on click
+
+    let finalX = this.endX -  this.startX;
+    
+    if (finalX > -100 && finalX < 100) { // reset card back to position
+    
+    (<HTMLStyleElement>document.getElementById("card-" + index)).style.transition = ".3s";
+    
+    (<HTMLStyleElement>document.getElementById("card-" + index)).style.transform ="translateX(@px) rotate(@deg)";
+    
+    // remove transition ofter 350 ms
+    
+    setTimeout(() => {
+    
+    (<HTMLStyleElement>document.getElementById("card-" + index)).style.transition = "0s";
+    },350);
+  }
+  else if (finalX <= 100) { //Reject Card
+
+    (<HTMLStyleElement>document.getElementById("card-" + index)).style.transition = "1s"; 
+    
+    (<HTMLStyleElement>document.getElementById("card-" + index)).style.transform = "translateX(-1000px) rotate(-360deg)";
+    
+    setTimeout(() => {
+       
+    this.allUserProfiles.splice(index, 1);
+    
+    
+    }, 100);
+    
+    }
+    
+    else if (finalX >= 100){
+     
+        
+        (<HTMLStyleElement>document.getElementById("card-" + index)).style.transition = "1s";
+        
+        (<HTMLStyleElement>document.getElementById("card-" + index)).style.transform = "translateX(1000px) rotate(30deg)";
+        
+    
+        
+        //remove user from users array
+        
+        setTimeout(() => {
+        
+ 
+        
+        this.allUserProfiles.splice(index, 1);
+        
+ 
+        
+        }, 100);
+    } //Accept Card
+}
+this.startX = 0;
+this.endX = 0;  
+(<HTMLStyleElement>document.getElementById("x-button")).style.opacity = "0";
+(<HTMLStyleElement>document.getElementById("love-button")).style.opacity = "0";
+
+    
+    
   }
 
   fetchAllUserProfiles(currentUserEmail: string) {
@@ -141,24 +247,34 @@ export class SwipeComponent {
     });
   }
 
-  //   fetchUserProfile() {
+    fetchUserProfile() {
 
-  //     const userRef = ref(this.database, 'users/' + this.userId);
-  //     onValue(userRef,(snapshot) => {
-  //       this.bio = snapshot.val()?.bio;
-  //       this.name = snapshot.val()?.name;
-  //       this.pet = snapshot.val()?.pet;
-  //       this.sex = snapshot.val()?.sex;
-  //       this.age=snapshot.val()?.age;
-  //       this.breed=snapshot.val()?.breed;
-  //       this.profilePictureUrl = snapshot.val()?.profilePictureUrl;
-  //       this.pictureUrl = snapshot.val()?.pictureUrl;
-  //       this.pictureUrl1 = snapshot.val()?.pictureUrl1;
-  //       this.pictureUrl2 = snapshot.val()?.pictureUrl2;
-  //       this.pictureUrl3 = snapshot.val()?.pictureUrl3;
-  //       this.username = snapshot.val()?.username;
-  //     });
-  // }
+      const userRef = ref(this.database, 'users/' + this.userId);
+     
+      onValue(userRef,(snapshot) => {
+        this.bio = snapshot.val()?.bio;
+        this.name = snapshot.val()?.name;
+        this.pet = snapshot.val()?.pet;
+        this.sex = snapshot.val()?.sex;
+        this.age=snapshot.val()?.age;
+        this.breed=snapshot.val()?.breed;
+        this.profilePictureUrl = snapshot.val()?.profilePictureUrl;
+        this.pictureUrl = snapshot.val()?.pictureUrl;
+        this.pictureUrl1 = snapshot.val()?.pictureUrl1;
+        this.pictureUrl2 = snapshot.val()?.pictureUrl2;
+        this.pictureUrl3 = snapshot.val()?.pictureUrl3;
+        this.username = snapshot.val()?.username;
+      });
+  }
+
+
+
+  onSwipeLeft() {
+    // swiper: Reference to the Swiper instance
+    // slideIndex: Index of the swiped slide
+    // previousIndex: Index of the previous slide
+
+  }
   // Handle swipe left action
 
   // Handle swipe right action
