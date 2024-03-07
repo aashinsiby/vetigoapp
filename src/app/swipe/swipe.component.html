@@ -1,8 +1,24 @@
+<div class="tinder-container">
+  <div class="profile-card" (touchstart)="onSwipe($event)" (touchmove)="onSwipe($event)">
+    <img [src]="profiles[currentProfileIndex].imageUrl" alt="Profile Image">
+    <h2>{{ profiles[currentProfileIndex].name }}, {{ profiles[currentProfileIndex].age }}</h2>
+    <p>{{ profiles[currentProfileIndex].bio }}</p>
+  </div>
+  <div class="actions">
+    <button (click)="swipeLeft()">
+      <img src="assets/icons/dislike.png" alt="Dislike">
+    </button>
+    <button (click)="swipeRight()">
+      <img src="assets/icons/like.png" alt="Like">
+    </button>
+  </div>
+</div>
 
-<div class="swiper"  grab-cursor="true" *ngIf="allUserProfiles.length>0; else emptyTemplate" >
+<swiper-container class="swiper"  grab-cursor="true" *ngIf="allUserProfiles.length>0; else emptyTemplate" style="background-color: #E49500;" (swiper)="onSwiperInit($event)"
+  (slideChange)="onSlideChange()">
 
-  <div class="div" *ngFor="let user of allUserProfiles;let i= index;" [style.zIndex]="allUserProfiles.length-i" (touchstart)="touchStar($event)"
-  (touchmove)="touchMove($event,i)" (touchend)="touchEnd(i)" id="{{'card-'+i}}"
+  <swiper-slide class="div" *ngFor="let user of allUserProfiles;let i= index;" [style.zIndex]="allUserProfiles.length-i" 
+ 
   >
 
     <div class="div" style="background-color: #E49500;">
@@ -16,7 +32,7 @@
           <div class="row justify-content-center">
             <div class="col d-flex justify-content-center ">
 
-              <button mat-icon-button class="custom-icon-x" (click)="onSwipeLeft()" id="x-button">
+              <button mat-icon-button class="custom-icon-x"  id="x-button">
                 <img src="../../assets/icons/x.png" alt="Image Alt Text" style="width: 50px; height: 50px ;">
               </button>
             </div>
@@ -109,9 +125,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </swiper-slide>
  
-</div>
+</swiper-container>
 
 
 
@@ -150,9 +166,8 @@
 </footer>
  <ng-template #emptyTemplate>
   <div class="centre">
-    <ion-icon name="check-circle"></ion-icon>
-    <br>
-    <ion-note>All Swiped!</ion-note>
+    
+   All Swiped!
 
   </div>
 </ng-template>

@@ -6,7 +6,7 @@ import {
 } from 'swiper/element/bundle';
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import 'hammerjs';
+
 
 platformBrowserDynamic();
 
