@@ -190,10 +190,15 @@ export class SwipeComponent {
 
   swipeLeft() {
     if (!this.currentProfile) return; // Ensure currentProfile is not null or undefined
-  
-    const currentIndex = this.allUserProfiles.indexOf(this.currentProfile);
-    const nextIndex = (currentIndex + 1) % this.allUserProfiles.length;
-    this.currentProfile = this.allUserProfiles[nextIndex];
+
+  const currentIndex = this.allUserProfiles.indexOf(this.currentProfile);
+  const nextIndex = (currentIndex + 1) % this.allUserProfiles.length;
+
+  // Remove the current profile from the array
+  this.allUserProfiles.splice(currentIndex, 1);
+
+  // Update currentProfile to the next profile
+  this.currentProfile = this.allUserProfiles[nextIndex];
   }
   
   swipeRight() {
