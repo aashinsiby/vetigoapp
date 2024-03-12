@@ -69,7 +69,8 @@ export class SignupComponent implements OnInit{
           pet : formValues.pet,
           age: formValues.age,
           sex: formValues.sex,
-          breed: formValues.breed
+          breed: formValues.breed,
+         id : user.uid
 
         })
         alert('signup successful');

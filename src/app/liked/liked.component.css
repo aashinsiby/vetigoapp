@@ -1,0 +1,99 @@
+
+.footer {
+ position: fixed;
+ bottom: 0;
+ left: 0;
+ width: 100%;
+ background-color: #f5f5f5;
+ padding: 10px 0;
+ border-top: 1px solid #ddd;
+}
+
+.footer button {
+ margin: 0 10px;
+ background-color: transparent;
+ color: #666;
+}
+
+.footer button:hover {
+ color: #333;
+}
+
+
+.custom-icon-heart {
+ background-image: url('../../assets/icons/likeactive.png');
+ /* Adjust as needed */
+ background-repeat: no-repeat; /* Adjust as needed */
+ background-position: center; /* Adjust as needed */
+ width: 28px; /* Adjust the width of the button */
+ height: 28px; /* Adjust the height of the button */
+ border: none; /* Remove border if necessary */
+}
+.custom-icon-msg {
+ background-image: url('../../assets/icons/message.png');
+  /* Adjust as needed */
+ background-repeat: no-repeat; /* Adjust as needed */
+ background-position: center; /* Adjust as needed */
+ width: 28px; /* Adjust the width of the button */
+ height: 28px; /* Adjust the height of the button */
+ border: none; /* Remove border if necessary */
+}
+.custom-icon-card {
+ background-image: url('../../assets/icons/cardpng.png');
+; /* Adjust as needed */
+ background-repeat: no-repeat; /* Adjust as needed */
+ background-position: center; /* Adjust as needed */
+ width: 28px; /* Adjust the width of the button */
+ height: 28px; /* Adjust the height of the button */
+ border: none; /* Remove border if necessary */
+}
+.custom-icon-people {
+ background-image: url('../../assets/icons/people.png');
+ /* Adjust as needed */
+ background-repeat: no-repeat; /* Adjust as needed */
+ background-position: center; /* Adjust as needed */
+ width: 28px; /* Adjust the width of the button */
+ height: 28px; /* Adjust the height of the button */
+ border: none; /* Remove border if necessary */
+}
+
+
+.container {
+ overflow-x: auto;
+}
+
+.example-header-images {
+ display: flex;
+ flex-wrap: nowrap; /* Prevent wrapping to multiple lines */
+ padding: 10px; /* Adjust padding as needed */
+ position: sticky;
+ top: 0;
+ z-index: 1;
+ 
+ background-color: #A89278; /* Match the container background color */
+}
+
+.profile-picture {
+ width: 50px; /* Adjust width as needed */
+ height: 50px; /* Adjust height as needed */
+ margin-right: 10px; /* Adjust margin between images */
+ border: 2px solid #F4EC27; /* Add border with color F4EC27 */
+ border-radius: 50%; /* Make the images circular */
+}
+
+
+.profile-card {
+ display: flex;
+ align-items: center; /* Align items vertically in the flex container */
+ padding: 10px; /* Add padding for better spacing */
+}
+
+/* Profile picture styling */
+.profile-picture1 {
+ width: 50px;
+ height: 50px;
+ border: 2px solid #F4EC27; /* Add border with color F4EC27 */
+
+ border-radius: 50%;
+ margin-right: 10px; /* Add margin between profile picture and name */
+}

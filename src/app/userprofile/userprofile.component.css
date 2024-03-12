@@ -104,6 +104,7 @@
  border-radius: 8px; /* Add rounded edges to the image */
 }
 
+
 .username-overlay {
  font-family: "Roboto", sans-serif;
  font-weight: 400;
@@ -119,7 +120,7 @@
  /* Match card's border radius for bottom right */
 }
 .custom-icon-heart {
- background-image: url('../../assets/icons/hearticon.png');
+ background-image: url('../../assets/icons/indicator1.png');
  /* Adjust as needed */
  background-repeat: no-repeat; /* Adjust as needed */
  background-position: center; /* Adjust as needed */
@@ -146,7 +147,7 @@
  border: none; /* Remove border if necessary */
 }
 .custom-icon-people {
- background-image: url('../../assets/icons/people.png');
+ background-image: url('../../assets/icons/peopleactive.png');
  /* Adjust as needed */
  background-repeat: no-repeat; /* Adjust as needed */
  background-position: center; /* Adjust as needed */

@@ -1,4 +1,5 @@
 .example-card {
+
  width:300px ;
  margin-bottom: 8px;
  margin-right: 0px;
@@ -41,8 +42,7 @@
  
  position: relative;
  top: 2vh;
- left: 10vw;
- width: 80vw; /* Adjust as needed */
+ width: 88vw; /* Adjust as needed */
  height: 60vh; /* Adjust as needed */
  overflow: hidden; /* Ensure username overlay stays within the card */
  border-radius: 55px; /* Add rounded edges */
@@ -96,7 +96,7 @@
  color: #333;
 }
 .custom-icon-heart {
- background-image: url('../../assets/icons/hearticon.png');
+ background-image: url('../../assets/icons/indicator1.png');
  /* Adjust as needed */
  background-repeat: no-repeat; /* Adjust as needed */
  background-position: center; /* Adjust as needed */
@@ -114,7 +114,7 @@
  border: none; /* Remove border if necessary */
 }
 .custom-icon-card {
- background-image: url('../../assets/icons/cardpng.png');
+ background-image: url('../../assets/icons/cardactive.png');
 ; /* Adjust as needed */
  background-repeat: no-repeat; /* Adjust as needed */
  background-position: center; /* Adjust as needed */
@@ -163,12 +163,13 @@
 }
 
 .profile-card {
- background-color: #fff;
+ background-color: #e49500;
  border-radius: 8px;
  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
  padding: 20px;
  text-align: center;
  max-width: 400px;
+ transition: transform 0.3s ease-in-out;
 }
 
 .profile-card img {
@@ -204,4 +205,13 @@
 .actions button img {
  width: 40px;
  height: 40px;
+}
+.swipe-left {
+ transform: translateX(-100%); /* Move card to the left */
+ opacity: 0; /* Optionally fade out the card */
+}
+
+.swipe-right {
+ transform: translateX(100%); /* Move card to the right */
+ opacity: 0; /* Optionally fade out the card */
 }

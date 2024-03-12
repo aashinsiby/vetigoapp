@@ -1,7 +1,7 @@
 import { Component, inject, CUSTOM_ELEMENTS_SCHEMA ,HostListener, ViewChild } from '@angular/core';
 import { Auth, User, authState } from '@angular/fire/auth';
-import { Database, get, onValue, ref, set, update } from '@angular/fire/database';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Database, get, onValue, ref, runTransaction, set, update } from '@angular/fire/database';
+import { AngularFireStorage,   } from '@angular/fire/compat/storage';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
@@ -24,8 +24,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
 import Swiper from 'swiper';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { CdkDragEnd } from '@angular/cdk/drag-drop';
-
+import { FieldValue, Firestore, addDoc, collection, getDocs, query, where } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-swipe',
@@ -66,12 +66,37 @@ export class SwipeComponent {
   pictureUrl1: string | null = null;
   pictureUrl2: string | null = null;
   pictureUrl3: string | null = null;
-  likedUserId : any[] = [];
-  allUserProfiles: any[] = [];
+  likedUserId: any[] = [];
+  allUserProfiles: {
+    bio: any;
+    name: any;
+    pet: any;
+    sex: any;
+    age: any;
+    breed: any;
+    profilePictureUrl: any;
+    pictureUrl: any;
+    pictureUrl1: any;
+    pictureUrl2: any;
+    pictureUrl3: any;
+    username: any;
+  }[] = [];
+  currentProfile: {
+    bio: any;
+    name: any;
+    pet: any;
+    sex: any;
+    age: any;
+    breed: any;
+    profilePictureUrl: any;
+    pictureUrl: any;
+    pictureUrl1: any;
+    pictureUrl2: any;
+    pictureUrl3: any;
+    username: any;
+  } | null = null;
   bio: string | null = null;
-  currentIndex: number = 0;
   user: User | null = null;
-  // user = user(this.auth);
   userSubscription = Subscription;
   authState = authState(this.auth);
   email: string | null = null;
@@ -83,26 +108,22 @@ export class SwipeComponent {
   sex: any;
   age: any;
   breed: any;
-  
-startX :number =0;
-endX :number =0;
-  cemail: string | null = null;swiper: any;
-
+  initialTouchX: number | null = null;
+  initialTouchY: number | null = null;
+  lastTouchTime: number | null = null;
+  swipeDelayMs = 50; // Delay in milliseconds before registering a swipe
+  cemail: string | null = null;
 
 
 
   constructor(
     private auth: Auth = inject(Auth),
     private database: Database,
-    private storage: AngularFireStorage,
+ 
+    private firestore: Firestore
   ) { 
-    const swiper = new Swiper('.swiper', {
-      on: {
-        activeIndexChange: function(swiper) {
-          // Handle active index change here
-        }
-      },
-    });
+
+   
    
   }
 
@@ -111,71 +132,22 @@ endX :number =0;
       //handle auth state changes here. Note, that user will be null if there is no currently logged in user.
       if (user) {
         this.userId = user.uid;
-        const currentUserEmail = user.email ?? ''; // Use empty string if user.email is null
-        this. fetchUserProfile() ;
+        const currentUserEmail = user.email ?? '';
+        this.fetchUserProfile();
         this.fetchAllUserProfiles(currentUserEmail);
+        this.currentProfile = this.allUserProfiles[7];
+        if (this.allUserProfiles.length > 0) {
+          this.currentProfile = this.allUserProfiles[0];
+        }
       }
     });
   } 
 
-  profiles = [
-    {
-      name: 'John Doe',
-      age: 25,
-      bio: 'Hello, I am a software engineer and enjoy hiking on weekends.',
-      imageUrl: 'https://via.placeholder.com/300x400'
-    },
-    {
-      name: 'Jane Smith',
-      age: 28,
-      bio: 'I love traveling and experiencing new cultures.',
-      imageUrl: 'https://via.placeholder.com/300x400'
-    }, {
-      name: 'ohn Doe',
-      age: 25,
-      bio: 'Hello, I am a software engineer and enjoy hiking on weekends.',
-      imageUrl: 'https://via.placeholder.com/300x400'
-    },
-    {
-      name: 'Jan Smith',
-      age: 28,
-      bio: 'I love traveling and experiencing new cultures.',
-      imageUrl: 'https://via.placeholder.com/300x400'
-    }, {
-      name: 'Joh Doe',
-      age: 25,
-      bio: 'Hello, I am a software engineer and enjoy hiking on weekends.',
-      imageUrl: 'https://via.placeholder.com/300x400'
-    },
-    {
-      name: 'Jne Smith',
-      age: 28,
-      bio: 'I love traveling and experiencing new cultures.',
-      imageUrl: 'https://via.placeholder.com/300x400'
-    }, {
-      name: 'Jhn Doe',
-      age: 25,
-      bio: 'Hello, I am a software engineer and enjoy hiking on weekends.',
-      imageUrl: 'https://via.placeholder.com/300x400'
-    },
-    {
-      name: 'Jae Smith',
-      age: 28,
-      bio: 'I love traveling and experiencing new cultures.',
-      imageUrl: 'https://via.placeholder.com/300x400'
-    },
-    // Add more profiles as needed
-  ];
-
-  currentProfileIndex = 0;
-  initialTouchX: number | null = null;
-  initialTouchY: number | null = null;
-  lastTouchTime: number | null = null;
-  swipeDelayMs = 50; // Delay in milliseconds before registering a swipe
+  
 
   onSwipe(event: TouchEvent) {
     const currentTime = new Date().getTime();
-
+  
     if (event.type === 'touchstart') {
       this.initialTouchX = event.touches[0].clientX;
       this.initialTouchY = event.touches[0].clientY;
@@ -184,36 +156,60 @@ endX :number =0;
       const touch = event.touches[0];
       const deltaX = touch.clientX - (this.initialTouchX || 0);
       const deltaY = touch.clientY - (this.initialTouchY || 0);
-
+  
       if (Math.abs(deltaX) > Math.abs(deltaY)) {
         if (currentTime - (this.lastTouchTime || 0) > this.swipeDelayMs) {
           if (deltaX < -100) {
             this.swipeLeft();
+            this.addSwipeAnimation('swipe-left');
           } else if (deltaX > 100) {
             this.swipeRight();
+            this.addSwipeAnimation('swipe-right');
           }
           this.lastTouchTime = currentTime;
         }
       }
     }
   }
+  
+  private addSwipeAnimation(animationClass: string) {
+    // Add animation class to trigger CSS animation
+    const cardElement = document.querySelector('.profile-card');
+    if (cardElement) {
+      cardElement.classList.add(animationClass);
+  
+      // Remove animation class after animation completes
+      setTimeout(() => {
+        cardElement.classList.remove(animationClass);
+      }, 300); // Adjust the timeout according to your CSS animation duration
+    }
+  }
 
 
   swipeLeft() {
-    // Handle swipe left logic
-    this.nextProfile();
+    if (!this.currentProfile) return; // Ensure currentProfile is not null or undefined
+  
+    const currentIndex = this.allUserProfiles.indexOf(this.currentProfile);
+    const nextIndex = (currentIndex + 1) % this.allUserProfiles.length;
+    this.currentProfile = this.allUserProfiles[nextIndex];
   }
-
+  
   swipeRight() {
-    // Handle swipe right logic
-    this.nextProfile();
+    // No need for separate logic here
+    this.swipeLeft(); // Call the swipeLeft function for unified behavior
   }
-
-  nextProfile() {
-    this.currentProfileIndex = (this.currentProfileIndex + 1) % this.profiles.length;
+   addLikedUserToCurrentUser(likedUserProfile: any) {
+    const likedUsersCollection = collection(this.firestore, 'likedUsers'); // Use 'likedUsers' collection
+  
+    // Use addDoc with async/await for proper promise handling
+    try {
+      const likedUserRef =  addDoc(likedUsersCollection, likedUserProfile.id);
+      console.log('Liked user data saved with ID:', likedUserRef);
+    } catch (error) {
+      console.error('Error saving liked user data:', error);
+    }
   }
-
-
+ 
 
 
   fetchAllUserProfiles(currentUserEmail: string) {
@@ -234,6 +230,7 @@ endX :number =0;
         pictureUrl2: any;
         pictureUrl3: any;
         username: any;
+        id : string;
       }[] = [];
       snapshot.forEach((userSnapshot) => {
         const user = userSnapshot.val();
@@ -253,12 +250,14 @@ endX :number =0;
             pictureUrl2: user.pictureUrl2,
             pictureUrl3: user.pictureUrl3,
             username: user.username,
+            id : user.id,
           };
           usersData.push(publicUserData);
         }
       });
 
       this.allUserProfiles = usersData;
+      this.currentProfile = this.allUserProfiles[0];
     });
   }
 
@@ -267,40 +266,23 @@ endX :number =0;
       const userRef = ref(this.database, 'users/' + this.userId);
      
       onValue(userRef,(snapshot) => {
-        this.bio = snapshot.val()?.bio;
-        this.name = snapshot.val()?.name;
-        this.pet = snapshot.val()?.pet;
-        this.sex = snapshot.val()?.sex;
-        this.age=snapshot.val()?.age;
-        this.breed=snapshot.val()?.breed;
-        this.profilePictureUrl = snapshot.val()?.profilePictureUrl;
-        this.pictureUrl = snapshot.val()?.pictureUrl;
-        this.pictureUrl1 = snapshot.val()?.pictureUrl1;
-        this.pictureUrl2 = snapshot.val()?.pictureUrl2;
-        this.pictureUrl3 = snapshot.val()?.pictureUrl3;
-        this.username = snapshot.val()?.username;
-        this.cemail = snapshot.val()?.cemail;
+        const userData = snapshot.val();
+        this.bio = userData?.bio ?? null;
+        this.name = userData?.name ?? null;
+        this.pet = userData?.pet ?? null;
+        this.sex = userData?.sex;
+        this.age = userData?.age;
+        this.breed = userData?.breed;
+        this.profilePictureUrl = userData?.profilePictureUrl ?? null;
+        this.pictureUrl = userData?.pictureUrl ?? null;
+        this.pictureUrl1 = userData?.pictureUrl1 ?? null;
+        this.pictureUrl2 = userData?.pictureUrl2 ?? null;
+        this.pictureUrl3 = userData?.pictureUrl3 ?? null;
+        this.username = userData?.username ?? null;
+        this.cemail = userData?.cemail ?? null;
       });
   }
 
 
- onSwiperInit(swiper: any) {
-  const swiperEl = document.querySelector('swiper-container');
 
-  this.swiper.addEventListener('swiperprogress', (event: { detail: [any, any]; }) => {
-    const [swiper, progress] = event.detail;
-  });
-
-  this.swiper.addEventListener('swiperslidechange', () => {
-    console.log('slide changed');
-  });
-  }
-   
-
-  onSlideChange() {
-    const activeIndex = this.swiper.swiper.activeIndex;
-    const activeUser = this.allUserProfiles[activeIndex];
-    // Here you can save or perform any actions with the active user's details
-    console.log('Active User:', activeUser);
-  }
 }

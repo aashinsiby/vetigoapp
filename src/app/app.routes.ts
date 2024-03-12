@@ -9,6 +9,8 @@ import { PdfComponent } from './pdf/pdf.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { SwipeComponent } from './swipe/swipe.component';
 import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
+import { LikedComponent } from './liked/liked.component';
+import { ChatComponent } from './chat/chat.component';
 
 export const routes: Routes = [ 
  {
@@ -16,16 +18,16 @@ export const routes: Routes = [
  },
  
  { path: 'login', component: LoginComponent},
-
 { path: 'main', component: AppComponent},
 {path: 'home', component: HomeComponent},
 { path: 'signup', component: SignupComponent},
 { path: 'aboutus', component: AboutusComponent},
 { path: 'forget', component: ForgetComponent},
 { path: 'pdf', component: PdfComponent},
-// {path: '**', component: HomeComponent},
 {path: 'profile', component: UserprofileComponent,canActivate: [AngularFireAuthGuard] },
 { path: 'swipe', component: SwipeComponent,canActivate: [AngularFireAuthGuard] },
+{path: 'like', component: LikedComponent,canActivate: [AngularFireAuthGuard]},
+{path: 'chat', component: ChatComponent,canActivate: [AngularFireAuthGuard]}
 
 ];
 

@@ -221,11 +221,12 @@ export class UserprofileComponent implements OnInit {
 
 
   profilePic(event: any): void {
+    console.log('Upload');
     const file = event.target.files[0];
     const filePath = 'profile-picture/' + file.name+ this.userId;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
-  
+ 
     // You can also get the download URL to display or save it in your database
     task.snapshotChanges().pipe(
       finalize(() => {

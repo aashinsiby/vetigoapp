@@ -1,44 +1,26 @@
-<div class="tinder-container">
-  <div class="profile-card" (touchstart)="onSwipe($event)" (touchmove)="onSwipe($event)">
-    <img [src]="profiles[currentProfileIndex].imageUrl" alt="Profile Image">
-    <h2>{{ profiles[currentProfileIndex].name }}, {{ profiles[currentProfileIndex].age }}</h2>
-    <p>{{ profiles[currentProfileIndex].bio }}</p>
-  </div>
-  <div class="actions">
-    <button (click)="swipeLeft()">
-      <img src="assets/icons/dislike.png" alt="Dislike">
-    </button>
-    <button (click)="swipeRight()">
-      <img src="assets/icons/like.png" alt="Like">
-    </button>
-  </div>
-</div>
 
-<swiper-container class="swiper"  grab-cursor="true" *ngIf="allUserProfiles.length>0; else emptyTemplate" style="background-color: #E49500;" (swiper)="onSwiperInit($event)"
-  (slideChange)="onSlideChange()">
-
-  <swiper-slide class="div" *ngFor="let user of allUserProfiles;let i= index;" [style.zIndex]="allUserProfiles.length-i" 
- 
-  >
+<div class="profile-container" style="background-color: #E49500;">
+  <div class="profile-card" *ngIf="allUserProfiles.length > 0" [style.zIndex]="allUserProfiles.length"
+       (touchstart)="onSwipe($event)" (touchmove)="onSwipe($event)">
 
     <div class="div" style="background-color: #E49500;">
       <mat-card class="image-card">
-        <img mat-card-image *ngIf="user.profilePictureUrl" [src]="user.profilePictureUrl" alt="Profile Picture"
+        <img mat-card-image *ngIf="currentProfile?.profilePictureUrl" [src]="currentProfile?.profilePictureUrl" alt="Profile Picture"
           class="profile-image">
         <div class="username-overlay">
           <h1 class="display-5 " style=" font-family: 'Roboto', sans-serif;
    font-weight: 600;
-   font-style: normal;"> &nbsp; &nbsp; {{user.username}}, {{user.age}} &nbsp; </h1>
+   font-style: normal;"> &nbsp; &nbsp; {{currentProfile?.username}}, {{currentProfile?.age}} &nbsp; </h1>
           <div class="row justify-content-center">
             <div class="col d-flex justify-content-center ">
 
-              <button mat-icon-button class="custom-icon-x"  id="x-button">
+              <button mat-icon-button class="custom-icon-x"  id="x-button" (click)="swipeLeft()">
                 <img src="../../assets/icons/x.png" alt="Image Alt Text" style="width: 50px; height: 50px ;">
               </button>
             </div>
 
             <div class="col d-flex justify-content-center">
-              <button mat-icon-button class="custom-icon-love" id="love-button">
+              <button mat-icon-button class="custom-icon-love" id="love-button" (click)="swipeRight()">
                 <img src="../../assets/icons/love.png" alt="Image Alt Text" class="large-icon"
                   style="width: 50px; height: 50px ;">
               </button>
@@ -59,27 +41,27 @@
 
 
             <mat-divider></mat-divider>
-            <mat-card-title style="font-size:22px;">{{ user.username }}</mat-card-title>
+            <mat-card-title style="font-size:22px;">{{ currentProfile?.username }}</mat-card-title>
             <mat-list *ngIf="!showForm">
               <div class="row ">
                 <div class="col">
 
                   <span matListItemLine><button mat-raised-button
                       style="background-color: #DCFC14;border-radius: 20px;">
-                      <mat-icon>{{user.sex}}</mat-icon>
+                      <mat-icon>{{currentProfile?.sex}}</mat-icon>
                     </button>
                   </span>
                 </div>
                 <div class="col">
                   <span matListItemLine><button mat-raised-button
-                      style="background-color: #DCFC14;border-radius: 20px;">Age : {{user.age}}</button></span>
+                      style="background-color: #DCFC14;border-radius: 20px;">Age : {{currentProfile?.age}}</button></span>
                 </div>
               </div>
               <div class="row mb-2">
                 <div class="col ">
                   <span matListItemLine><button mat-raised-button
-                      style="background-color: #DCFC14; z-index: 0; border-radius: 20px;">{{user.pet}} :
-                      {{user.breed}}</button></span>
+                      style="background-color: #DCFC14; z-index: 0; border-radius: 20px;">{{currentProfile?.pet}} :
+                      {{currentProfile?.breed}}</button></span>
                 </div>
               </div>
 
@@ -88,8 +70,8 @@
             <mat-divider></mat-divider>
             <mat-card-content *ngIf="!showForm" class="mt-2 mb-2">
 
-              <h6>About {{user.username}}:</h6>
-              <p>{{ user.bio }}</p>
+              <h6>About {{currentProfile?.username}}:</h6>
+              <p>{{ currentProfile?.bio }}</p>
             </mat-card-content>
             <!--  -->
 
@@ -101,34 +83,33 @@
         </div>
 
         <div class="col-md-6 d-flex flex-column align-items-center justify-content-center ">
-          <mat-card class="example-card ">
+          <mat-card class="example-card " style="background-color: #E49500;">
             <!-- images -->
-            <img mat-card-image *ngIf="user.pictureUrl" [src]="user.pictureUrl" alt="Uploaded" class=""
+            <img mat-card-image *ngIf="currentProfile?.pictureUrl" [src]="currentProfile?.pictureUrl" alt="Uploaded" class=""
               style="height: 400px; width: auto;">
             <br>
             <mat-divider></mat-divider>
             <!--  -->
-            <img mat-card-image *ngIf="user.pictureUrl1" [src]="user.pictureUrl1" alt="Uploaded" class="card-img-top"
+            <img mat-card-image *ngIf="currentProfile?.pictureUrl1" [src]="currentProfile?.pictureUrl1" alt="Uploaded" class="card-img-top"
               style="height: 400px; width: auto;">
             <br>
             <mat-divider></mat-divider>
             <!--  -->
-            <img mat-card-image *ngIf="user.pictureUrl2" [src]="user.pictureUrl2" alt="Uploaded" class="card-img-top"
+            <img mat-card-image *ngIf="currentProfile?.pictureUrl2" [src]="currentProfile?.pictureUrl2" alt="Uploaded" class="card-img-top"
               style="height: 400px; width: auto;">
             <br>
             <mat-divider></mat-divider>
             <!--  -->
-            <img mat-card-image *ngIf="user.pictureUrl3" [src]="user.pictureUrl3" alt="Uploaded" class="card-img-top"
+            <img mat-card-image *ngIf="currentProfile?.pictureUrl3" [src]="currentProfile?.pictureUrl3" alt="Uploaded" class="card-img-top"
               style="height: 400px; width: auto;">
             <br>
           </mat-card>
         </div>
       </div>
     </div>
-  </swiper-slide>
+  </div>
  
-</swiper-container>
-
+</div>
 
 
 
@@ -143,15 +124,19 @@
         </a>
       </div>
       <div class="col text-center"> <!-- Center the content horizontally -->
+        <a class="nav-link active" aria-current="page" routerLink="/like">
+
         <button mat-icon-button class="custom-icon-heart">
           <!-- Your icon or image goes here -->
-        </button>
+        </button></a>
       </div>
       <div class="col text-center"> <!-- Center the content horizontally -->
+        <a class="nav-link active" aria-current="page" routerLink="/chat">
+
         <button mat-icon-button class="custom-icon-msg">
           <!-- Your icon or image goes here -->
         </button>
-      </div>
+        </a></div>
       <div class="col text-center"> <!-- Center the content horizontally -->
         <a class="nav-link active" aria-current="page" routerLink="/profile">
 
@@ -164,10 +149,4 @@
   </div>
 
 </footer>
- <ng-template #emptyTemplate>
-  <div class="centre">
-    
-   All Swiped!
-
-  </div>
-</ng-template>
+ 
