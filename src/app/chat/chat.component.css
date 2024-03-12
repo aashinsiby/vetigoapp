@@ -1,0 +1,63 @@
+.footer {
+ position: fixed;
+ bottom: 0;
+ left: 0;
+ width: 100%;
+ background-color: #f5f5f5;
+ padding: 10px 0;
+ border-top: 1px solid #ddd;
+}
+
+.footer button {
+ margin: 0 10px;
+ background-color: transparent;
+ color: #666;
+}
+
+.footer button:hover {
+ color: #333;
+}
+
+
+.custom-icon-heart {
+ background-image: url('../../assets/icons/indicator1.png');
+ /* Adjust as needed */
+ background-repeat: no-repeat; /* Adjust as needed */
+ background-position: center; /* Adjust as needed */
+ width: 28px; /* Adjust the width of the button */
+ height: 28px; /* Adjust the height of the button */
+ border: none; /* Remove border if necessary */
+}
+.custom-icon-msg {
+ background-image: url('../../assets/icons/messageactive.png');
+  /* Adjust as needed */
+ background-repeat: no-repeat; /* Adjust as needed */
+ background-position: center; /* Adjust as needed */
+ width: 28px; /* Adjust the width of the button */
+ height: 28px; /* Adjust the height of the button */
+ border: none; /* Remove border if necessary */
+}
+.custom-icon-card {
+ background-image: url('../../assets/icons/cardpng.png');
+; /* Adjust as needed */
+ background-repeat: no-repeat; /* Adjust as needed */
+ background-position: center; /* Adjust as needed */
+ width: 28px; /* Adjust the width of the button */
+ height: 28px; /* Adjust the height of the button */
+ border: none; /* Remove border if necessary */
+}
+.custom-icon-people {
+ background-image: url('../../assets/icons/people.png');
+ /* Adjust as needed */
+ background-repeat: no-repeat; /* Adjust as needed */
+ background-position: center; /* Adjust as needed */
+ width: 28px; /* Adjust the width of the button */
+ height: 28px; /* Adjust the height of the button */
+ border: none; /* Remove border if necessary */
+}
+
+.example-header-image {
+ background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+ background-size: cover;
+}
+

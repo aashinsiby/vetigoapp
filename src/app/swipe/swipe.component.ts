@@ -68,6 +68,7 @@ export class SwipeComponent {
   pictureUrl3: string | null = null;
   likedUserId: any[] = [];
   allUserProfiles: {
+    id:any;
     bio: any;
     name: any;
     pet: any;
@@ -82,6 +83,7 @@ export class SwipeComponent {
     username: any;
   }[] = [];
   currentProfile: {
+    id: any;
     bio: any;
     name: any;
     pet: any;
@@ -195,8 +197,22 @@ export class SwipeComponent {
   }
   
   swipeRight() {
-    // No need for separate logic here
-    this.swipeLeft(); // Call the swipeLeft function for unified behavior
+    if (!this.currentProfile) return; // Ensure currentProfile is not null or undefined
+
+    const currentUserId = this.userId; // Assuming userId is the ID of the current user
+    const likedUserId = this.currentProfile.id; // Assuming id is the ID of the liked user
+  
+    const likedRef = ref(this.database, `liked/${currentUserId}/${likedUserId}`);
+  
+    // Use update to set the liked profile ID as true
+    update(likedRef, { liked: true })
+      .then(() => {
+        console.log('Liked profile saved to Realtime Database.');
+      })
+      .catch((error) => {
+        console.error('Error saving liked profile to Realtime Database:', error);
+      });
+      this.swipeLeft(); 
   }
    addLikedUserToCurrentUser(likedUserProfile: any) {
     const likedUsersCollection = collection(this.firestore, 'likedUsers'); // Use 'likedUsers' collection
@@ -218,6 +234,7 @@ export class SwipeComponent {
     // Use `once` to fetch data once for security:
     onValue(usersRef, (snapshot) => {
       const usersData: {
+        id: any; 
         bio: any;
         name: any;
         pet: any;
@@ -230,7 +247,7 @@ export class SwipeComponent {
         pictureUrl2: any;
         pictureUrl3: any;
         username: any;
-        id : string;
+       
       }[] = [];
       snapshot.forEach((userSnapshot) => {
         const user = userSnapshot.val();
@@ -238,6 +255,7 @@ export class SwipeComponent {
         if (user && user.email !== currentUserEmail) {
           // Exercise caution when handling sensitive data:
           const publicUserData = {
+            id: userSnapshot.key,
             bio: user.bio,
             name: user.name,
             pet: user.pet,
@@ -250,7 +268,7 @@ export class SwipeComponent {
             pictureUrl2: user.pictureUrl2,
             pictureUrl3: user.pictureUrl3,
             username: user.username,
-            id : user.id,
+            
           };
           usersData.push(publicUserData);
         }

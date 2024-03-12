@@ -44,7 +44,6 @@ import {MatChipsModule} from '@angular/material/chips';
 export class LikedComponent {
 
   showForm: boolean = false;
-  userId: string | null = null;
   profilePictureUrl: string | null = null;
   pictureUrl: string | null = null;
   pictureUrl1: string | null = null;
@@ -93,6 +92,8 @@ export class LikedComponent {
   sex: any;
   age: any;
   breed: any;
+  userId: string | null = null;
+  likedUserProfiles: any[] = [];
   constructor(
   private auth: Auth = inject(Auth),
     private database: Database,
@@ -111,11 +112,31 @@ export class LikedComponent {
         const currentUserEmail = user.email ?? '';
         this.fetchUserProfile();
         this.fetchAllUserProfiles(currentUserEmail);
+        this.fetchLikedUserProfiles();
       }
  
   })
     
   }
+  fetchLikedUserProfiles() {
+    const likedProfilesRef = ref(this.database, 'liked/' + this.userId);
+
+    onValue(likedProfilesRef, (snapshot) => {
+      const likedUserIds: string[] = snapshot.val() ? Object.keys(snapshot.val()) : [];
+      this.likedUserProfiles = [];
+
+      likedUserIds.forEach((likedUserId) => {
+        const userProfileRef = ref(this.database, 'users/' + likedUserId);
+        onValue(userProfileRef, (profileSnapshot) => {
+          const userProfile = profileSnapshot.val();
+          if (userProfile) {
+            this.likedUserProfiles.push(userProfile);
+          }
+        });
+      });
+    });
+  }
+
 
   fetchAllUserProfiles(currentUserEmail: string) {
     const usersRef = ref(this.database, 'users');

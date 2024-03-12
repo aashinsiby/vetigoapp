@@ -1,34 +1,32 @@
-<div class="container" style="background-color: #A89278; overflow-x: auto;">
- <div class="example-header-images">
-   <div *ngFor="let profile of allUserProfiles">
-     <img class="profile-picture" [src]="profile.profilePictureUrl" alt="">
-   </div>
- </div>
+<body style="background-color: #D9D9D9;">
+ 
+ <div class="container" style="background-color: #A89278; overflow-x: auto;">
+  <div class="example-header-images">
+    <div *ngFor="let profile of likedUserProfiles">
+      <img class="profile-picture" [src]="profile.profilePictureUrl" alt="">
+    </div>
+  </div>
+</div>
+
+<div class="container1 mt-1" id="profile-row">
+  <!-- Loop through each liked user profile -->
+  <ng-container class="row" *ngFor="let userProfile of likedUserProfiles">
+    <!-- Liked user profile card -->
+    <div class="col mb-1" style="background-color: #B9B6B6; font-family: 'Roboto', sans-serif; font-weight: 400; font-style: normal;">
+      <div class="profile-card">
+        <img [src]="userProfile.profilePictureUrl" alt="" class="profile-picture1">
+        <div class="profile-info">
+          <p class="profile-name">{{ userProfile.name ? userProfile.name.charAt(0).toUpperCase() + userProfile.name.slice(1) : '' }}</p>
+          <!-- Add logic to display online or offline status if available -->
+          <div class="status" [ngClass]="{ 'online': userProfile.online, 'offline': !userProfile.online }"></div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 </div>
 
 
-
- <div class="container1 mt-1" id="profile-row" >
-   <!-- Loop through each user profile -->
-   <ng-container *ngFor="let userProfile of allUserProfiles" >
-     <!-- User profile card -->
-     <div class="col rounded-pill mb-1" style="background-color: #B9B6B6;      font-family: 'Roboto', sans-serif; font-weight: 400;
-     font-style: normal;">
-       <div class="profile-card">
-         <img [src]="userProfile.profilePictureUrl" alt="" class="profile-picture1">
-         <div class="profile-info">
-          <p class="profile-name">{{ userProfile.name ? userProfile.name.charAt(0).toUpperCase() + userProfile.name.slice(1) : '' }}</p>
-
-           <div class="status" [ngClass]="{ 'online': userProfile, 'offline': !userProfile}"></div>
-         </div>
-       </div>
-     </div>
-   </ng-container>
- </div>
-
-
-
-
+</body>
 
 
 
@@ -50,9 +48,11 @@
              </button>
            </div>
            <div class="col text-center"> <!-- Center the content horizontally -->
+            <a class="nav-link active" aria-current="page" routerLink="/chat">
+
              <button mat-icon-button class="custom-icon-msg">
                <!-- Your icon or image goes here -->
-             </button>
+             </button></a>
            </div>
            <div class="col text-center"> <!-- Center the content horizontally -->
              <a class="nav-link active" aria-current="page" routerLink="/profile">
