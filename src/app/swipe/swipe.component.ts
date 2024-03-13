@@ -137,10 +137,10 @@ export class SwipeComponent {
         const currentUserEmail = user.email ?? '';
         this.fetchUserProfile();
         this.fetchAllUserProfiles(currentUserEmail);
-        this.currentProfile = this.allUserProfiles[7];
-        if (this.allUserProfiles.length > 0) {
-          this.currentProfile = this.allUserProfiles[0];
-        }
+        // this.currentProfile = this.allUserProfiles[7];
+        // if (this.allUserProfiles.length > 0) {
+        //   this.currentProfile = this.allUserProfiles[0];
+        // }
       }
     });
   } 
@@ -203,7 +203,6 @@ export class SwipeComponent {
   
   swipeRight() {
     if (!this.currentProfile) return; // Ensure currentProfile is not null or undefined
-
     const currentUserId = this.userId; // Assuming userId is the ID of the current user
     const likedUserId = this.currentProfile.id; // Assuming id is the ID of the liked user
   
@@ -280,7 +279,9 @@ export class SwipeComponent {
       });
 
       this.allUserProfiles = usersData;
+      console.log("All user profiles fetched:", this.allUserProfiles);
       this.currentProfile = this.allUserProfiles[0];
+      console.log("Current profile set:", this.currentProfile);
     });
   }
 

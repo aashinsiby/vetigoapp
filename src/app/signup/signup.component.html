@@ -1,83 +1,103 @@
-<div class="row justify-content-center" id="main">
+
+    
+
+<div class="row justify-content-center" style="background-color: #D9D9D9 ;">
    
       <!-- Image half -->
-  <div class="col-md-4 mt-5 justify-content-center">
-    <a routerLink="/login">
-      <img src="assets/category/Group 34.png" class="img-fluid" alt="Image" id="img">
-    </a>
-  </div>
+      <div class="col-md-4 mt-1 text-center position-relative">
+        <a routerLink="/login">
+          <img src="assets/category/Group 34.png" class="img-fluid" alt="Image" id="img">
+          
+        </a>
+      </div>
   <!-- Signup half -->
   <div class="col-md-3">
-    <div class="container-fluid d-flex justify-content-center">
+    <div class="container-fluid d-flex justify-content-center text-center" style="background-color: #D9D9D9 ;">
      
       <form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)"> 
-        <h2 class="mt-3 mb-5">Signup</h2>
+        <h2 class="mt-3 mb-3 signup-heading">Signup</h2>
        
         <div class="mb-1">
             <mat-form-field appearance="fill">
-                <mat-label>Name</mat-label>
-                <input matInput type="text" placeholder="Enter name" formControlName="name" required>
-                <mat-error *ngIf="registerForm.get('name')?.invalid">You must enter a name</mat-error>
+              <mat-label>
+                <mat-icon>person</mat-icon> Name
+              </mat-label>
+              <input matInput type="text" placeholder="Enter name" formControlName="name" required>
+              <mat-error *ngIf="registerForm.get('name')?.invalid">You must enter a name</mat-error>
             </mat-form-field>
-        </div>
-        <div class="mb-1">
+          </div>
+          <div class="mb-1">
             <mat-form-field appearance="fill">
-                <mat-label>Email</mat-label>
-                <input matInput type="email" placeholder="Enter email" formControlName="email" required>
-                <mat-error *ngIf="registerForm.get('email')?.invalid">Enter a valid email address</mat-error>
+              <mat-label>
+                <mat-icon>email</mat-icon> Email
+              </mat-label>
+              <input matInput type="email" placeholder="Enter email" formControlName="email" required>
+              <mat-error *ngIf="registerForm.get('email')?.invalid">Enter a valid email address</mat-error>
             </mat-form-field>
-        </div>
-        <div class="mb-1">
+          </div>
+          <div class="mb-1">
             <mat-form-field appearance="fill">
-                <mat-label>Password</mat-label>
-                <input matInput type="password" placeholder="Enter password" formControlName="password" required>
-                <mat-error *ngIf="registerForm.get('password')?.invalid">Password must be at least 6 characters long</mat-error>
+              <mat-label>
+                <mat-icon>lock</mat-icon> Password
+              </mat-label>
+              <input matInput type="password" placeholder="Enter password" formControlName="password" required>
+              <mat-error *ngIf="registerForm.get('password')?.invalid">Password must be at least 6 characters long</mat-error>
             </mat-form-field>
-        </div>
-        <div class="mb-1">
+          </div>
+          <div class="mb-1">
             <mat-form-field appearance="fill">
-                <mat-label>Username</mat-label>
-                <input matInput type="text" placeholder="Enter username" formControlName="username" required>
-                <mat-error *ngIf="registerForm.get('username')?.invalid">You must enter a username</mat-error>
+              <mat-label>
+                <mat-icon>person</mat-icon> Username
+              </mat-label>
+              <input matInput type="text" placeholder="Enter username" formControlName="username" required>
+              <mat-error *ngIf="registerForm.get('username')?.invalid">You must enter a username</mat-error>
             </mat-form-field>
-        </div>
- 
-   
-        <div class="mb-1">
-            <mat-form-field >
-                <mat-label>Pet you are looking for</mat-label>
-                <mat-select formControlName="pet" required>
-                    <mat-option value="Dog">Dog</mat-option>
-                    <mat-option value="Cat">Cat</mat-option>
-                </mat-select>
+          </div>
+          
+          <div class="mb-1 text-center">
+            <mat-form-field>
+              <mat-label>
+                <mat-icon>pets</mat-icon> Pet you are looking for
+              </mat-label>
+              <mat-select formControlName="pet" required>
+                <mat-option value="Dog"><mat-icon>dog</mat-icon> Dog</mat-option>
+                <mat-option value="Cat"><mat-icon>cat</mat-icon> Cat</mat-option>
+              </mat-select>
             </mat-form-field>
-        </div>
-        <div class="mb-1">
+          </div>
+          <div class="mb-1">
             <mat-form-field appearance="fill">
-                <mat-label>Pet Age</mat-label>
-                <input matInput type="number" placeholder="Enter age" formControlName="age" required>
-                <mat-error *ngIf="registerForm.get('age')?.invalid">You must enter a value</mat-error>
+              <mat-label>
+                <mat-icon>event</mat-icon> Pet Age
+              </mat-label>
+              <input matInput type="number" placeholder="Enter age" formControlName="age" required>
+              <mat-error *ngIf="registerForm.get('age')?.invalid">You must enter a value</mat-error>
             </mat-form-field>
-        </div>
-        <div class="mb-1">
-            <mat-form-field >
-                <mat-label>Sex</mat-label>
-                <mat-select formControlName="sex" required>
-                    <mat-option value="male">Male</mat-option>
-                    <mat-option value="female">Female</mat-option>
-                </mat-select>
+          </div>
+          <div class="mb-1">
+            <mat-form-field>
+              <mat-label>
+                 Sex
+              </mat-label>
+              <mat-select formControlName="sex" required>
+                <mat-option value="male"> <mat-icon>male</mat-icon>Male</mat-option>
+                <mat-option value="female"> <mat-icon>female</mat-icon>Female</mat-option>
+              </mat-select>
             </mat-form-field>
-        </div>
-        <div class="mb-1">
+          </div>
+          <div class="mb-1">
             <mat-form-field appearance="fill">
-                <mat-label>Pet Breed</mat-label>
-                <input matInput type="text" placeholder="Enter breed" formControlName="breed" required>
-                <mat-error *ngIf="registerForm.get('breed')?.invalid">You must enter a value</mat-error>
+              <mat-label>
+                 Pet Breed
+              </mat-label>
+              <input matInput type="text" placeholder="Enter breed" formControlName="breed" required>
+              <mat-error *ngIf="registerForm.get('breed')?.invalid">You must enter a value</mat-error>
             </mat-form-field>
-        </div>
-        <div class="mb-3">
-            <button mat-raised-button color="primary" type="submit" >Sign Up</button>
-        </div>
+          </div>
+          <div class="mb-3 d-flex justify-content-center align-items-center">
+            <button class="button-88" role="button" type="submit">Create an account</button>
+          </div>
+          
  
     </form>
     </div>
