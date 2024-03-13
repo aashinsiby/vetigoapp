@@ -1,6 +1,7 @@
 
 <div class="profile-container" style="background-color: #E49500;">
-  <div class="profile-card" *ngIf="allUserProfiles.length > 0" [style.zIndex]="allUserProfiles.length"
+  <div class="profile-card" *ngIf="allUserProfiles.length > 0" [style.zIndex]="100"
+
        (touchstart)="onSwipe($event)" (touchmove)="onSwipe($event)">
 
     <div class="div" style="background-color: #E49500;">

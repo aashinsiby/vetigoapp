@@ -1,7 +1,6 @@
-import { Component, inject, CUSTOM_ELEMENTS_SCHEMA ,HostListener, ViewChild } from '@angular/core';
+import { Component, inject, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Auth, User, authState } from '@angular/fire/auth';
-import { Database, get, onValue, ref, runTransaction, set, update } from '@angular/fire/database';
-import { AngularFireStorage,   } from '@angular/fire/compat/storage';
+import { Database, onValue, ref, update } from '@angular/fire/database';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
@@ -12,20 +11,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  Router,
-  RouterLink,
-  RouterLinkActive,
-  RouterOutlet,
-} from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet, } from '@angular/router';
 import { MatCardModule, MatCardTitleGroup } from '@angular/material/card';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
-import Swiper from 'swiper';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { FieldValue, Firestore, addDoc, collection, getDocs, query, where } from '@angular/fire/firestore';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { Firestore, addDoc, collection } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-swipe',
@@ -67,8 +59,9 @@ export class SwipeComponent {
   pictureUrl2: string | null = null;
   pictureUrl3: string | null = null;
   likedUserId: any[] = [];
+  swipedProfiles: any[] = [];
   allUserProfiles: {
-    id:any;
+    id: any;
     bio: any;
     name: any;
     pet: any;
@@ -118,16 +111,7 @@ export class SwipeComponent {
 
 
 
-  constructor(
-    private auth: Auth = inject(Auth),
-    private database: Database,
- 
-    private firestore: Firestore
-  ) { 
-
-   
-   
-  }
+  constructor(private auth: Auth = inject(Auth), private database: Database, private firestore: Firestore) { }
 
   ngOnInit(): void {
     this.authState.subscribe((user: User | null) => {
@@ -137,19 +121,15 @@ export class SwipeComponent {
         const currentUserEmail = user.email ?? '';
         this.fetchUserProfile();
         this.fetchAllUserProfiles(currentUserEmail);
-        // this.currentProfile = this.allUserProfiles[7];
-        // if (this.allUserProfiles.length > 0) {
-        //   this.currentProfile = this.allUserProfiles[0];
-        // }
       }
     });
-  } 
+  }
 
-  
+
 
   onSwipe(event: TouchEvent) {
     const currentTime = new Date().getTime();
-  
+
     if (event.type === 'touchstart') {
       this.initialTouchX = event.touches[0].clientX;
       this.initialTouchY = event.touches[0].clientY;
@@ -158,7 +138,7 @@ export class SwipeComponent {
       const touch = event.touches[0];
       const deltaX = touch.clientX - (this.initialTouchX || 0);
       const deltaY = touch.clientY - (this.initialTouchY || 0);
-  
+
       if (Math.abs(deltaX) > Math.abs(deltaY)) {
         if (currentTime - (this.lastTouchTime || 0) > this.swipeDelayMs) {
           if (deltaX < -100) {
@@ -173,13 +153,13 @@ export class SwipeComponent {
       }
     }
   }
-  
+
   private addSwipeAnimation(animationClass: string) {
     // Add animation class to trigger CSS animation
     const cardElement = document.querySelector('.profile-card');
     if (cardElement) {
       cardElement.classList.add(animationClass);
-  
+
       // Remove animation class after animation completes
       setTimeout(() => {
         cardElement.classList.remove(animationClass);
@@ -189,25 +169,45 @@ export class SwipeComponent {
 
 
   swipeLeft() {
-    if (!this.currentProfile) return; // Ensure currentProfile is not null or undefined
-
-  const currentIndex = this.allUserProfiles.indexOf(this.currentProfile);
-  const nextIndex = (currentIndex + 1) % this.allUserProfiles.length;
-
-  // Remove the current profile from the array
-  this.allUserProfiles.splice(currentIndex, 1);
-
-  // Update currentProfile to the next profile
-  this.currentProfile = this.allUserProfiles[nextIndex];
-  }
+    if (!this.currentProfile) return;
+    let foundNextProfile = false;
   
+    for (let i = 0; i < this.allUserProfiles.length; i++) {
+      if (this.allUserProfiles[i] === this.currentProfile) {
+        if (i < this.allUserProfiles.length - 1) {
+          this.currentProfile = this.allUserProfiles[i + 1];
+        } else {
+          // Handle case when reaching the end of the array (optional: reset to first profile)
+         
+          alert("All swiped ");
+        }
+        foundNextProfile = true;
+        break;
+      }
+    }
+  
+    if (!foundNextProfile) {
+      console.log("all done");
+    }
+    // if (!this.currentProfile) return; 
+    // const currentIndex = this.allUserProfiles.indexOf(this.currentProfile);
+    // const nextIndex = (currentIndex + 1) % this.allUserProfiles.length;
+    // console.log("Before splice - allUserProfiles length:", this.allUserProfiles.length);
+    // console.log("Before splice - allUserProfiles:", this.allUserProfiles);
+    // this.allUserProfiles.splice(currentIndex, 1);
+    // console.log("After splice - allUserProfiles length:", this.allUserProfiles.length);
+    // console.log("After splice - allUserProfiles:", this.allUserProfiles);
+    // this.currentProfile = this.allUserProfiles[nextIndex];
+  }
+
   swipeRight() {
     if (!this.currentProfile) return; // Ensure currentProfile is not null or undefined
     const currentUserId = this.userId; // Assuming userId is the ID of the current user
     const likedUserId = this.currentProfile.id; // Assuming id is the ID of the liked user
-  
+    console.log(likedUserId);
+
     const likedRef = ref(this.database, `liked/${currentUserId}/${likedUserId}`);
-  
+
     // Use update to set the liked profile ID as true
     update(likedRef, { liked: true })
       .then(() => {
@@ -216,20 +216,20 @@ export class SwipeComponent {
       .catch((error) => {
         console.error('Error saving liked profile to Realtime Database:', error);
       });
-      this.swipeLeft(); 
+    this.swipeLeft();
   }
-   addLikedUserToCurrentUser(likedUserProfile: any) {
+  addLikedUserToCurrentUser(likedUserProfile: any) {
     const likedUsersCollection = collection(this.firestore, 'likedUsers'); // Use 'likedUsers' collection
-  
+
     // Use addDoc with async/await for proper promise handling
     try {
-      const likedUserRef =  addDoc(likedUsersCollection, likedUserProfile.id);
+      const likedUserRef = addDoc(likedUsersCollection, likedUserProfile.id);
       console.log('Liked user data saved with ID:', likedUserRef);
     } catch (error) {
       console.error('Error saving liked user data:', error);
     }
   }
- 
+
 
 
   fetchAllUserProfiles(currentUserEmail: string) {
@@ -238,7 +238,7 @@ export class SwipeComponent {
     // Use `once` to fetch data once for security:
     onValue(usersRef, (snapshot) => {
       const usersData: {
-        id: any; 
+        id: any;
         bio: any;
         name: any;
         pet: any;
@@ -251,7 +251,7 @@ export class SwipeComponent {
         pictureUrl2: any;
         pictureUrl3: any;
         username: any;
-       
+
       }[] = [];
       snapshot.forEach((userSnapshot) => {
         const user = userSnapshot.val();
@@ -272,39 +272,48 @@ export class SwipeComponent {
             pictureUrl2: user.pictureUrl2,
             pictureUrl3: user.pictureUrl3,
             username: user.username,
-            
+
           };
           usersData.push(publicUserData);
         }
       });
 
-      this.allUserProfiles = usersData;
-      console.log("All user profiles fetched:", this.allUserProfiles);
+      // Shuffle the array of profiles
+      this.allUserProfiles = this.shuffleArray(usersData);
+      // Display the first profile after shuffling
       this.currentProfile = this.allUserProfiles[0];
-      console.log("Current profile set:", this.currentProfile);
     });
   }
 
-    fetchUserProfile() {
+  // Function to shuffle an array
+  shuffleArray(array: any[]) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
 
-      const userRef = ref(this.database, 'users/' + this.userId);
-     
-      onValue(userRef,(snapshot) => {
-        const userData = snapshot.val();
-        this.bio = userData?.bio ?? null;
-        this.name = userData?.name ?? null;
-        this.pet = userData?.pet ?? null;
-        this.sex = userData?.sex;
-        this.age = userData?.age;
-        this.breed = userData?.breed;
-        this.profilePictureUrl = userData?.profilePictureUrl ?? null;
-        this.pictureUrl = userData?.pictureUrl ?? null;
-        this.pictureUrl1 = userData?.pictureUrl1 ?? null;
-        this.pictureUrl2 = userData?.pictureUrl2 ?? null;
-        this.pictureUrl3 = userData?.pictureUrl3 ?? null;
-        this.username = userData?.username ?? null;
-        this.cemail = userData?.cemail ?? null;
-      });
+  fetchUserProfile() {
+
+    const userRef = ref(this.database, 'users/' + this.userId);
+
+    onValue(userRef, (snapshot) => {
+      const userData = snapshot.val();
+      this.bio = userData?.bio ?? null;
+      this.name = userData?.name ?? null;
+      this.pet = userData?.pet ?? null;
+      this.sex = userData?.sex;
+      this.age = userData?.age;
+      this.breed = userData?.breed;
+      this.profilePictureUrl = userData?.profilePictureUrl ?? null;
+      this.pictureUrl = userData?.pictureUrl ?? null;
+      this.pictureUrl1 = userData?.pictureUrl1 ?? null;
+      this.pictureUrl2 = userData?.pictureUrl2 ?? null;
+      this.pictureUrl3 = userData?.pictureUrl3 ?? null;
+      this.username = userData?.username ?? null;
+      this.cemail = userData?.cemail ?? null;
+    });
   }
 
 
