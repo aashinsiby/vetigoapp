@@ -177,27 +177,13 @@ export class SwipeComponent {
         if (i < this.allUserProfiles.length - 1) {
           this.currentProfile = this.allUserProfiles[i + 1];
         } else {
-          // Handle case when reaching the end of the array (optional: reset to first profile)
-         
           alert("All swiped ");
         }
         foundNextProfile = true;
         break;
       }
     }
-  
-    if (!foundNextProfile) {
-      console.log("all done");
-    }
-    // if (!this.currentProfile) return; 
-    // const currentIndex = this.allUserProfiles.indexOf(this.currentProfile);
-    // const nextIndex = (currentIndex + 1) % this.allUserProfiles.length;
-    // console.log("Before splice - allUserProfiles length:", this.allUserProfiles.length);
-    // console.log("Before splice - allUserProfiles:", this.allUserProfiles);
-    // this.allUserProfiles.splice(currentIndex, 1);
-    // console.log("After splice - allUserProfiles length:", this.allUserProfiles.length);
-    // console.log("After splice - allUserProfiles:", this.allUserProfiles);
-    // this.currentProfile = this.allUserProfiles[nextIndex];
+     if(!foundNextProfile) {console.log("all done");}
   }
 
   swipeRight() {
