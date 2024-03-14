@@ -11,6 +11,7 @@ import { SwipeComponent } from './swipe/swipe.component';
 import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 import { LikedComponent } from './liked/liked.component';
 import { ChatComponent } from './chat/chat.component';
+import { ErrorComponent } from './error/error.component';
 
 export const routes: Routes = [ 
  {
@@ -27,7 +28,8 @@ export const routes: Routes = [
 {path: 'profile', component: UserprofileComponent,canActivate: [AngularFireAuthGuard] },
 { path: 'swipe', component: SwipeComponent,canActivate: [AngularFireAuthGuard] },
 {path: 'like', component: LikedComponent,canActivate: [AngularFireAuthGuard]},
-{path: 'chat', component: ChatComponent,canActivate: [AngularFireAuthGuard]}
+{path: 'chat', component: ChatComponent,canActivate: [AngularFireAuthGuard]},
+{ path: '**', component: ErrorComponent } // Wildcard route for any unmatched routes
 
 ];
 

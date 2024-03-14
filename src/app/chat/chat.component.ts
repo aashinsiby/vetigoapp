@@ -109,23 +109,7 @@ export class ChatComponent  implements OnInit {
       }
  
   })}
-  // fetchChatMessages() {
-  //   // console.log('Fetching chat messages...');
-  //   // const chatRef = this.db.list(`chats/${this.selectedUserProfile.id}`);
-  //   // chatRef.valueChanges().subscribe(messages => {
-  //   //   console.log('Received messages:', messages);
-  //   //   this.chatMessages = messages; // Keep all messages for complete chat history
-  //   //   this.receivedMessages = messages.filter(message => message.sender !== 'You'); // Filter out your messages
-  //   // });
-  //   const chatRef = this.db.list(`chats/${this.selectedUserProfile.id}`);
-  //   chatRef.valueChanges().subscribe(messages => {
-  //     this.chatMessages = messages;
-  //   });
-  //   const chatRef2 = this.db.list(`chats/${this.userId}`);
-  //   chatRef2.valueChanges().subscribe(messages1 => {
-  //     this.chatMessages1 = messages1;
-  //   });
-  // }
+
   
   fetchChatMessages() {
 
@@ -162,8 +146,7 @@ export class ChatComponent  implements OnInit {
       profilepic: this.profilePictureUrl,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     }).then(() => {
-      console.log('Message sent successfully');
-      // Clear the input field after sending the message
+    
       this.newMessage = '';
     }).catch((error) => {
       console.error('Error sending message:', error);

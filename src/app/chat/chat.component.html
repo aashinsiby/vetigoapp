@@ -1,4 +1,3 @@
-
 <mat-sidenav-container class="example-container">
   <mat-sidenav-content>
     <div class="container" style="background-color: #A89278; overflow-x: auto; position: sticky; top: 0; z-index: 100;">
@@ -11,9 +10,9 @@
     
     <div class="chat-messages">
       <ng-container *ngFor="let message of chatMessages">
-        <mat-card class="example-card rounded-2 mb-2" [ngClass]="{'align-right': message.senderName === username, 'align-left': message.senderName !== username}">
+        <mat-card class="example-card " [ngClass]="{'align-right': message.senderName === username, 'align-left': message.senderName !== username}">
           <mat-card-header>
-            <mat-card-subtitle>{{ message.senderName }}</mat-card-subtitle>
+           
             <mat-card-title>{{ message.content }}</mat-card-title><img [src]="message.profilepic" alt="" class="profile-picture1" >
             
           </mat-card-header>

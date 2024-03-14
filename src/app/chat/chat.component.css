@@ -63,21 +63,47 @@
  background-color: #0056b3;
 }
 
-.chat-messages{
- display: flex;
+.chat-messages {
+  display: flex;
   flex-direction: column;
+  align-items: flex-start; /* Align chat bubbles to the left */
 }
+
+.example-card {
+  max-width: 70%; /* Limit the width of chat bubbles */
+  margin: 8px; /* Add some margin between chat bubbles */
+  border-radius: 10px; /* Round the corners of chat bubbles */
+  padding: 12px; /* Add padding inside chat bubbles */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+}
+
 .align-right {
- align-self: flex-end;
- text-align: end;
- background-color: #86848444;
- 
+  align-self: flex-end;
+  background-color: #daf5d2; /* Blue background for sender's messages */
+  color: rgb(0, 0, 0); /* White text color for sender's messages */
+}
+.align-right .profile-picture1 {
+  position: absolute; /* Position the profile picture absolutely */
+  left: 3px;
+  top: 16px;
+
+  transform: translateY(-50%); /* Adjust for vertical centering */
 }
 
 .align-left {
- align-self: flex-start;
- text-align: start;
- background-color: #86848444;
- 
-
+  align-self: flex-start;
+  background-color: #f0f0f0; /* Light gray background for recipient's messages */
+  color: #333; /* Dark text color for recipient's messages */
 }
+.align-left .profile-picture1 {
+  position: absolute; 
+  left: 3px;
+  top: 16px;
+
+  transform: translateY(-50%); /* Adjust for vertical centering */
+}
+/* Additional styling for subtitle and title */
+.mat-card-subtitle, .mat-card-title {
+  margin: 0;
+}
+

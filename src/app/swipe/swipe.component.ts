@@ -190,10 +190,7 @@ export class SwipeComponent {
     if (!this.currentProfile) return; // Ensure currentProfile is not null or undefined
     const currentUserId = this.userId; // Assuming userId is the ID of the current user
     const likedUserId = this.currentProfile.id; // Assuming id is the ID of the liked user
-    console.log(likedUserId);
-
     const likedRef = ref(this.database, `liked/${currentUserId}/${likedUserId}`);
-
     // Use update to set the liked profile ID as true
     update(likedRef, { liked: true })
       .then(() => {
@@ -204,17 +201,7 @@ export class SwipeComponent {
       });
     this.swipeLeft();
   }
-  // addLikedUserToCurrentUser(likedUserProfile: any) {
-  //   const likedUsersCollection = collection(this.firestore, 'likedUsers'); // Use 'likedUsers' collection
-
-  //   // Use addDoc with async/await for proper promise handling
-  //   try {
-  //     const likedUserRef = addDoc(likedUsersCollection, likedUserProfile.id);
-  //     console.log('Liked user data saved with ID:', likedUserRef);
-  //   } catch (error) {
-  //     console.error('Error saving liked user data:', error);
-  //   }
-  // }
+ 
 
 
 

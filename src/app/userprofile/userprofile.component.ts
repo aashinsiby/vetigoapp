@@ -221,7 +221,7 @@ export class UserprofileComponent implements OnInit {
 
 
   profilePic(event: any): void {
-    console.log('Upload');
+    
     const file = event.target.files[0];
     const filePath = 'profile-picture/' + file.name+ this.userId;
     const fileRef = this.storage.ref(filePath);
