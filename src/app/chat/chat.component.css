@@ -1,74 +1,11 @@
-.footer {
- position: fixed;
- bottom: 0;
- left: 0;
- width: 100%;
- background-color: #f5f5f5;
- padding: 10px 0;
- border-top: 1px solid #ddd;
-}
 
-.footer button {
- margin: 0 10px;
- background-color: transparent;
- color: #666;
-}
-
-.footer button:hover {
- color: #333;
-}
-
-
-.custom-icon-heart {
- background-image: url('../../assets/icons/indicator1.png');
- /* Adjust as needed */
- background-repeat: no-repeat; /* Adjust as needed */
- background-position: center; /* Adjust as needed */
- width: 28px; /* Adjust the width of the button */
- height: 28px; /* Adjust the height of the button */
- border: none; /* Remove border if necessary */
-}
-.custom-icon-msg {
- background-image: url('../../assets/icons/messageactive.png');
-  /* Adjust as needed */
- background-repeat: no-repeat; /* Adjust as needed */
- background-position: center; /* Adjust as needed */
- width: 28px; /* Adjust the width of the button */
- height: 28px; /* Adjust the height of the button */
- border: none; /* Remove border if necessary */
-}
-.custom-icon-card {
- background-image: url('../../assets/icons/cardpng.png');
-; /* Adjust as needed */
- background-repeat: no-repeat; /* Adjust as needed */
- background-position: center; /* Adjust as needed */
- width: 28px; /* Adjust the width of the button */
- height: 28px; /* Adjust the height of the button */
- border: none; /* Remove border if necessary */
-}
-.custom-icon-people {
- background-image: url('../../assets/icons/people.png');
- /* Adjust as needed */
- background-repeat: no-repeat; /* Adjust as needed */
- background-position: center; /* Adjust as needed */
- width: 28px; /* Adjust the width of the button */
- height: 28px; /* Adjust the height of the button */
- border: none; /* Remove border if necessary */
-}
-
-.example-header-image {
- background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
- background-size: cover;
-}
 
 
 .profile-picture {
  width: 50px; /* Adjust width as needed */
  height: 50px; /* Adjust height as needed */
  margin-right: 10px; /* Adjust margin between images */
- border: 4px solid #F4EC27; /* Add border with color F4EC27 */
  border-radius: 50%; /* Make the images circular */
- box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add drop shadow */
 
 }
 
@@ -81,9 +18,8 @@
 
 /* Profile picture styling */
 .profile-picture1 {
- width: 50px;
- height: 50px;
- border: 4px solid #F4EC27; /* Add border with color F4EC27 */
+ width: 25px;
+ height: 25px;
 
  border-radius: 50%;
  margin-right: 10px; /* Add margin between profile picture and name */
@@ -91,18 +27,18 @@
 }
 .fixed-input-box {
  position: fixed;
- left: 5px;
- bottom: 50px;
- width: 60px;
+ left: 0px;
+ bottom: 20px;
+ width: 100vw;
  padding: 10px;
- background-color: white; /* Optional: Add background color */
+ background-color: rgba(255, 255, 255, 0); /* Optional: Add background color */
 }
 
 .chat-input-container {
  display: flex;
  align-items: center;
  
- background-color: #f9f9f9;
+ background-color: #f9f9f900;
  padding: 10px;
 }
 
@@ -125,4 +61,18 @@
 
 .send-button:hover {
  background-color: #0056b3;
+}
+
+.chat-messages{
+ display: flex;
+  flex-direction: column;
+}
+.align-right {
+ align-self: flex-end;
+ text-align: end;
+}
+
+.align-left {
+ align-self: flex-start;
+ text-align: start;
 }

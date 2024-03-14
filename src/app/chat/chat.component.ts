@@ -128,19 +128,7 @@ export class ChatComponent  implements OnInit {
   // }
   
   fetchChatMessages() {
-    // const chatKey1 = `${this.selectedUserProfile.id}_${this.userId}`;
-    // const chatRef1 = this.db.list(`chats/${chatKey1}`, ref => ref.orderByChild('timestamp').limitToLast(7));
-    // chatRef1.valueChanges().subscribe(messages => {
-    //   this.chatMessagesFromSelectedUser = messages;
-    //   this.combineAndSortMessages();
-    // });
-  
-    // const chatKey2 = `${this.userId}_${this.selectedUserProfile.id}`;
-    // const chatRef2 = this.db.list(`chats/${chatKey2}`, ref => ref.orderByChild('timestamp').limitToLast(7));
-    // chatRef2.valueChanges().subscribe(messages1 => {
-    //   this.chatMessagesToSelectedUser = messages1;
-    //   this.combineAndSortMessages();
-    // });
+
     const chatId = this.createChatId(this.userId, this.selectedUserProfile.id);
 
     // Reference to the messages collection within the chat document
@@ -156,12 +144,6 @@ export class ChatComponent  implements OnInit {
     });
   }
   
-  // combineAndSortMessages() {
-  //   if (this.chatMessagesFromSelectedUser && this.chatMessagesToSelectedUser) {
-  //     const allMessages = [...this.chatMessagesFromSelectedUser, ...this.chatMessagesToSelectedUser];
-  //     this.allChatMessages = allMessages.sort((a, b) => a.timestamp - b.timestamp);
-  //   }
-  // }
 
   sendMessage() {
     if (this.newMessage.trim() === '') return;
@@ -177,6 +159,7 @@ export class ChatComponent  implements OnInit {
       senderId: this.userId,
       senderName: this.username, // Assuming you have the sender's name
       content: this.newMessage,
+      profilepic: this.profilePictureUrl,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     }).then(() => {
       console.log('Message sent successfully');

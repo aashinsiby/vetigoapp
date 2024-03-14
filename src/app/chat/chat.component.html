@@ -1,63 +1,38 @@
 
 <mat-sidenav-container class="example-container">
   <mat-sidenav-content>
-
-    <div class="chat-messages">
-      <div class="message" *ngFor="let message of chatMessages">
-        <div class="sender">{{ message.senderName }}</div>
-        <div class="content">{{ message.content }}</div>
+    <div class="container" style="background-color: #A89278; overflow-x: auto; position: sticky; top: 0; z-index: 100;">
+      <div class="example-header-images mb-1 mt-1">
+        <img class="profile-picture" [src]="selectedUserProfile.profilePictureUrl" alt=""> 
+        {{selectedUserProfile.username}}
       </div>
-     
     </div>
+    
+    
+    <div class="chat-messages">
+      <ng-container *ngFor="let message of chatMessages">
+        <mat-card class="example-card rounded-pill mb-1" [ngClass]="{'align-right': message.senderName === username, 'align-left': message.senderName !== username}">
+          <mat-card-header>
+            <mat-card-subtitle>{{ message.senderName }}</mat-card-subtitle>
+            <mat-card-title>{{ message.content }}</mat-card-title><img [src]="message.profilepic" alt="" class="profile-picture1" >
+            
+          </mat-card-header>
+        </mat-card>
+      </ng-container>
+    </div>
+    
 
     <!-- Fixed input box at the bottom -->
     <div class="fixed-input-box">
       <div class="input-box">
         <div class="chat-input-container">
-          <input type="text" placeholder="Type your message here..." class="chat-input" [(ngModel)]="newMessage">
+          <input type="text" placeholder="Type... 😊" class="chat-input" [(ngModel)]="newMessage">
           <button class="send-button"(click)="sendMessage()"> <mat-icon>send</mat-icon></button>
       </div>
-        <!-- <mat-form-field appearance="fill">
-          <mat-label>Type a message</mat-label>
-          <textarea matInput [(ngModel)]="newMessage"></textarea>
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="sendMessage()"> <mat-icon>send</mat-icon></button> -->
+  
       </div>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
 
 
-
-<footer class="footer"  style="z-index: 3;">
- <div class="container">
-   <div class="row justify-content-center"> <!-- Center the columns -->
-     <div class="col text-center"> <!-- Center the content horizontally -->
-       <a class="nav-link active" aria-current="page" routerLink="/swipe">
-         <button mat-icon-button class="custom-icon-card">
-           <!-- Your icon or image goes here -->
-         </button>
-       </a>
-     </div>
-     <div class="col text-center"> <!-- Center the content horizontally -->
-      <a class="nav-link active" aria-current="page" routerLink="/like">
-
-       <button mat-icon-button class="custom-icon-heart">
-         <!-- Your icon or image goes here -->
-       </button></a>
-     </div>
-     <div class="col text-center"> <!-- Center the content horizontally -->
-
-       <button mat-icon-button class="custom-icon-msg">
-         <!-- Your icon or image goes here -->
-       </button>
-     </div>
-     <div class="col text-center"> 
-       <a class="nav-link active" aria-current="page" routerLink="/profile">
-       <button mat-icon-button class="custom-icon-people" > </button>
-       </a>
-     </div>
-   </div>
- </div>
- 
-</footer>

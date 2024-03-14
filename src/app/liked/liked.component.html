@@ -13,7 +13,7 @@
       <div class="profile-card" *ngFor="let userProfile of likedUserProfiles" >
         <img [src]="userProfile.profilePictureUrl" alt="" class="profile-picture1">
         <div class="d-flex justify-content-between align-items-center w-100">
-          <p class="profile-name">{{ userProfile.name ? userProfile.name.charAt(0).toUpperCase() + userProfile.name.slice(1) : '' }}</p>
+          <p class="profile-name">{{ userProfile.username ? userProfile.username.charAt(0).toUpperCase() + userProfile.username.slice(1) : '' }}</p>
           <button mat-button class="chat-button" (click)="openChatScreen(userProfile)">
             <mat-icon>chat</mat-icon>
           </button>
