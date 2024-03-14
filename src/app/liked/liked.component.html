@@ -7,31 +7,39 @@
     </div>
   </div>
 </div>
-
 <div class="container1 mt-1" id="profile-row">
-  <!-- Loop through each liked user profile -->
+  <div class="row">
+    <div class="col mb-1" style="background-color: #B9B6B6; font-family: 'Roboto', sans-serif; font-weight: 400; font-style: normal;">
+      <div class="profile-card" *ngFor="let userProfile of likedUserProfiles" (click)="openChatScreen(userProfile)">
+        <img [src]="userProfile.profilePictureUrl" alt="" class="profile-picture1">
+        <div class="profile-info">
+          <p class="profile-name">{{ userProfile.name ? userProfile.name.charAt(0).toUpperCase() + userProfile.name.slice(1) : '' }}</p>
+          <button class="chat-button" (click)="openChatScreen(userProfile)">
+            <mat-icon>chat</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container1 mt-1" id="profile-row">
   <ng-container class="row" *ngFor="let userProfile of likedUserProfiles">
-    <!-- Liked user profile card -->
     <div class="col mb-1" style="background-color: #B9B6B6; font-family: 'Roboto', sans-serif; font-weight: 400; font-style: normal;">
       <div class="profile-card">
         <img [src]="userProfile.profilePictureUrl" alt="" class="profile-picture1">
         <div class="profile-info">
           <p class="profile-name">{{ userProfile.name ? userProfile.name.charAt(0).toUpperCase() + userProfile.name.slice(1) : '' }}</p>
-          <!-- Add logic to display online or offline status if available -->
           <div class="status" [ngClass]="{ 'online': userProfile.online, 'offline': !userProfile.online }"></div>
         </div>
       </div>
-    </div>
+    </div>  
   </ng-container>
-</div>
+  </div>
+ -->
 
 
 </body>
-
-
-
- 
- 
      <footer class="footer"  style="z-index: 3;">
        <div class="container">
          <div class="row justify-content-center"> <!-- Center the columns -->

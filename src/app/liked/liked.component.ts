@@ -1,9 +1,8 @@
-import { Component, Inject, OnInit, inject } from '@angular/core';
-import {  Auth, User, user,authState  } from '@angular/fire/auth';
-import { Database, onValue, ref, update } from '@angular/fire/database';
-import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/compat/storage';
-import { finalize, tap } from 'rxjs/operators';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import {  Auth, User, authState  } from '@angular/fire/auth';
+import { Database, onValue, ref } from '@angular/fire/database';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {MatListModule} from '@angular/material/list';
 import {  AngularFireAuthModule,  } from '@angular/fire/compat/auth';
@@ -18,6 +17,10 @@ import { MatCardModule, MatCardTitleGroup } from '@angular/material/card';
 import {MatBadgeModule} from '@angular/material/badge';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatChipsModule} from '@angular/material/chips';
+import { Firestore, addDoc, collection } from '@angular/fire/firestore';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { ChatComponent } from '../chat/chat.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-liked',
@@ -37,7 +40,7 @@ import {MatChipsModule} from '@angular/material/chips';
     MatCardModule,
     MatDividerModule,
   MatIconButton,
-  MatCardTitleGroup,MatBadgeModule,MatChipsModule,MatListModule],
+  MatCardTitleGroup,MatBadgeModule,MatChipsModule,MatListModule,MatSidenavModule],
   templateUrl: './liked.component.html',
   styleUrl: './liked.component.css'
 })
@@ -98,7 +101,8 @@ export class LikedComponent {
   private auth: Auth = inject(Auth),
     private database: Database,
     private storage: AngularFireStorage,
-    private router: Router)
+    private firestore: Firestore,
+    private router: Router,private dialog: MatDialog)
     {
     
   }
@@ -118,6 +122,7 @@ export class LikedComponent {
   })
     
   }
+  
   fetchLikedUserProfiles() {
     const likedProfilesRef = ref(this.database, 'liked/' + this.userId);
 
@@ -208,5 +213,12 @@ export class LikedComponent {
 
   
   }
+  openChatScreen(userProfile: any): void {
+    const dialogRef = this.dialog.open(ChatComponent, {
+      width: '600px',
+      data: userProfile
+    });
+  }
+
 
 }

@@ -204,17 +204,17 @@ export class SwipeComponent {
       });
     this.swipeLeft();
   }
-  addLikedUserToCurrentUser(likedUserProfile: any) {
-    const likedUsersCollection = collection(this.firestore, 'likedUsers'); // Use 'likedUsers' collection
+  // addLikedUserToCurrentUser(likedUserProfile: any) {
+  //   const likedUsersCollection = collection(this.firestore, 'likedUsers'); // Use 'likedUsers' collection
 
-    // Use addDoc with async/await for proper promise handling
-    try {
-      const likedUserRef = addDoc(likedUsersCollection, likedUserProfile.id);
-      console.log('Liked user data saved with ID:', likedUserRef);
-    } catch (error) {
-      console.error('Error saving liked user data:', error);
-    }
-  }
+  //   // Use addDoc with async/await for proper promise handling
+  //   try {
+  //     const likedUserRef = addDoc(likedUsersCollection, likedUserProfile.id);
+  //     console.log('Liked user data saved with ID:', likedUserRef);
+  //   } catch (error) {
+  //     console.error('Error saving liked user data:', error);
+  //   }
+  // }
 
 
 
