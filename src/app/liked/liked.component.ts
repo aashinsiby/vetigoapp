@@ -215,7 +215,8 @@ export class LikedComponent {
   }
   openChatScreen(userProfile: any): void {
     const dialogRef = this.dialog.open(ChatComponent, {
-      width: '600px',
+      width: '100vw',
+      height: '100vh',
       data: userProfile
     });
   }

@@ -1,26 +1,32 @@
 
 <mat-sidenav-container class="example-container">
   <mat-sidenav-content>
+
     <div class="chat-messages">
       <div class="message" *ngFor="let message of chatMessages">
-        <div class="sender">{{ message.sender }}</div>
+        <div class="sender">{{ message.senderName }}</div>
         <div class="content">{{ message.content }}</div>
       </div>
-      <!-- <div class="message" *ngFor="let message of chatMessages1">
-        <div class="sender">{{ message.sender }}</div>
-        <div class="content">{{ message.content }}</div>
-       
-      </div> -->
+     
     </div>
-    <div class="input-box">
-      <mat-form-field appearance="fill">
-        <mat-label>Type a message</mat-label>
-        <textarea matInput [(ngModel)]="newMessage"></textarea>
-      </mat-form-field>
-      <button mat-raised-button color="primary" (click)="sendMessage()">Send</button>
+
+    <!-- Fixed input box at the bottom -->
+    <div class="fixed-input-box">
+      <div class="input-box">
+        <div class="chat-input-container">
+          <input type="text" placeholder="Type your message here..." class="chat-input" [(ngModel)]="newMessage">
+          <button class="send-button"(click)="sendMessage()"> <mat-icon>send</mat-icon></button>
+      </div>
+        <!-- <mat-form-field appearance="fill">
+          <mat-label>Type a message</mat-label>
+          <textarea matInput [(ngModel)]="newMessage"></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="sendMessage()"> <mat-icon>send</mat-icon></button> -->
+      </div>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
 
 
 <footer class="footer"  style="z-index: 3;">

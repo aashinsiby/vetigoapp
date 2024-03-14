@@ -89,3 +89,40 @@
  margin-right: 10px; /* Add margin between profile picture and name */
  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add drop shadow */
 }
+.fixed-input-box {
+ position: fixed;
+ left: 5px;
+ bottom: 50px;
+ width: 60px;
+ padding: 10px;
+ background-color: white; /* Optional: Add background color */
+}
+
+.chat-input-container {
+ display: flex;
+ align-items: center;
+ 
+ background-color: #f9f9f9;
+ padding: 10px;
+}
+
+.chat-input {
+ flex: 1;
+ padding: 8px;
+ border: 1px solid #ccc;
+ border-radius: 5px;
+}
+
+.send-button {
+ background-color: #007bff;
+ color: white;
+ border: none;
+ padding: 8px 15px;
+ margin-left: 10px;
+ border-radius: 5px;
+ cursor: pointer;
+}
+
+.send-button:hover {
+ background-color: #0056b3;
+}

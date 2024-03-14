@@ -12,7 +12,10 @@ import { Firestore, addDoc, collection } from '@angular/fire/firestore';
 import {  Auth, User, authState  } from '@angular/fire/auth';
 import { Subscription } from 'rxjs';
 import { Database, onValue, ref } from '@angular/fire/database';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { AngularFirestore } from '@angular/fire/compat/firestore'; 
+
+import firebase from 'firebase/compat/app'; 
+
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -32,7 +35,6 @@ export class ChatComponent  implements OnInit {
   selectedUserProfile: any;
   chatMessages: any[] = [];
   chatMessages1: any[] = [];
-
   newMessage: string = '';
   events: string[] = [];
   opened: boolean = true;
@@ -43,7 +45,6 @@ export class ChatComponent  implements OnInit {
   pictureUrl3: string | null = null;
   likedUserId: any[] = [];
   allUserProfiles: {
-
     bio: any;
     name: any;
     pet: any;
@@ -88,8 +89,11 @@ export class ChatComponent  implements OnInit {
   likedUserProfiles: any[] = [];
   receivedMessages: any[] = []; // Define an empty array to store received messages
   chatSubscription: Subscription | undefined;
+  chatMessagesFromSelectedUser: any[] = [];
+  chatMessagesToSelectedUser: any[]= [];
+  allChatMessages: any[] =  [];
    
-  constructor(private auth: Auth = inject(Auth),@Inject(MAT_DIALOG_DATA) public data: any, private database: Database, private db: AngularFireDatabase,) {}
+  constructor(private auth: Auth = inject(Auth),@Inject(MAT_DIALOG_DATA) public data: any, private database: Database, private db: AngularFireDatabase,private firestore : AngularFirestore) {}
 
   ngOnInit(): void {
     this.selectedUserProfile = this.data;
@@ -122,31 +126,84 @@ export class ChatComponent  implements OnInit {
   //     this.chatMessages1 = messages1;
   //   });
   // }
+  
   fetchChatMessages() {
-    const chatRef = this.db.list(`chats/${this.selectedUserProfile.id}`);
-    chatRef.valueChanges().subscribe(messages => {
+    // const chatKey1 = `${this.selectedUserProfile.id}_${this.userId}`;
+    // const chatRef1 = this.db.list(`chats/${chatKey1}`, ref => ref.orderByChild('timestamp').limitToLast(7));
+    // chatRef1.valueChanges().subscribe(messages => {
+    //   this.chatMessagesFromSelectedUser = messages;
+    //   this.combineAndSortMessages();
+    // });
+  
+    // const chatKey2 = `${this.userId}_${this.selectedUserProfile.id}`;
+    // const chatRef2 = this.db.list(`chats/${chatKey2}`, ref => ref.orderByChild('timestamp').limitToLast(7));
+    // chatRef2.valueChanges().subscribe(messages1 => {
+    //   this.chatMessagesToSelectedUser = messages1;
+    //   this.combineAndSortMessages();
+    // });
+    const chatId = this.createChatId(this.userId, this.selectedUserProfile.id);
+
+    // Reference to the messages collection within the chat document
+    const chatMessagesRef = this.firestore.collection('chats').doc(chatId).collection('messages');
+
+    // Query to order messages by timestamp in ascending order
+    const query = chatMessagesRef.ref.orderBy('timestamp', 'asc');
+
+    // Subscribe to the messages collection to fetch messages
+    query.onSnapshot(snapshot => {
+      const messages = snapshot.docs.map(doc => ({ ...doc.data(), messageId: doc.id }));
       this.chatMessages = messages;
     });
-    const chatRef2 = this.db.list(`chats/${this.userId}`);
-    chatRef2.valueChanges().subscribe(messages1 => {
-      this.chatMessages1 = messages1;
-      this.chatMessages = this.chatMessages.concat(this.chatMessages1);
-    });
   }
-
+  
+  // combineAndSortMessages() {
+  //   if (this.chatMessagesFromSelectedUser && this.chatMessagesToSelectedUser) {
+  //     const allMessages = [...this.chatMessagesFromSelectedUser, ...this.chatMessagesToSelectedUser];
+  //     this.allChatMessages = allMessages.sort((a, b) => a.timestamp - b.timestamp);
+  //   }
+  // }
 
   sendMessage() {
     if (this.newMessage.trim() === '') return;
 
-    const chatRef = this.db.list(`chats/${this.selectedUserProfile.id}`);
-    chatRef.push({
-      sender: this.username, 
-      content: this.newMessage
-    });
-
+    // Create a unique chat ID using the IDs of both users
+    const chatId = this.createChatId(this.userId, this.selectedUserProfile.id);
   
-    this.newMessage = '';
+    // Reference to the messages collection within the chat document
+    const chatMessagesRef = this.firestore.collection('chats').doc(chatId).collection('messages');
+  
+    // Add the new message to the chat messages collection including sender information
+    chatMessagesRef.add({
+      senderId: this.userId,
+      senderName: this.username, // Assuming you have the sender's name
+      content: this.newMessage,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+      console.log('Message sent successfully');
+      // Clear the input field after sending the message
+      this.newMessage = '';
+    }).catch((error) => {
+      console.error('Error sending message:', error);
+    });
   }
+  
+  // Function to create a unique chat ID using user IDs
+  createChatId(userId1: string, userId2: string): string {
+    // Concatenate the user IDs in a specific order
+    if (userId1 < userId2) {
+      return userId1 + '_' + userId2;
+    } else {
+      return userId2 + '_' + userId1;
+    }
+  }
+    // const chatKey = `${this.userId}_${this.selectedUserProfile.id}`;
+    // const chatRef = this.db.list(`chats/${chatKey}`);
+    // chatRef.push({
+    //   sender: this.username, 
+    //   content: this.newMessage
+    // });
+     
+ 
 
 
 
