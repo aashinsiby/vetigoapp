@@ -70,9 +70,14 @@
 .align-right {
  align-self: flex-end;
  text-align: end;
+ background-color: #86848444;
+ 
 }
 
 .align-left {
  align-self: flex-start;
  text-align: start;
+ background-color: #86848444;
+ 
+
 }

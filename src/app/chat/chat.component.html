@@ -11,7 +11,7 @@
     
     <div class="chat-messages">
       <ng-container *ngFor="let message of chatMessages">
-        <mat-card class="example-card rounded-pill mb-1" [ngClass]="{'align-right': message.senderName === username, 'align-left': message.senderName !== username}">
+        <mat-card class="example-card rounded-2 mb-2" [ngClass]="{'align-right': message.senderName === username, 'align-left': message.senderName !== username}">
           <mat-card-header>
             <mat-card-subtitle>{{ message.senderName }}</mat-card-subtitle>
             <mat-card-title>{{ message.content }}</mat-card-title><img [src]="message.profilepic" alt="" class="profile-picture1" >
