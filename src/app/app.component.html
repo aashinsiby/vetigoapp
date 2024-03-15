@@ -12,15 +12,15 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           
-          <a class="nav-link active" aria-current="page" href="" routerLink="/swipe"><button mat-button    *ngIf="showdat" (click)="swipe()">Dating</button></a>
+        
           <a class="nav-link active" aria-current="page" routerLink="/aboutus">
             <button mat-button>About Us</button>
           </a>
-          <button class="nav-link" routerLink="/login" class="button-31" *ngIf="!showprof">Get Started</button>
-          <a class="nav-link active" aria-current="page"  routerLink="/profile"  *ngIf="showprof">
+          <button class="nav-link" routerLink="/signup" class="button-31" *ngIf="!showprof">Get Started</button>
+          <!-- <a class="nav-link active" aria-current="page"  routerLink="/profile"  *ngIf="showprof">
           <button  mat-button  id="lg"> 
             <mat-icon>person</mat-icon>
-          </button></a>
+          </button></a> -->
           <a class="nav-link active" aria-current="page"   routerLink="/login"  *ngIf="showprof">
 
           <button  mat-button color="warn" (click)="logout()" id="lg" >
