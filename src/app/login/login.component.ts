@@ -9,7 +9,7 @@ import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/rou
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Auth, GoogleAuthProvider, signInWithEmailAndPassword } from '@angular/fire/auth';
-import { Database, child, get, ref, update } from '@angular/fire/database';
+import { Database, get, ref, update } from '@angular/fire/database';
 @Component({
   selector: 'app-login',
   standalone: true,
