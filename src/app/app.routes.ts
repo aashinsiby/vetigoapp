@@ -23,7 +23,7 @@ export const routes: Routes = [
 {path: 'home', component: HomeComponent},
 { path: 'signup', component: SignupComponent},
 { path: 'aboutus', component: AboutusComponent},
-{ path: 'forget', component: ForgetComponent},
+{ path: 'forget', component: ForgetComponent }, // This route is for ForgetComponent
 { path: 'pdf', component: PdfComponent},
 {path: 'profile', component: UserprofileComponent,canActivate: [AngularFireAuthGuard] },
 { path: 'swipe', component: SwipeComponent,canActivate: [AngularFireAuthGuard] },
