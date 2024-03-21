@@ -32,6 +32,7 @@
  width: 100vw;
  padding: 10px;
  background-color: rgba(255, 255, 255, 0); /* Optional: Add background color */
+ z-index: 1;
 }
 
 .chat-input-container {
