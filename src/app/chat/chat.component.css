@@ -25,20 +25,18 @@
  margin-right: 10px; /* Add margin between profile picture and name */
  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add drop shadow */
 }
-.fixed-input-box {
+/* .fixed-input-box {
  position: fixed;
  left: 0px;
  bottom: 50px;
  width: 100vw;
  padding: 10px;
- background-color: rgba(255, 255, 255, 0); /* Optional: Add background color */
- z-index: 1;
+ background-color: rgba(255, 255, 255, 0); 
 }
 
 .chat-input-container {
  display: flex;
  align-items: center;
- 
  background-color: #f9f9f900;
  padding: 10px;
 }
@@ -67,8 +65,49 @@
 .chat-messages {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Align chat bubbles to the left */
+  align-items: flex-start; 
+} */
+.fixed-chat-input-box {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
 }
+
+.chat-input-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  resize: none;
+}
+
+.send-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.send-button:hover {
+  background-color: #0056b3;
+}
+
+/*  */
+
+
+
 
 .example-card {
   max-width: 70%; /* Limit the width of chat bubbles */
