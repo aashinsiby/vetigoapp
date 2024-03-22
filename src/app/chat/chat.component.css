@@ -37,8 +37,8 @@
 /* Add a media query to adjust styling for smaller screens */
 @media only screen and (max-width: 768px) {
   .fixed-input-box {
-    position: sticky;
-    bottom: 0;
+    position: fixed;
+    bottom: 15px;
     z-index: 999; /* Ensure it's above other content */
   }
 }
