@@ -19,23 +19,17 @@
         </mat-card>
       </ng-container>
     </div>
-    <div class="fixed-chat-input-box">
-      <div class="chat-input-container">
-        <textarea placeholder="Type your message..." class="chat-input" [(ngModel)]="newMessage"></textarea>
-        <button class="send-button" (click)="sendMessage()">Send</button>
-      </div>
-    </div>
-    
+   
 
     <!-- Fixed input box at the bottom -->
-    <!-- <div class="fixed-input-box">
+    <div class="fixed-input-box">
       <div class="input-box">
         <div class="chat-input-container">
           <input type="text" placeholder="Type... 😊" class="chat-input" [(ngModel)]="newMessage">
           <button class="send-button" (click)="sendMessage()"> <mat-icon>send</mat-icon></button>
         </div>
       </div>
-    </div> -->
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
 
