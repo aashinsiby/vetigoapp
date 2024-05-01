@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import {  Auth, User, user,authState  } from '@angular/fire/auth';
 import { SwipeComponent } from './swipe/swipe.component';
 import { Analytics } from "@vercel/analytics/react"
+import { inject as myInject } from "@vercel/analytics";
 
 
 @Component({
@@ -37,7 +38,7 @@ export class AppComponent {
   userId: string | null = null;
   showprof: boolean = false;
   showdat: boolean = false;
-  constructor(private firestore : AngularFirestore,private auth: Auth = inject(Auth),private router: Router, ){
+  constructor(private firestore : AngularFirestore,private auth: Auth = inject(Auth),private router: Router){
    
   }
   
